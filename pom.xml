@@ -80,6 +80,12 @@
       <artifactId>jakarta.servlet.jsp.jstl</artifactId>
       <version>2.0.0</version>
     </dependency>
+    <!-- 增加jackson-databind依赖 -->
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>2.14.0</version>
+    </dependency>
   </dependencies>
   <build>
     <!--识别所有的配置文件-->

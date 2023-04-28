@@ -3,12 +3,14 @@ package com.bjpowernode.controller;
 import com.bjpowernode.pojo.User;
 import com.bjpowernode.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,8 +28,7 @@ public class UserController {
     public static final int PAGE_SIZE = 5;
 
     //user/selectUserPage?userName=z&userSex=男&page=null
-    @RequestMapping("/selectUserPage")
-
+    @RequestMapping(value = "/selectUserPage")
     public List<User> selectUserPage(String userName,String userSex,Integer page){
         //根据页码计算起始行
         int startRow = 0;
@@ -35,7 +36,9 @@ public class UserController {
             startRow = (page-1) * PAGE_SIZE;
         }
 
-        return userService.selectUserPage(userName,userSex,startRow);
+        List<User> users = userService.selectUserPage(userName,userSex,startRow);
+
+        return users;
     }
     ///user/getRowCount?userName=z&userSex=男
     @RequestMapping("/getRowCount")
@@ -45,14 +48,12 @@ public class UserController {
     }
     ///user/deleteUserById?userId= 15968162087363060
     @RequestMapping("/deleteUserById")
-
     public int deleteUserById(String userId){
         return userService.deleteUserById(userId);
     }
 
     ///user/createUser(参数见下面)
     @RequestMapping("/createUser")
-
     public int createUser(User user){
         String userId = System.currentTimeMillis()+"";
         user.setUserId(userId);
