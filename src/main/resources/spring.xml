@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd
+                           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+<!--
+
+    spring.xml文件是applicationContext_mapper.xml和applicationContext_serviece.xml两个文件的整合
+    且spring.xml中的JDBC事物管理是用的注解的方式，需要在service的实现上加上@Transactional注解，而applicationContext_serviece.xml中是使用的配置文件方式，两者任选其一就行。
+    但需要修改web.xml中的配置：
+        <context-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>classpath:applicationContext_*.xml</param-value>
+            或：
+            <param-value>classpath:spring.xml</param-value>
+        </context-param>
+-->
+    <!--组件扫描-->
+    <context:component-scan base-package="com.bjpowernode.service">
+        <context:exclude-filter type="regex" expression="com.bjpowernode.controller"/>
+    </context:component-scan>
+
+    <!--读取属性文件-->
+    <context:property-placeholder location="classpath:jdbc.properties"></context:property-placeholder>
+
+    <!--配置数据源-->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="driverClassName" value="${jdbc.driver}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+    </bean>
+
+    <!--配置SqlSessionFactoryBean-->
+    <bean class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!--配置数据源-->
+        <property name="dataSource" ref="dataSource"></property>
+        <!--配置SqlMapConfig.xml核心配置-->
+        <property name="configLocation" value="classpath:SqlMapConfig.xml"></property>
+        <!--注册实体类-->
+        <property name="typeAliasesPackage" value="com.bjpowernode.pojo"></property>
+    </bean>
+    <!--Mapper扫描配置器，主要扫描Mapper接口，生成代理类-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.bjpowernode.mapper"></property>
+    </bean>
+    <!--添加事务管理器-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <!--切记切记:配置数据源-->
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+    <!--启用事务注解-->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+</beans>
