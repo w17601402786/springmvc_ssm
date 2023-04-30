@@ -1,8 +1,7 @@
-package com.bjpowernode.mapper;
+package com.management.mapper;
 
-import com.bjpowernode.pojo.User;
+import com.management.pojo.User;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 

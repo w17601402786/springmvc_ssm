@@ -1,4 +1,4 @@
-package com.bjpowernode.pojo;
+package com.management.pojo;
 
 /**
  *

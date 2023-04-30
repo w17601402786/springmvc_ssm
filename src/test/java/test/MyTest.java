@@ -1,7 +1,7 @@
 package test;
 
-import com.bjpowernode.pojo.User;
-import com.bjpowernode.service.UserService;
+import com.management.pojo.User;
+import com.management.service.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

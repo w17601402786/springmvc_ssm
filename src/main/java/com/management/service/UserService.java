@@ -1,6 +1,6 @@
-package com.bjpowernode.service;
+package com.management.service;
 
-import com.bjpowernode.pojo.User;
+import com.management.pojo.User;
 
 import java.util.List;
 

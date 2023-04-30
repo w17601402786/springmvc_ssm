@@ -1,8 +1,8 @@
-package com.bjpowernode.service.impl;
+package com.management.service.impl;
 
-import com.bjpowernode.mapper.UserMapper;
-import com.bjpowernode.pojo.User;
-import com.bjpowernode.service.UserService;
+import com.management.mapper.UserMapper;
+import com.management.pojo.User;
+import com.management.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

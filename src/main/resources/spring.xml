@@ -20,7 +20,7 @@
         </context-param>
 -->
     <!--组件扫描-->
-    <context:component-scan base-package="com.bjpowernode.service">
+    <context:component-scan base-package="com.management.service">
         <context:exclude-filter type="regex" expression="com.bjpowernode.controller"/>
     </context:component-scan>
 
@@ -42,11 +42,11 @@
         <!--配置SqlMapConfig.xml核心配置-->
         <property name="configLocation" value="classpath:SqlMapConfig.xml"></property>
         <!--注册实体类-->
-        <property name="typeAliasesPackage" value="com.bjpowernode.pojo"></property>
+        <property name="typeAliasesPackage" value="com.management.pojo"></property>
     </bean>
     <!--Mapper扫描配置器，主要扫描Mapper接口，生成代理类-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.bjpowernode.mapper"></property>
+        <property name="basePackage" value="com.management.mapper"></property>
     </bean>
     <!--添加事务管理器-->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">

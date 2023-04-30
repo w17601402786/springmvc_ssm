@@ -23,10 +23,10 @@
         <!--配置SqlMapConfig.xml核心配置-->
         <property name="configLocation" value="classpath:SqlMapConfig.xml"></property>
         <!--注册实体类-->
-        <property name="typeAliasesPackage" value="com.bjpowernode.pojo"></property>
+        <property name="typeAliasesPackage" value="com.management.pojo"></property>
     </bean>
     <!--注册mapper.xml文件-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.bjpowernode.mapper"></property>
+        <property name="basePackage" value="com.management.mapper"></property>
     </bean>
 </beans>
