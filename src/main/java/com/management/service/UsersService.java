@@ -1,24 +1,15 @@
 package com.management.service;
 
-
 import com.management.pojo.Users;
-
 import java.util.List;
 
 public interface UsersService {
-
+    // 添加用户
     int addUser(Users user);
 
-    int deleteUser(int userId);
-
-    int updateUser(Users user);
-
-    Users getUserById(int userId);
-
+    // 根据用户名查找用户
     Users getUserByUsername(String username);
 
-    List<Users> getAllUsers();
-
-    Users getUserByUserNameAndPassword(String userName,String password);
-
+    // 更新用户信息
+    int updateUser(Users user);
 }
