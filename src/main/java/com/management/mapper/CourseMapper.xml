@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.management.mapper.CourseMapper">
+
+    <!-- 增加一门课程信息 -->
+    <insert id="addCourse" parameterType="com.management.pojo.Course">
+        insert into course(course_id, name, hours, credit)
+        values(#{courseId}, #{name}, #{hours}, #{credit})
+    </insert>
+
+    <!-- 删除一门课程信息 -->
+    <delete id="deleteCourseById" parameterType="int">
+        delete from course where id=#{id}
+    </delete>
+
+    <!-- 修改一门课程信息 -->
+    <update id="updateCourse" parameterType="com.management.pojo.Course">
+        update course set course_id=#{courseId}, name=#{name}, hours=#{hours}, credit=#{credit} where id=#{id}
+    </update>
+
+    <!-- 查询所有课程信息 -->
+    <select id="getAllCourses" resultType="com.management.pojo.Course">
+        select * from course
+    </select>
+
+    <!-- 根据id查询一门课程信息 -->
+    <select id="getCourseById" parameterType="int" resultType="com.management.pojo.Course">
+        select * from course where id=#{id}
+    </select>
+
+    <!-- 根据课程号查询一门课程信息 -->
+    <select id="getCourseByCourseId" parameterType="String" resultType="com.management.pojo.Course">
+        select * from course where course_id=#{courseId}
+    </select>
+
+</mapper>

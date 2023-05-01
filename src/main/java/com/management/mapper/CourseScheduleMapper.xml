@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.management.mapper.CourseScheduleMapper">
+
+    <!-- 增加一条课程表信息 -->
+    <insert id="addCourseSchedule" parameterType="com.management.pojo.CourseSchedule">
+        insert into course_schedule(course_id, class_id, teacher_name, time, location)
+        values(#{courseId}, #{classId}, #{teacherName}, #{time}, #{location})
+    </insert>
+
+    <!-- 删除一条课程表信息 -->
+    <delete id="deleteCourseScheduleById" parameterType="int">
+        delete from course_schedule where id=#{id}
+    </delete>
+
+    <!-- 修改一条课程表信息 -->
+    <update id="updateCourseSchedule" parameterType="com.management.pojo.CourseSchedule">
+        update course_schedule set course_id=#{courseId}, class_id=#{classId},
+                                   teacher_name=#{teacherName}, time=#{time}, location=#{location} where id=#{id}
+    </update>
+
+    <!-- 查询所有课程表信息 -->
+    <select id="getAllCourseSchedules" resultType="com.management.pojo.CourseSchedule">
+        select * from course_schedule
+    </select>
+
+    <!-- 根据id查询一条课程表信息 -->
+    <select id="getCourseScheduleById" parameterType="int" resultType="com.management.pojo.CourseSchedule">
+        select * from course_schedule where id=#{id}
+    </select>
+
+    <!-- 根据课程号查询该门课程的课程表信息 -->
+    <select id="getCourseSchedulesByCourseId" parameterType="String" resultType="com.management.pojo.CourseSchedule">
+        select * from course_schedule where course_id=#{courseId}
+    </select>
+
+    <!-- 根据班级号查询该班级的课程表信息 -->
+    <select id="getCourseSchedulesByClassId" parameterType="String" resultType="com.management.pojo.CourseSchedule">
+        select * from course_schedule where class_id=#{classId}
+    </select>
+
+    <!-- 根据教师姓名查询该教师的课程表信息 -->
+    <select id="getCourseSchedulesByTeacherName" parameterType="String" resultType="com.management.pojo.CourseSchedule">
+        select * from course_schedule where teacher_name=#{teacherName}
+    </select>
+
+    <!-- 根据时间查询课程表信息 -->
+    <select id="getCourseSchedulesByTime" parameterType="String" resultType="com.management.pojo.CourseSchedule">
+        select * from course_schedule where time=#{time}
+    </select>
+
+</mapper>

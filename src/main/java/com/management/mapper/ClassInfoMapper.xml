@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.management.mapper.ClassInfoMapper">
+
+    <resultMap type="com.management.pojo.ClassInfo" id="classResultMap">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="major" column="major"/>
+        <result property="num" column="num"/>
+        <result property="year" column="year"/>
+        <result property="teacher" column="teacher" />
+    </resultMap>
+
+    <insert id="addClass" parameterType="com.management.pojo.ClassInfo">
+        insert into classInfo(id, name, major, num, year, teacher)
+        values(#{id}, #{name}, #{major}, #{num}, #{year}, #{teacher})
+    </insert>
+
+    <delete id="deleteClass" parameterType="Integer">
+        delete from classInfo where id = #{id}
+    </delete>
+
+    <update id="updateClass" parameterType="com.management.pojo.ClassInfo">
+        update classInfo set name = #{name}, major = #{major}, num = #{num}, year = #{year}, teacher = #{teacher}
+        where id = #{id}
+    </update>
+
+    <select id="getClassByCid" resultMap="classResultMap" parameterType="Integer">
+        select id, name, major, num, year, teacher
+        from classInfo where id = #{id}
+    </select>
+
+    <select id="getClassByCname" resultMap="classResultMap" parameterType="String">
+        select id, name, major, num, year, teacher
+        from classInfo where name like '%${name}%'
+    </select>
+
+    <select id="getClassByMajor" resultMap="classResultMap" parameterType="String">
+        select id, name, major, num, year, teacher
+        from classInfo where major = #{major}
+    </select>
+
+</mapper>

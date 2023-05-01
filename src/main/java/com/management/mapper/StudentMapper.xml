@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.management.mapper.StudentMapper">
+
+    <resultMap id="studentResultMap" type="com.management.pojo.Student">
+        <id property="sno" column="sno"/>
+        <result property="name" column="name"/>
+        <result property="gender" column="gender"/>
+        <result property="birthday" column="birthday"/>
+        <result property="major" column="major"/>
+        <result property="clazz" column="clazz"/>
+        <result property="address" column="address"/>
+        <result property="phone" column="phone"/>
+        <result property="remark" column="remark"/>
+    </resultMap>
+
+    <insert id="addStudent" parameterType="Student">
+        insert into student(student_id, name, gender, birthday, major, class, address, phone, note)
+        values(#{studentId}, #{name}, #{gender}, #{birthday}, #{major}, #{classNum}, #{address}, #{phone}, #{note})
+    </insert>
+
+    <delete id="deleteStudent" parameterType="String">
+        delete from student where student_id = #{studentId}
+    </delete>
+
+    <update id="updateStudent" parameterType="Student">
+        update student set name = #{name}, gender = #{gender},
+                           birthday = #{birthday}, major = #{major}, class = #{classNum},
+                           address = #{address}, phone = #{phone}, note = #{note}
+        where student_id = #{studentId}
+    </update>
+
+    <select id="getStudentBySno" resultMap="studentResultMap" parameterType="String">
+        select * from student where student_id = #{studentId}
+    </select>
+
+    <select id="getStudentByName" resultMap="studentResultMap" parameterType="String">
+        select * from student where name like '%${name}%'
+    </select>
+
+    <select id="getStudentByClass" resultMap="studentResultMap" parameterType="Map">
+        select * from student where major = #{major} and class = #{classNum}
+    </select>
+
+</mapper>

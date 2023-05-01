@@ -4,6 +4,10 @@ public class ClassInfo {
     private Integer id;
     private String name;
     private String major;
+
+    /**
+     * 班级人数
+     */
     private Integer num;
     private Integer year;
     private String teacher;

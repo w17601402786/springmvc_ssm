@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.management.mapper.GradeMapper">
+
+    <!-- 增加一条成绩记录 -->
+    <insert id="addGrade" parameterType="com.management.pojo.Grade">
+        insert into grade(student_id, course_id, score)
+        values(#{studentId}, #{courseId}, #{score})
+    </insert>
+
+    <!-- 删除一条成绩记录 -->
+    <delete id="deleteGradeById" parameterType="int">
+        delete from grade where id=#{id}
+    </delete>
+
+    <!-- 修改一条成绩记录 -->
+    <update id="updateGrade" parameterType="com.management.pojo.Grade">
+        update grade set student_id=#{studentId}, course_id=#{courseId}, score=#{score} where id=#{id}
+    </update>
+
+    <!-- 查询所有成绩记录 -->
+    <select id="getAllGrades" resultType="com.management.pojo.Grade">
+        select * from grade
+    </select>
+
+    <!-- 根据id查询一条成绩记录 -->
+    <select id="getGradeById" parameterType="int" resultType="com.management.pojo.Grade">
+        select * from grade where id=#{id}
+    </select>
+
+    <!-- 根据学生号和课程号查询一条成绩记录 -->
+    <select id="getGradeByStudentIdAndCourseId" parameterType="map" resultType="com.management.pojo.Grade">
+        select * from grade where student_id=#{studentId} and course_id=#{courseId}
+    </select>
+
+</mapper>
