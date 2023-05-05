@@ -1,7 +1,7 @@
 package com.management.service;
 
 import com.management.pojo.Course;
-import com.management.pojo.Score;
+import com.management.pojo.Grade;
 import com.management.pojo.Student;
 
 import java.util.List;
@@ -26,7 +26,7 @@ public interface StudentService {
     List<Course> getCourseTable(String studentId);
 
     // 获取学生的成绩信息
-    List<Score> getScores(String studentId);
+    List<Grade> getScores(String studentId);
 
     // 修改学生登录密码
     int changePassword(String studentId, String password);
