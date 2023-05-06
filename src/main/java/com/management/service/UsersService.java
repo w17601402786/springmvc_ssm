@@ -12,4 +12,16 @@ public interface UsersService {
 
     // 更新用户信息
     int updateUser(Users user);
+
+    // 根据用户ID删除用户
+    int deleteUserById(Integer userId);
+
+    // 获取所有用户
+    List<Users> getAllUsers();
+
+    // 获取特定类型的所有用户
+    List<Users> getUsersByType(String userType);
+
+    // 根据用户ID获取用户信息
+    Users getUserById(Integer userId);
 }

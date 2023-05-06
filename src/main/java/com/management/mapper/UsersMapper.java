@@ -67,5 +67,8 @@ public interface UsersMapper {
      */
     @Select("select * from users where username=#{userName} and password=#{password}")
     Users getUserByUserNameAndPassword(@PathVariable("userName") String userName,@PathVariable("password") String password);
+
+
+
 }
 

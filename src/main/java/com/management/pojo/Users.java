@@ -6,6 +6,9 @@ public class Users {
     private String password;
     private String userType;
 
+    private Student studentInfo = null;
+
+    private Teacher teacherInfo = null;
 
     public int getId() {
         return id;
