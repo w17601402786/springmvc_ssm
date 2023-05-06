@@ -32,7 +32,7 @@ public interface UsersMapper {
      * @param user 要修改的用户修改后的对象
      * @return 修改结果
      */
-    @Update("update users set username=#{username},password=#{password},user_type=#{userType} where id=#{userId}")
+    @Update("update users set password=#{password},user_type=#{userType} where username=#{username}")
     int updateUser(Users user);
 
     /**
@@ -48,7 +48,7 @@ public interface UsersMapper {
      * @param username 用户名
      * @return 用户对象
      */
-    @Select("select * from users where username=#{username}")
+    @Select("select * from users where username=#{username} limit 1")
     Users getUserByUsername(String username);
 
     /**

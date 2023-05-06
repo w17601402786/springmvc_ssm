@@ -12,4 +12,9 @@
 <!--    <select id="findUserById" resultType="Users">-->
 <!--        SELECT * FROM users WHERE id = #{id}-->
 <!--    </select>-->
+
+<!--    <insert id="addUser" parameterType="com.management.pojo.Users">-->
+<!--       insert into users(username,password,user_type) values(#{username},#{password},#{userType})-->
+<!--    </insert>-->
+
 </mapper>

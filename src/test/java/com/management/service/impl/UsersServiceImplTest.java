@@ -33,9 +33,19 @@ public class UsersServiceImplTest extends TestCase {
 
     @Test
     public void testGetUserByUsername() {
+
+        Users users = usersService.getUserByUsername("123");
+
+        System.out.println(users);
     }
 
     @Test
     public void testUpdateUser() {
+
+        Users users = new Users();
+
+
+
     }
+
 }
