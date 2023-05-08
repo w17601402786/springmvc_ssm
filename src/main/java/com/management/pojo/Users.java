@@ -66,6 +66,8 @@ public class Users {
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", userType='" + userType + '\'' +
+                ", studentInfo=" + studentInfo +
+                ", teacherInfo=" + teacherInfo +
                 '}';
     }
 }

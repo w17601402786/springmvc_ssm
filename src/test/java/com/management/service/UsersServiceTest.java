@@ -23,6 +23,15 @@ public class UsersServiceTest extends TestCase {
     }
 
     public void testAddUser() {
+
+        Users users = new Users();
+
+        users.setUsername("qqq");
+        users.setPassword("q111");
+        users.setUserType("admin");
+
+        usersService.addUser(users,"admin");
+
     }
 
     public void testUpdateUser() {

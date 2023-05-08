@@ -75,4 +75,19 @@ public class CourseSchedule {
     public void setClassInfo(ClassInfo classInfo) {
         this.classInfo = classInfo;
     }
+
+
+    @Override
+    public String toString() {
+        return "CourseSchedule{" +
+                "id=" + id +
+                ", courseId='" + courseId + '\'' +
+                ", classId='" + classId + '\'' +
+                ", teacherId='" + teacherId + '\'' +
+                ", time=" + time +
+                ", location='" + location + '\'' +
+                ", courseInfo=" + courseInfo +
+                ", classInfo=" + classInfo +
+                '}';
+    }
 }

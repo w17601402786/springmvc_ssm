@@ -47,4 +47,15 @@ public class Grade {
     public void setStudentInfo(Student studentInfo) {
         this.studentInfo = studentInfo;
     }
+
+    @Override
+    public String toString() {
+        return "Grade{" +
+                "id=" + id +
+                ", studentId='" + studentId + '\'' +
+                ", courseId='" + courseId + '\'' +
+                ", score=" + score +
+                ", studentInfo=" + studentInfo +
+                '}';
+    }
 }

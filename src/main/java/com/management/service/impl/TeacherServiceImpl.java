@@ -10,9 +10,11 @@ import com.management.pojo.Grade;
 import com.management.pojo.Teacher;
 import com.management.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class TeacherServiceImpl  implements TeacherService {
     @Autowired
     private TeacherMapper teacherMapper;
