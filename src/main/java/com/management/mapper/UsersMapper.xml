@@ -6,12 +6,22 @@
         SELECT *
         FROM users
         <where>
-            <if test="id != null">AND id = #{id}</if>
+            <if test="id != 0">AND id = #{id}</if>
             <if test="username != null and username != ''">AND username = #{username}</if>
             <if test="password != null and password != ''">AND password = #{password}</if>
             <if test="userType != null and userType != ''">AND userType = #{userType}</if>
         </where>
     </select>
+
+    <select id="getStudentUsers" parameterType="com.management.pojo.Users" resultMap="usersResultMap">
+        SELECT *
+        FROM users u LEFT JOIN student s ON u.id = s.user_id
+        WHERE u.user_type = 'student'
+        <if test="id != 0">AND u.id = #{id}</if>
+        <if test="username != null and username != ''">AND u.username = #{username}</if>
+        <if test="password != null and password != ''">AND u.password = #{password}</if>
+    </select>
+
 
     <resultMap id="usersResultMap" type="com.management.pojo.Users">
         <id column="id" jdbcType="INTEGER" property="id"/>

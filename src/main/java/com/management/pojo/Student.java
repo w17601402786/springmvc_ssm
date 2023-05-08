@@ -9,11 +9,14 @@ public class Student {
     private String gender;
     private Date birthday;
     private String major;
-    private String classNum;
+
+    private String classId;
     private String address;
     private String phone;
     private String note;
     private int userId;
+
+    private ClassInfo classInfo = null;
 
     private Users userInfo = null;
 
@@ -65,12 +68,20 @@ public class Student {
         this.major = major;
     }
 
-    public String getClassNum() {
-        return classNum;
+    public String getClassId() {
+        return classId;
     }
 
-    public void setClassNum(String classNum) {
-        this.classNum = classNum;
+    public void setClassId(String classId) {
+        this.classId = classId;
+    }
+
+    public ClassInfo getClassInfo() {
+        return classInfo;
+    }
+
+    public void setClassInfo(ClassInfo classInfo) {
+        this.classInfo = classInfo;
     }
 
     public String getAddress() {
@@ -112,4 +123,24 @@ public class Student {
     public void setUserInfo(Users userInfo) {
         this.userInfo = userInfo;
     }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "id=" + id +
+                ", studentId='" + studentId + '\'' +
+                ", name='" + name + '\'' +
+                ", gender='" + gender + '\'' +
+                ", birthday=" + birthday +
+                ", major='" + major + '\'' +
+                ", classId='" + classId + '\'' +
+                ", address='" + address + '\'' +
+                ", phone='" + phone + '\'' +
+                ", note='" + note + '\'' +
+                ", userId=" + userId +
+                ", classInfo=" + classInfo +
+                ", userInfo=" + userInfo +
+                '}';
+    }
 }
+

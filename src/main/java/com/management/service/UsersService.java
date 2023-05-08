@@ -59,5 +59,7 @@ public interface UsersService {
      */
     List<Users> getUsers(Users user, String thisUserType);
 
+    List<Users> getStudentUsers(Users user, String thisUserType);
+
 
 }

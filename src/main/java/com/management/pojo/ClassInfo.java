@@ -12,6 +12,8 @@ public class ClassInfo {
     private Integer year;
     private String counsellor;
 
+    private String classId;
+
     public Integer getId() {
         return id;
     }

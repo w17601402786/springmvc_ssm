@@ -85,4 +85,19 @@ public class Teacher {
     public void setUserInfo(Users userInfo) {
         this.userInfo = userInfo;
     }
+
+    @Override
+    public String toString() {
+        return "Teacher{" +
+                "id=" + id +
+                ", teacherId='" + teacherId + '\'' +
+                ", name='" + name + '\'' +
+                ", gender='" + gender + '\'' +
+                ", birthday=" + birthday +
+                ", faculty='" + faculty + '\'' +
+                ", phone='" + phone + '\'' +
+                ", userId=" + userId +
+                ", userInfo=" + userInfo +
+                '}';
+    }
 }

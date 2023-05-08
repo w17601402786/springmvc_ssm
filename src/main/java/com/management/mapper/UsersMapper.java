@@ -63,6 +63,8 @@ public interface UsersMapper {
 
     List<Users> getUsers(Users user);
 
+    List<Users> getStudentUsers(Users user);
+
 
 }
 

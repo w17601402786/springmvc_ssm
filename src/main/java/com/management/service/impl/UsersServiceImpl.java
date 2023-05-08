@@ -76,4 +76,14 @@ public class UsersServiceImpl implements UsersService {
         return usersMapper.getUsers(user);
     }
 
+    @Override
+    public List<Users> getStudentUsers(Users user, String thisUserType) {
+
+        if (!thisUserType.equals("admin")){
+            return null;
+        }
+
+        return usersMapper.getStudentUsers(user);
+    }
+
 }
