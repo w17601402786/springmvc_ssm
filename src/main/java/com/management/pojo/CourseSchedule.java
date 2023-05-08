@@ -9,6 +9,8 @@ public class CourseSchedule {
     private String teacherId;
     private Date time;
     private String location;
+    private Course courseInfo = null;
+    private ClassInfo classInfo = null;
 
     public Integer getId() {
         return id;
@@ -56,5 +58,21 @@ public class CourseSchedule {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public Course getCourseInfo() {
+        return courseInfo;
+    }
+
+    public void setCourseInfo(Course courseInfo) {
+        this.courseInfo = courseInfo;
+    }
+
+    public ClassInfo getClassInfo() {
+        return classInfo;
+    }
+
+    public void setClassInfo(ClassInfo classInfo) {
+        this.classInfo = classInfo;
     }
 }

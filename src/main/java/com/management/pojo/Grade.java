@@ -6,6 +6,8 @@ public class Grade {
     private String courseId;
     private Integer score;
 
+    private Student studentInfo = null;
+
     public Integer getId() {
         return id;
     }
@@ -36,5 +38,13 @@ public class Grade {
 
     public void setScore(Integer score) {
         this.score = score;
+    }
+
+    public Student getStudentInfo() {
+        return studentInfo;
+    }
+
+    public void setStudentInfo(Student studentInfo) {
+        this.studentInfo = studentInfo;
     }
 }
