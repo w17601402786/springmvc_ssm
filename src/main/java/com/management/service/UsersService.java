@@ -56,12 +56,20 @@ public interface UsersService {
 
     /**
      * 根据用户bean获取用户信息
+     * <p>仅管理员可用</p>
      * @param user 用户bean
      * @param thisUserType 当前用户类型
      * @return 用户信息
      */
     List<Users> getUsers(Users user, String thisUserType);
 
+    /**
+     * 获取所有学生用户信息
+     * <p>仅管理员可用</p>
+     * @param user 用户bean
+     * @param thisUserType 当前用户类型
+     * @return 学生用户信息
+     */
     List<Users> getStudentUsers(Users user, String thisUserType);
 
 
