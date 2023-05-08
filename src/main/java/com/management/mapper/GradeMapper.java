@@ -1,9 +1,11 @@
 package com.management.mapper;
 
 import com.management.pojo.Grade;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
+@Mapper
 public interface GradeMapper {
     // 增加一条成绩记录
     int addGrade(Grade grade);

@@ -1,9 +1,11 @@
 package com.management.mapper;
 
 import com.management.pojo.Teacher;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
+@Mapper
 public interface TeacherMapper {
     // 增加一位教师
     int addTeacher(Teacher teacher);

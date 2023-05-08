@@ -3,9 +3,7 @@ package com.management.service.impl;
 import com.management.mapper.CourseMapper;
 import com.management.mapper.GradeMapper;
 import com.management.mapper.StudentMapper;
-import com.management.pojo.Course;
-import com.management.pojo.Grade;
-import com.management.pojo.Student;
+import com.management.pojo.*;
 import com.management.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,8 +23,28 @@ public class StudentServiceImpl implements StudentService {
     private GradeMapper scoreMapper;
 
     @Override
-    public Student getStudentById(Integer id) {
+    public List<Student> getAllStudents(String userType) {
         return null;
+    }
+
+    @Override
+    public List<Student> getStudents(Student student, String userType) {
+        return null;
+    }
+
+    @Override
+    public int addStudent(Student student, String userType) {
+        return 0;
+    }
+
+    @Override
+    public int deleteStudentByUserId(Integer userId, String userType) {
+        return 0;
+    }
+
+    @Override
+    public int updateStudent(Student student, String userType) {
+        return 0;
     }
 
     @Override
@@ -35,42 +53,42 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public int updateStudent(Student student) {
-        return 0;
-    }
-
-    @Override
-    public String getClassInfo(String studentId) {
+    public Student getStudentByName(String name) {
         return null;
     }
 
     @Override
-    public List<Course> getCourses(String studentId) {
-//        return courseMapper.getCoursesByStudentId(studentId);
+    public List<Student> getStudentByClassInfo(ClassInfo classInfo) {
         return null;
     }
 
     @Override
-    public List<Course> getCourseTable(String studentId) {
-//        return courseMapper.getCourseTableByClassId(
-//                studentMapper.getStudentByStudentId(studentId).getClassId());
+    public List<Student> getStudentByMajor(String major) {
         return null;
     }
 
     @Override
-    public List<Grade> getScores(String studentId) {
-//        return scoreMapper.getScoresByStudentId(studentId);
+    public ClassInfo getClassInfo(Integer userId) {
         return null;
     }
 
     @Override
-    public int changePassword(String studentId, String password) {
-//        Student student = studentMapper.getStudentBySno(studentId);
-//        if (student == null) {
-//            return 0;
-//        }
-//        student.setPassword(password);
-//        return studentMapper.updateStudent(student);
-        return 0;
+    public Student getStudentByUserId(Integer userId) {
+        return null;
+    }
+
+    @Override
+    public List<Course> getCourses(Integer userId) {
+        return null;
+    }
+
+    @Override
+    public List<CourseSchedule> getCourseSchedule(Integer userId) {
+        return null;
+    }
+
+    @Override
+    public List<Grade> getGrades(Integer userId) {
+        return null;
     }
 }

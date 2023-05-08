@@ -15,9 +15,10 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class TeacherServiceImpl  implements TeacherService {
+public class TeacherServiceImpl implements TeacherService {
     @Autowired
     private TeacherMapper teacherMapper;
+
     @Autowired
     private CourseMapper courseMapper;
     @Autowired
