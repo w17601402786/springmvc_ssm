@@ -4,6 +4,9 @@ import com.management.pojo.Grade;
 
 import java.util.List;
 
+/**
+ * 成绩管理业务逻辑接口
+ */
 public interface GradeService {
     /**
      * 管理员添加成绩操作
