@@ -3,7 +3,6 @@ package com.management.service.impl;
 import com.management.mapper.StudentMapper;
 import com.management.mapper.TeacherMapper;
 import com.management.mapper.UsersMapper;
-import com.management.pojo.Student;
 import com.management.pojo.Users;
 import com.management.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,15 +32,6 @@ public class UsersServiceImpl implements UsersService {
         return usersMapper.addUser(user);
     }
 
-    @Override
-    public Users getUserByUsername(String username,String thisUserType) {
-
-        if (!thisUserType.equals("admin")){
-            return null;
-        }
-
-        return usersMapper.getUserByUsername(username);
-    }
 
     @Override
     public int updateUser(Users user,String thisUserType) {
@@ -58,7 +48,7 @@ public class UsersServiceImpl implements UsersService {
         if (!thisUserType.equals("admin")){
             return -1;
         }
-        return 0;
+        return usersMapper.deleteUserById(userId);
     }
 
     @Override
@@ -72,22 +62,18 @@ public class UsersServiceImpl implements UsersService {
     }
 
     @Override
-    public List<Users> getUsersByType(String userType,String thisUsertype) {
-
-        if (!thisUsertype.equals("admin")){
-            return null;
-        }
-
-        return null;
+    public Users getUserById(Integer userId) {
+        return usersMapper.getUserById(userId);
     }
 
     @Override
-    public Users getUserById(Integer userId,String thisUserType) {
+    public List<Users> getUsers(Users user, String thisUserType) {
 
         if (!thisUserType.equals("admin")){
             return null;
         }
 
-        return null;
+        return usersMapper.getUsers(user);
     }
+
 }

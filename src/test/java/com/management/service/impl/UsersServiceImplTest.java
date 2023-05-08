@@ -25,10 +25,13 @@ public class UsersServiceImplTest extends TestCase {
         users.setPassword("q111");
         users.setUserType("admin");
 
-        usersService.addUser(users);
+        usersService.addUser(users,"admin");
 
     }
     public void testGetUserByUsername() {
+
+
+
     }
 
     public void testUpdateUser() {

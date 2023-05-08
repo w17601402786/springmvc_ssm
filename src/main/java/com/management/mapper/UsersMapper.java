@@ -23,9 +23,8 @@ public interface UsersMapper {
      * @param userId 要删除的用户的id
      * @return 删除结果
      */
-    // 删除用户
     @Delete("delete from users where id=#{userId}")
-    int deleteUser(int userId);
+    int deleteUserById(int userId);
 
     /**
      * 修改用户信息
@@ -43,13 +42,6 @@ public interface UsersMapper {
     @Select("select * from users where id=#{userId}")
     Users getUserById(@PathVariable("userId") int userId);
 
-    /**
-     * 根据用户名查询用户
-     * @param username 用户名
-     * @return 用户对象
-     */
-    @Select("select * from users where username=#{username} limit 1")
-    Users getUserByUsername(String username);
 
     /**
      * 查询所有用户的信息
@@ -68,6 +60,8 @@ public interface UsersMapper {
     @Select("select * from users where username=#{userName} and password=#{password}")
     Users getUserByUserNameAndPassword(@PathVariable("userName") String userName,@PathVariable("password") String password);
 
+
+    List<Users> getUsers(Users user);
 
 
 }

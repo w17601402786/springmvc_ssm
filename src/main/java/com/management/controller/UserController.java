@@ -60,6 +60,6 @@ public class UserController {
     @RequestMapping("/createUser")
     public int createUser(Users user){
 
-        return userService.addUser(user);
+        return userService.addUser(user,"admin");
     }
 }
