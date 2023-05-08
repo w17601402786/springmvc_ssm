@@ -8,6 +8,8 @@ public class Grade {
 
     private Student studentInfo = null;
 
+    private Course courseInfo = null;
+
     public Integer getId() {
         return id;
     }
@@ -46,6 +48,14 @@ public class Grade {
 
     public void setStudentInfo(Student studentInfo) {
         this.studentInfo = studentInfo;
+    }
+
+    public Course getCourseInfo() {
+        return courseInfo;
+    }
+
+    public void setCourseInfo(Course courseInfo) {
+        this.courseInfo = courseInfo;
     }
 
     @Override
