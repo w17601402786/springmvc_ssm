@@ -22,4 +22,6 @@ public interface GradeMapper {
 
     // 根据学生号和课程号查询一条成绩记录
     Grade getGradeByStudentIdAndCourseId(String studentId, String courseId);
+
+    List<Grade> getScoreByTeacherId(String teacherId);
 }
