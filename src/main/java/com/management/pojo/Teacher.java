@@ -12,6 +12,8 @@ public class Teacher {
     private String phone;
     private int userId;
 
+    private Users userInfo = null;
+
     public int getId() {
         return id;
     }
@@ -74,5 +76,13 @@ public class Teacher {
 
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+    public Users getUserInfo() {
+        return userInfo;
+    }
+
+    public void setUserInfo(Users userInfo) {
+        this.userInfo = userInfo;
     }
 }

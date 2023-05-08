@@ -6,7 +6,7 @@ public class CourseSchedule {
     private Integer id;
     private String courseId;
     private String classId;
-    private String teacherName;
+    private String teacherId;
     private Date time;
     private String location;
 
@@ -34,12 +34,12 @@ public class CourseSchedule {
         this.classId = classId;
     }
 
-    public String getTeacherName() {
-        return teacherName;
+    public String getTeacherId() {
+        return teacherId;
     }
 
-    public void setTeacherName(String teacherName) {
-        this.teacherName = teacherName;
+    public void setTeacherId(String teacherId) {
+        this.teacherId = teacherId;
     }
 
     public Date getTime() {

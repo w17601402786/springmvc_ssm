@@ -10,7 +10,7 @@ public class ClassInfo {
      */
     private Integer num;
     private Integer year;
-    private String teacher;
+    private String counsellor;
 
     public Integer getId() {
         return id;
@@ -52,11 +52,11 @@ public class ClassInfo {
         this.year = year;
     }
 
-    public String getTeacher() {
-        return teacher;
+    public String getCounsellor() {
+        return counsellor;
     }
 
-    public void setTeacher(String teacher) {
-        this.teacher = teacher;
+    public void setCounsellor(String counsellor) {
+        this.counsellor = counsellor;
     }
 }

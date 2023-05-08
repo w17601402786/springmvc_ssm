@@ -42,6 +42,23 @@ public class Users {
         this.userType = userType;
     }
 
+
+    public Student getStudentInfo() {
+        return studentInfo;
+    }
+
+    public void setStudentInfo(Student studentInfo) {
+        this.studentInfo = studentInfo;
+    }
+
+    public Teacher getTeacherInfo() {
+        return teacherInfo;
+    }
+
+    public void setTeacherInfo(Teacher teacherInfo) {
+        this.teacherInfo = teacherInfo;
+    }
+
     @Override
     public String toString() {
         return "Users{" +
