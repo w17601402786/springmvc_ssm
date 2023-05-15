@@ -1,26 +1,13 @@
 package com.management.service.impl;
 
-import com.management.mapper.CourseMapper;
-import com.management.mapper.GradeMapper;
-import com.management.mapper.StudentMapper;
 import com.management.pojo.*;
 import com.management.service.StudentService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class StudentServiceImpl implements StudentService {
-
-    @Autowired
-    private StudentMapper studentMapper;
-
-    @Autowired
-    private CourseMapper courseMapper;
-
-    @Autowired
-    private GradeMapper scoreMapper;
 
     @Override
     public List<Student> getAllStudents(String userType) {

@@ -12,7 +12,11 @@ public class ClassInfo {
     private Integer year;
     private String counsellor;
 
+    /**
+     * 班级编号
+     */
     private String classId;
+
 
     public Integer getId() {
         return id;
