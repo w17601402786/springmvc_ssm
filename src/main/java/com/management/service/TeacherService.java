@@ -136,10 +136,10 @@ public interface TeacherService {
 
     /**
      * 通过教师的教工号获取教师的基本信息
-     * @param TeacherID 教师的教工号
+     * @param teacherID 教师的教工号
      * @return 教师对象
      */
-    Teacher getTeacherByTeacherID(String TeacherID);
+    Teacher getTeacherByTeacherID(String teacherID);
 
     /**
      * 更新教师的基本信息
@@ -150,10 +150,11 @@ public interface TeacherService {
 
     /**
      * 获取教师的课程信息
+     *
      * @param teacherId 教师的教工号
      * @return 课程列表
      */
-    List<Course> getCourse(String teacherId);
+    List<CourseSchedule> getCourse(String teacherId);
 
     /**
      * 获取教师的课程表信息
