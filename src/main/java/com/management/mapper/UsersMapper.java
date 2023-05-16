@@ -28,10 +28,13 @@ public interface UsersMapper {
 
     /**
      * 修改用户信息
+     * <p color=red"">
+     *  不能更新userName!!!
+     * </p>
      * @param user 要修改的用户修改后的对象
      * @return 修改结果
      */
-    @Update("update users set password=#{password},user_type=#{userType} where username=#{username}")
+    @Update("update users set password=#{password},user_type=#{userType} where id=#{id}")
     int updateUser(Users user);
 
     /**
@@ -61,10 +64,26 @@ public interface UsersMapper {
     Users getUserByUserNameAndPassword(@PathVariable("userName") String userName,@PathVariable("password") String password);
 
 
+    /**
+     * 根据用户Bean查询用户
+     * @param user 用户Bean
+     * @return 用户列表
+     */
     List<Users> getUsers(Users user);
 
+    /**
+     * 获取学生用户的信息
+     * @param user 用户Bean
+     * @return 学生用户列表，其中student信息包含在user中的属性中
+     */
     List<Users> getStudentUsers(Users user);
 
+    /**
+     * 获取教师用户的信息
+     * @param user 用户Bean
+     * @return 教师用户列表，其中teacher信息包含在user中的属性中
+     */
+    List<Users> getTeacherUsers(Users user);
 
 }
 

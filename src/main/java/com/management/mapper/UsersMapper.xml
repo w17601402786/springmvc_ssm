@@ -9,7 +9,7 @@
             <if test="id != 0">AND id = #{id}</if>
             <if test="username != null and username != ''">AND username = #{username}</if>
             <if test="password != null and password != ''">AND password = #{password}</if>
-            <if test="userType != null and userType != ''">AND userType = #{userType}</if>
+            <if test="userType != null and userType != ''">AND user_type = #{userType}</if>
         </where>
     </select>
 
@@ -22,12 +22,22 @@
         <if test="password != null and password != ''">AND u.password = #{password}</if>
     </select>
 
+    <select id="getTeacherUsers" parameterType="com.management.pojo.Users" resultMap="usersResultMap">
+        SELECT *
+        FROM users u LEFT JOIN teacher t ON u.id = t.user_id
+        WHERE u.user_type = 'teacher'
+        <if test="id != 0">AND u.id = #{id}</if>
+        <if test="username != null and username != ''">AND u.username = #{username}</if>
+        <if test="password != null and password != ''">AND u.password = #{password}</if>
+    </select>
+
 
     <resultMap id="usersResultMap" type="com.management.pojo.Users">
         <id column="id" jdbcType="INTEGER" property="id"/>
         <result column="username" jdbcType="VARCHAR" property="username"/>
         <result column="password" jdbcType="VARCHAR" property="password"/>
         <result column="userType" jdbcType="VARCHAR" property="userType"/>
+
         <association property="studentInfo" javaType="com.management.pojo.Student">
             <id column="student_id" jdbcType="VARCHAR" property="studentId"/>
             <result column="name" jdbcType="VARCHAR" property="name"/>

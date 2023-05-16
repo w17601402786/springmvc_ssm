@@ -73,4 +73,14 @@ public interface UsersService {
     List<Users> getStudentUsers(Users user, String thisUserType);
 
 
+    /**
+     * 获取所有教师用户信息
+     * <p>仅管理员可用</p>
+     * @param user 用户bean
+     * @param thisUserType 当前用户类型
+     * @return 教师用户信息
+     */
+    List<Users> getTeacherUsers(Users user, String thisUserType);
+
+
 }

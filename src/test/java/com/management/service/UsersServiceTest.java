@@ -46,7 +46,6 @@ public class UsersServiceTest{
         Users users = new Users();
 
         users.setId(1);
-        users.setUsername("wyz");
         users.setPassword("123456");
         users.setUserType("student");
 
@@ -56,11 +55,13 @@ public class UsersServiceTest{
 
     @Test
     public void testDeleteUserById() {
-            usersService.deleteUserById(1,"admin");
+        usersService.deleteUserById(1,"admin");
     }
 
     @Test
     public void testGetAllUsers() {
+        List<Users> users = usersService.getAllUsers("admin");
+        users.forEach(System.out::println);
     }
 
     @Test
@@ -68,15 +69,11 @@ public class UsersServiceTest{
 
         Users user = new Users();
 
-//        user.setUsername("qqq");
-//        user.setPassword("q111");
-//        user.setUserType("admin");
-//
+        user.setUserType("admin");
+
         List<Users> users = usersService.getUsers(user,"admin");
 
-        for (Users u : users) {
-            System.out.println(u);
-        }
+        users.forEach(System.out::println);
     }
 
 
@@ -87,9 +84,19 @@ public class UsersServiceTest{
 
         List<Users> users = usersService.getStudentUsers(user,"admin");
 
-        for (Users u : users) {
-            System.out.println(u);
-        }
+        users.forEach(System.out::println);
+
+    }
+
+
+    @Test
+    public void testGetTeacherUsers(){
+
+        Users user = new Users();
+
+        List<Users> users = usersService.getTeacherUsers(user,"admin");
+
+        users.forEach(System.out::println);
 
     }
 
