@@ -27,6 +27,65 @@ public class TeacherServiceImpl implements TeacherService {
     private GradeMapper gradeMapper;
 
     @Override
+    public List<Teacher> getAllTeachers(String userType) {
+        return null;
+    }
+
+    @Override
+    public List<Teacher> getTeachers(Teacher teacher, String userType) {
+        return null;
+    }
+
+    @Override
+    public int addTeacher(Teacher teacher, String userType) {
+        return 0;
+    }
+
+    @Override
+    public int deleteTeacherByUserId(Integer userId, String userType) {
+        return 0;
+    }
+
+    @Override
+    public int updateTeacher(Teacher teacher, String userType) {
+        return 0;
+    }
+
+    @Override
+    public Teacher getTeacherByTeacherId(String teacherId) {
+        return null;
+    }
+
+    @Override
+    public Teacher getTeacherByName(String name) {
+        return null;
+    }
+
+    @Override
+    public Teacher getTeacherByUserId(Integer userId) {
+        return null;
+    }
+
+    @Override
+    public List<Course> getCourses(Integer userId) {
+        return null;
+    }
+
+    @Override
+    public List<CourseSchedule> getCourseSchedule(Integer userId) {
+        return null;
+    }
+
+    @Override
+    public List<Grade> getGrades(Integer userId) {
+        return null;
+    }
+
+
+
+
+
+    @Override
     public Teacher getTeacherById(Integer id) {
         return teacherMapper.getTeacherById(id);
     }

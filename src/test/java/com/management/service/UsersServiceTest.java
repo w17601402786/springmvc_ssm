@@ -1,8 +1,6 @@
 package com.management.service;
 
 import com.management.pojo.Users;
-import com.management.service.impl.StudentServiceImpl;
-import junit.framework.TestCase;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,15 +11,22 @@ import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class) //启动spring容器
 @ContextConfiguration(locations = {"classpath:applicationContext_service.xml","classpath:applicationContext_mapper.xml"})
-public class UsersServiceTest extends TestCase {
+public class UsersServiceTest{
 
 
     @Autowired
     UsersService usersService;
 
+    @Test
     public void testGetUserById() {
+
+        Users user = usersService.getUserById(1);
+
+        System.out.println(user);
+
     }
 
+    @Test
     public void testAddUser() {
 
         Users users = new Users();
@@ -34,19 +39,32 @@ public class UsersServiceTest extends TestCase {
 
     }
 
+    @Test
     public void testUpdateUser() {
+
+
+        Users users = new Users();
+
+        users.setId(1);
+        users.setUsername("wyz");
+        users.setPassword("123456");
+        users.setUserType("student");
+
+        usersService.updateUser(users,"admin");
+
     }
 
+    @Test
     public void testDeleteUserById() {
+            usersService.deleteUserById(1,"admin");
     }
 
+    @Test
     public void testGetAllUsers() {
     }
 
     @Test
     public void testGetUsers() {
-
-
 
         Users user = new Users();
 

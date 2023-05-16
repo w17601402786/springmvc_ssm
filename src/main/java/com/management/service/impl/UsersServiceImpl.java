@@ -22,6 +22,13 @@ public class UsersServiceImpl implements UsersService {
     @Autowired
     private TeacherMapper teacherMapper;
 
+
+    @Override
+    public Users getUserById(Integer userId) {
+        return usersMapper.getUserById(userId);
+    }
+
+
     @Override
     public int addUser(Users user, String thisUserType) {
 
@@ -61,10 +68,6 @@ public class UsersServiceImpl implements UsersService {
         return usersMapper.getAllUsers();
     }
 
-    @Override
-    public Users getUserById(Integer userId) {
-        return usersMapper.getUserById(userId);
-    }
 
     @Override
     public List<Users> getUsers(Users user, String thisUserType) {

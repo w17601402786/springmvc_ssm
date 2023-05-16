@@ -7,6 +7,8 @@
 
     <!--帮助我们打印mybatis的日志信息。sql语句等。-->
     <settings>
+        <!--将数据库中的下划线自动映射到java对象的驼峰命名法中-->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
         <setting name="logImpl" value="STDOUT_LOGGING"/>
     </settings>
 
