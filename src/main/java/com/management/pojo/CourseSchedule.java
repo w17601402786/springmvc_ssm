@@ -61,7 +61,7 @@ public class CourseSchedule {
     private Date time;
     private String location;
     private Course courseInfo = null;
-    private ClassInfo classInfo = null;
+    private Classes classInfo = null;
 
     public Integer getId() {
         return id;
@@ -119,11 +119,11 @@ public class CourseSchedule {
         this.courseInfo = courseInfo;
     }
 
-    public ClassInfo getClassInfo() {
+    public Classes getClassInfo() {
         return classInfo;
     }
 
-    public void setClassInfo(ClassInfo classInfo) {
+    public void setClassInfo(Classes classInfo) {
         this.classInfo = classInfo;
     }
 

@@ -1,6 +1,6 @@
 package com.management.pojo;
 
-public class ClassInfo {
+public class Classes {
     private Integer id;
     private String name;
     private String major;
@@ -64,5 +64,18 @@ public class ClassInfo {
 
     public void setCounsellor(String counsellor) {
         this.counsellor = counsellor;
+    }
+
+    @Override
+    public String toString() {
+        return "Classes{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", major='" + major + '\'' +
+                ", num=" + num +
+                ", year=" + year +
+                ", counsellor='" + counsellor + '\'' +
+                ", classId='" + classId + '\'' +
+                '}';
     }
 }

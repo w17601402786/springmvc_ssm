@@ -91,10 +91,10 @@ public interface StudentService {
 
     /**
      * 根据班级信息查询学生信息
-     * @param classInfo 班级信息
+     * @param classes 班级信息
      * @return 学生信息列表
      */
-    List<Student> getStudentByClassInfo(ClassInfo classInfo);
+    List<Student> getStudentByClasses(Classes classes);
 
     /**
      * 根据专业信息查询学生信息
@@ -116,7 +116,7 @@ public interface StudentService {
      * @param userId 用户ID
      * @return 班级信息
      */
-    ClassInfo getClassInfo(Integer userId);
+    Classes getClasses(Integer userId);
 
 
     /**

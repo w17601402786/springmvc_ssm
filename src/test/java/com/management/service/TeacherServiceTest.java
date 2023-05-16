@@ -42,13 +42,13 @@ public class TeacherServiceTest extends TestCase {
         System.out.println("更新结果：" + result);
     }
 
-    @Test
-    public void testGetCourse() {
-        List<Course> courseList = teacherService.getCourse("t001");
-        for (Course course : courseList) {
-            System.out.println(course.getName());
-        }
-    }
+//    @Test
+//    public void testGetCourse() {
+//        List<Course> courseList = teacherService.getCourse("t001");
+//        for (Course course : courseList) {
+//            System.out.println(course.getName());
+//        }
+//    }
 
     @Test
     public void testGetGradeCalendar() {

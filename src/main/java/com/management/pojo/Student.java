@@ -16,7 +16,7 @@ public class Student {
     private String note;
     private int userId;
 
-    private ClassInfo classInfo = null;
+    private Classes classInfo = null;
 
     private Users userInfo = null;
 
@@ -76,11 +76,11 @@ public class Student {
         this.classId = classId;
     }
 
-    public ClassInfo getClassInfo() {
+    public Classes getClassInfo() {
         return classInfo;
     }
 
-    public void setClassInfo(ClassInfo classInfo) {
+    public void setClassInfo(Classes classInfo) {
         this.classInfo = classInfo;
     }
 

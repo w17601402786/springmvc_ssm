@@ -45,7 +45,7 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public List<Student> getStudentByClassInfo(ClassInfo classInfo) {
+    public List<Student> getStudentByClasses(Classes classes) {
         return null;
     }
 
@@ -55,7 +55,7 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public ClassInfo getClassInfo(Integer userId) {
+    public Classes getClasses(Integer userId) {
         return null;
     }
 

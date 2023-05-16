@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.management.mapper.ClassesMapper">
+
+    <insert id="addClasses" parameterType="com.management.pojo.Classes">
+        insert into classes(name, major, num, year, counsellor,class_id)
+        values(#{name}, #{major}, #{num}, #{year}, #{counsellor},#{classId})
+    </insert>
+
+    <delete id="deleteClasses" parameterType="Integer">
+        delete from classes where id = #{id}
+    </delete>
+
+    <update id="updateClasses" parameterType="com.management.pojo.Classes">
+        update classes
+        <set>
+            <if test="name != null">name = #{name},</if>
+            <if test="major != null">major = #{major},</if>
+            <if test="num != null">num = #{num},</if>
+            <if test="year != null">year = #{year},</if>
+            <if test="counsellor != null">counsellor = #{counsellor},</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <select id="getClasses" parameterType="com.management.pojo.Classes" resultType="com.management.pojo.Classes">
+
+        select * from classes
+        <where>
+            <if test="name != null">and name = #{name}</if>
+            <if test="major != null">and major = #{major}</if>
+            <if test="year != null">and year = #{year}</if>
+            <if test="counsellor != null">and counsellor = #{counsellor}</if>
+            <if test="classId != null">and class_id = #{classId}</if>
+        </where>
+    </select>
+</mapper>
