@@ -124,8 +124,9 @@ public class TeacherServiceImpl implements TeacherService {
     }
 
     @Override
-    public List<Course> getCourses(Integer userId) {
-        return null;
+    public List<Course> getCourses(String teacherId) {
+        List<Course> courses = teacherMapper.getTeacherCourses(teacherId);
+        return courses;
     }
 
     @Override
@@ -156,9 +157,8 @@ public class TeacherServiceImpl implements TeacherService {
 
     @Override
     public List<Course> getCourse(String teacherId) {
-//        return teacherMapper.getTeacherCourses(teacherId);
-
-        return null;
+        List<Course> courses = teacherMapper.getTeacherCourses(teacherId);
+        return courses;
 
     }
 

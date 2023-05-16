@@ -37,8 +37,13 @@
     </select>
 
     <!-- 获取教师的课程信息 -->
-    <select id="getTeacherCourses" parameterType="String" resultType="com.management.pojo.Teacher">
-        select * from teacher where teacher_id=#{teacherId}
+    <select id="getTeacherCourses" parameterType="String" resultType="com.management.pojo.Course">
+        SELECT c.course_id, c.name, c.hours, c.credit, cs.time, cs.location
+        FROM course c
+                 JOIN course_schedule cs ON c.course_id = cs.course_id
+                 JOIN teacher t ON cs.teacher_id = t.teacher_id
+                 JOIN users u ON t.user_id = u.id
+        WHERE u.user_type = 'teacher' AND t.teacher_id = #{teacherId};
     </select>
 
 </mapper>

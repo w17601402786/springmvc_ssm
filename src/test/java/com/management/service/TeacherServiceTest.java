@@ -45,13 +45,13 @@ public class TeacherServiceTest extends TestCase {
 
     }
 
-//    @Test
-//    public void testGetCourse() {
-//        List<Course> courseList = teacherService.getCourse("t001");
-//        for (Course course : courseList) {
-//            System.out.println(course.getName());
-//        }
-//    }
+    @Test
+    public void testGetCourse() {
+        List<Course> courseList = teacherService.getCourses("t001");
+        for (Course course : courseList) {
+            System.out.println(course.getName());
+        }
+    }
 
     @Test
     public void testGetGradeCalendar() {

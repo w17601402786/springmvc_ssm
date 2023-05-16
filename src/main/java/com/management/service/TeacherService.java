@@ -107,10 +107,10 @@ public interface TeacherService {
      *  课程的数据表、课程表的联合查询
      *  记得对课程去重
      * </p>
-     * @param userId 用户ID
+     * @param teacherId 用户ID
      * @return 课程信息列表
      */
-    List<Course> getCourses(Integer userId);
+    List<Course> getCourses(String teacherId);
 
     /**
      * 获取当前用户的课程表信息
