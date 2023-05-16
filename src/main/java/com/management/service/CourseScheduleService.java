@@ -22,7 +22,7 @@ public interface CourseScheduleService {
 
     /**
      * 添加课程表
-     * <p>需要进行排课冲突检测</p>
+     * <p color="red">需要进行排课冲突检测</p>
      * @param courseSchedule 课程表信息
      * @param userType 当前用户类型
      * @return 添加结果
