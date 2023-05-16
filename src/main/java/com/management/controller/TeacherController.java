@@ -63,8 +63,8 @@ public class TeacherController {
      */
     @GetMapping("/{teacherId}/courseSchedules")
     @ResponseBody
-    public String getCourseSchedulesByTeacherId(@PathVariable String teacherId) {
-        List<CourseSchedule> courseSchedules = teacherService.getCourse(teacherId);
+    public String getCourseSchedulesByTeacherId(@PathVariable Integer Id) {
+        List<CourseSchedule> courseSchedules = teacherService.getCourseSchedule(Id);
         return JSON.toString();
     }
 

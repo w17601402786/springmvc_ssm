@@ -155,7 +155,7 @@ public class TeacherServiceImpl implements TeacherService {
 
 
     @Override
-    public List<CourseSchedule> getCourse(String teacherId) {
+    public List<Course> getCourse(String teacherId) {
 //        return teacherMapper.getTeacherCourses(teacherId);
 
         return null;

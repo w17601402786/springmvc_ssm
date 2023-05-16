@@ -88,6 +88,7 @@ public interface TeacherService {
      * @param name 姓名
      * @return 老师信息
      */
+    @Deprecated
     Teacher getTeacherByName(String name);
 
 
@@ -154,13 +155,15 @@ public interface TeacherService {
      * @param teacherId 教师的教工号
      * @return 课程列表
      */
-    List<CourseSchedule> getCourse(String teacherId);
+    @Deprecated
+    List<Course> getCourse(String teacherId);
 
     /**
      * 获取教师的课程表信息
      * @param teacherId 教师的教工号
      * @return 课程表列表
      */
+    @Deprecated
     List<CourseSchedule> getGradeCalendar(String teacherId);
 
     /**

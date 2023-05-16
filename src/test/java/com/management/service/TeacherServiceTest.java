@@ -40,6 +40,9 @@ public class TeacherServiceTest extends TestCase {
         teacher.setName("王宇哲");
         int result = teacherService.updateTeacher(teacher);
         System.out.println("更新结果：" + result);
+
+
+
     }
 
 //    @Test

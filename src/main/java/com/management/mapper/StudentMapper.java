@@ -35,7 +35,7 @@ public interface StudentMapper {
      * @param studentId 学号
      * @return 查询到的学生信息
      */
-    Student getStudentBySno(String studentId);
+    Student getStudentByStudentId(String studentId);
 
     /**
      * 根据姓名查询学生基本信息
@@ -53,5 +53,13 @@ public interface StudentMapper {
      * @return 查询到的学生信息
      */
     List<Student> getStudentByClass(String major, String classNum);
+
+    /**
+     * 获取当前学生的学生信息
+     * @param userId 用户ID
+     * @return 当前学生信息
+     */
+    Student getStudentByUserId(Integer userId);
+
 
 }

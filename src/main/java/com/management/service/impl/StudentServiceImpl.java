@@ -1,13 +1,19 @@
 package com.management.service.impl;
 
+import com.management.mapper.StudentMapper;
 import com.management.pojo.*;
 import com.management.service.StudentService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class StudentServiceImpl implements StudentService {
+
+    @Autowired
+    StudentMapper studentMapper;
+
 
     @Override
     public List<Student> getAllStudents(String userType) {
@@ -36,12 +42,15 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public Student getStudentByStudentId(String studentId) {
-        return null;
+        return studentMapper.getStudentByStudentId(studentId);
     }
 
     @Override
     public Student getStudentByName(String name) {
-        return null;
+
+        List<Student> students = studentMapper.getStudentByName(name);
+
+        return students.size() == 0 ? null : students.get(0);
     }
 
     @Override
@@ -61,7 +70,7 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public Student getStudentByUserId(Integer userId) {
-        return null;
+        return studentMapper.getStudentByUserId(userId);
     }
 
     @Override

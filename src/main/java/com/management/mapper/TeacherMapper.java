@@ -51,6 +51,7 @@ public interface TeacherMapper {
 
     /**
      * 获取教师的课程信息
+     *
      * @param teacherId 教师号
      * @return 课程列表
      */

@@ -32,7 +32,7 @@
         where student_id = #{studentId}
     </update>
 
-    <select id="getStudentBySno" resultMap="studentResultMap" parameterType="String">
+    <select id="getStudentByStudentId" resultMap="studentResultMap" parameterType="String">
         select * from student where student_id = #{studentId}
     </select>
 
@@ -43,5 +43,10 @@
     <select id="getStudentByClass" resultMap="studentResultMap" parameterType="Map">
         select * from student where major = #{major} and class = #{classNum}
     </select>
+
+    <select id="getStudentByUserId" resultMap="studentResultMap" parameterType="Integer">
+        SELECT * FROM student WHERE student_id = #{userId}
+    </select>
+   
 
 </mapper>
