@@ -36,4 +36,9 @@
         select * from teacher where teacher_id=#{teacherId}
     </select>
 
+    <!-- 获取教师的课程信息 -->
+    <select id="getTeacherCourses" parameterType="String" resultType="com.management.pojo.Teacher">
+        select * from teacher where teacher_id=#{teacherId}
+    </select>
+
 </mapper>

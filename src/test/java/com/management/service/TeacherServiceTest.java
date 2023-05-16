@@ -28,21 +28,23 @@ public class TeacherServiceTest extends TestCase {
 
     @Test
     public void testGetTeacherByTeacherID() {
-        Teacher teacher = teacherService.getTeacherByTeacherID("1001");
-        System.out.println(teacher.getName());
+        Teacher teacher = teacherService.getTeacherByTeacherID("t001");
+        System.out.println(teacher);
     }
 
     @Test
     public void testUpdateTeacher() {
         Teacher teacher = teacherService.getTeacherById(1);
-        teacher.setName("新姓名");
+
+        System.out.println(teacher);
+        teacher.setName("王宇哲");
         int result = teacherService.updateTeacher(teacher);
         System.out.println("更新结果：" + result);
     }
 
     @Test
     public void testGetCourse() {
-        List<Course> courseList = teacherService.getCourse("1001");
+        List<Course> courseList = teacherService.getCourse("t001");
         for (Course course : courseList) {
             System.out.println(course.getName());
         }

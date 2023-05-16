@@ -1,9 +1,6 @@
 package com.management.service.impl;
 
-import com.management.mapper.CourseMapper;
-import com.management.mapper.CourseScheduleMapper;
-import com.management.mapper.GradeMapper;
-import com.management.mapper.TeacherMapper;
+import com.management.mapper.*;
 import com.management.pojo.Course;
 import com.management.pojo.CourseSchedule;
 import com.management.pojo.Grade;
@@ -25,6 +22,65 @@ public class TeacherServiceImpl implements TeacherService {
     private CourseScheduleMapper courseScheduleMapper;
     @Autowired
     private GradeMapper gradeMapper;
+//
+//    @Override
+//    public List<Teacher> getAllTeachers(String userType) {
+//        return null;
+//    }
+//
+//    @Override
+//    public List<Teacher> getTeachers(Teacher teacher, String userType) {
+//        return null;
+//    }
+//
+//    @Override
+//    public int addTeacher(Teacher teacher, String userType) {
+//        return 0;
+//    }
+//
+//    @Override
+//    public int deleteTeacherByUserId(Integer userId, String userType) {
+//        return 0;
+//    }
+//
+//    @Override
+//    public int updateTeacher(Teacher teacher, String userType) {
+//        return 0;
+//    }
+//
+//    @Override
+//    public Teacher getTeacherByTeacherId(String teacherId) {
+//        return null;
+//    }
+//
+//    @Override
+//    public Teacher getTeacherByName(String name) {
+//        return null;
+//    }
+//
+//    @Override
+//    public Teacher getTeacherByUserId(Integer userId) {
+//        return null;
+//    }
+//
+//    @Override
+//    public List<Course> getCourses(Integer userId) {
+//        return null;
+//    }
+//
+//    @Override
+//    public List<CourseSchedule> getCourseSchedule(Integer userId) {
+//        return null;
+//    }
+//
+//    @Override
+//    public List<Grade> getGrades(Integer userId) {
+//        return null;
+//    }
+//
+
+
+
 
     @Override
     public List<Teacher> getAllTeachers(String userType) {
@@ -53,13 +109,14 @@ public class TeacherServiceImpl implements TeacherService {
 
     @Override
     public Teacher getTeacherByTeacherId(String teacherId) {
-        return null;
+        return teacherMapper.getTeacherByTeacherId(teacherId);
     }
 
     @Override
     public Teacher getTeacherByName(String name) {
         return null;
     }
+
 
     @Override
     public Teacher getTeacherByUserId(Integer userId) {
@@ -81,18 +138,14 @@ public class TeacherServiceImpl implements TeacherService {
         return null;
     }
 
-
-
-
-
     @Override
     public Teacher getTeacherById(Integer id) {
         return teacherMapper.getTeacherById(id);
     }
 
     @Override
-    public Teacher getTeacherByTeacherID(String TeacherID) {
-        return null;
+    public Teacher getTeacherByTeacherID(String teacherID) {
+        return teacherMapper.getTeacherByTeacherId(teacherID);
     }
 
     @Override
@@ -102,8 +155,8 @@ public class TeacherServiceImpl implements TeacherService {
 
 
     @Override
-    public List<Course> getCourse(String teacherId) {
-        return null;
+    public List<CourseSchedule> getCourse(String teacherId) {
+        return teacherMapper.getTeacherCourses(teacherId);
     }
 
     @Override

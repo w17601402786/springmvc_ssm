@@ -61,10 +61,10 @@ public class TeacherController {
      * @param teacherName 教师姓名
      * @return 课程表信息（JSON字符串）
      */
-    @GetMapping("/{teacherName}/courseSchedules")
+    @GetMapping("/{teacherId}/courseSchedules")
     @ResponseBody
-    public String getCourseSchedulesByTeacherName(@PathVariable String teacherName) {
-        List<CourseSchedule> courseSchedules = teacherService.getGradeCalendar(teacherName);
+    public String getCourseSchedulesByTeacherId(@PathVariable String teacherId) {
+        List<CourseSchedule> courseSchedules = teacherService.getCourse(teacherId);
         return JSON.toString();
     }
 

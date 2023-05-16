@@ -27,7 +27,7 @@ public interface CourseScheduleMapper {
     List<CourseSchedule> getCourseSchedulesByClassId(String classId);
 
     // 根据教师姓名查询该教师的课程表信息
-    List<CourseSchedule> getCourseSchedulesByTeacherName(String teacherName);
+    List<CourseSchedule> getCourseSchedulesByTeacherId(String teacherId);
 
     // 根据时间查询课程表信息
     List<CourseSchedule> getCourseSchedulesByTime(String time);
