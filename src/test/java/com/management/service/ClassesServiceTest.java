@@ -59,11 +59,9 @@ public class ClassesServiceTest extends TestCase {
 
     @Test
     public void testGetClasses() {
+
         List<Classes> classes = classesService.getClasses(null);
-
-
         classes.forEach(System.out::println);
-
 
     }
 }
