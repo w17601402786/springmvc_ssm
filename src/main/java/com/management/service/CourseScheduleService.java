@@ -56,4 +56,11 @@ public interface CourseScheduleService {
     List<CourseSchedule> getCourseSchedule(CourseSchedule courseSchedule, String userType);
 
 
+    /**
+     * 根据userId查询课程表信息
+     * @param userId 用户ID
+     * @return 课程表信息
+     */
+    List<CourseSchedule> getCourseSchedulesByUserId(Integer userId);
+
 }

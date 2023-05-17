@@ -19,6 +19,8 @@ public class TeacherServiceTest extends TestCase {
 
     @Autowired
     private TeacherService teacherService;
+    @Autowired
+    private CourseScheduleService courseScheduleService;
 
     @Test
     public void testGetTeacherById() {
@@ -55,7 +57,7 @@ public class TeacherServiceTest extends TestCase {
 
     @Test
     public void testGetGradeCalendar() {
-        List<CourseSchedule> scheduleList = teacherService.getGradeCalendar("1001");
+        List<CourseSchedule> scheduleList = teacherService.getGradeCalendar("t001");
         for (CourseSchedule schedule : scheduleList) {
             System.out.println(schedule);
         }
@@ -63,7 +65,7 @@ public class TeacherServiceTest extends TestCase {
 
     @Test
     public void testGetGrade() {
-        List<Grade> gradeList = teacherService.getGrade("1001");
+        List<Grade> gradeList = teacherService.getGrade("t001");
         for (Grade grade : gradeList) {
             System.out.println(grade);
         }
@@ -73,5 +75,19 @@ public class TeacherServiceTest extends TestCase {
     public void testSubmitGrade() {
         int result = teacherService.submitGrade("2001", "1", 80);
         System.out.println("提交结果：" + result);
+    }
+
+    @Test
+    public void testGetCourseScheduleByUserId(){
+        List<CourseSchedule> courseScheduleList = courseScheduleService.getCourseSchedulesByUserId(2);
+        for (CourseSchedule courseSchedule : courseScheduleList){
+            System.out.println(courseSchedule);
+        }
+    }
+
+    @Test
+    public void testGetTeacherByUserId(){
+        Teacher teacher = teacherService.getTeacherByUserId(3);
+        System.out.println(teacher);
     }
 }

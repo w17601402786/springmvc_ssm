@@ -80,8 +80,6 @@ public class TeacherServiceImpl implements TeacherService {
 //
 
 
-
-
     @Override
     public List<Teacher> getAllTeachers(String userType) {
         return null;
@@ -120,7 +118,7 @@ public class TeacherServiceImpl implements TeacherService {
 
     @Override
     public Teacher getTeacherByUserId(Integer userId) {
-        return null;
+        return teacherMapper.getTeacherByUserId(userId);
     }
 
     @Override
@@ -131,7 +129,8 @@ public class TeacherServiceImpl implements TeacherService {
 
     @Override
     public List<CourseSchedule> getCourseSchedule(Integer userId) {
-        return null;
+        List<CourseSchedule> courseSchedules = courseScheduleMapper.getCourseScheduleByUserId(userId);
+        return courseSchedules;
     }
 
     @Override
@@ -163,14 +162,14 @@ public class TeacherServiceImpl implements TeacherService {
     }
 
     @Override
-    public List<CourseSchedule> getGradeCalendar(String teacherName) {
-//        return courseScheduleMapper.getCourseSchedulesByTeacherName(teacherName);
-        return null;
+    public List<CourseSchedule> getGradeCalendar(String teacherId) {
+        List<CourseSchedule> courseSchedules = courseScheduleMapper.getCourseSchedulesByTeacherId(teacherId);
+        return courseSchedules;
     }
 
     @Override
     public List<Grade> getGrade(String teacherId) {
-        return gradeMapper.getScoreByTeacherId(teacherId);
+        return teacherMapper.getGrade(teacherId);
     }
 
     @Override

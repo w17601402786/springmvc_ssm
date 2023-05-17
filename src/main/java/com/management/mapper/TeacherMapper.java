@@ -1,6 +1,7 @@
 package com.management.mapper;
 
 import com.management.pojo.Course;
+import com.management.pojo.Grade;
 import com.management.pojo.Teacher;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -50,10 +51,27 @@ public interface TeacherMapper {
     Teacher getTeacherByTeacherId(String teacherId);
 
     /**
+     * 根据用户ID查询教师信息
+     * @param userId 用户ID
+     * @return 教师信息
+     */
+    Teacher getTeacherByUserId(Integer userId);
+
+
+    /**
      * 获取教师的课程信息
      *
      * @param teacherId 教师号
      * @return 课程列表
      */
     List<Course> getTeacherCourses(String teacherId);
+
+    /**
+     * 教师获取成绩信息
+     * @param teacherId
+     * @return
+     */
+    List<Grade> getGrade(String teacherId);
+
+
 }

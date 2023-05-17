@@ -38,12 +38,44 @@
 
     <!-- 获取教师的课程信息 -->
     <select id="getTeacherCourses" parameterType="String" resultType="com.management.pojo.Course">
-        SELECT c.course_id, c.name, c.hours, c.credit, cs.time, cs.location
+        SELECT c.course_id, c.name, c.hours, c.credit, cs.start_time,cs.end_time, cs.location, cs.week, cs.day
         FROM course c
                  JOIN course_schedule cs ON c.course_id = cs.course_id
                  JOIN teacher t ON cs.teacher_id = t.teacher_id
                  JOIN users u ON t.user_id = u.id
         WHERE u.user_type = 'teacher' AND t.teacher_id = #{teacherId};
     </select>
+
+    <!-- 根据userId查询一位教师的信息 -->
+    <select id="getTeacherByUserId" parameterType="int" resultType="com.management.pojo.Teacher">
+        select t.*
+        from teacher t
+                 join users u on t.user_id = u.id
+        where u.id = #{userId} and u.user_type = 'teacher'
+    </select>
+
+    <!-- 根据教师id获取成绩列表 -->
+    <select id="getGrade" parameterType="String" resultType="com.management.pojo.Grade">
+        SELECT * FROM grade WHERE course_id = (
+            SELECT course_id FROM course_schedule WHERE teacher_id = (
+                SELECT teacher_id FROM teacher WHERE user_id = #{user_id}
+            )
+        ) AND student_id IN (
+            SELECT student_id FROM student WHERE class_id = (
+                SELECT class_id FROM course_schedule WHERE teacher_id = (
+                    SELECT teacher_id FROM teacher WHERE user_id = #{user_id}
+                )
+            )
+        );
+
+
+    </select>
+
+    <!-- 提交成绩 -->
+    <update id="updateGrade" parameterType="com.management.pojo.Grade">
+        UPDATE grade
+        SET score = #{score}
+        WHERE student_id = #{studentId} AND course_id = #{courseId}
+    </update>
 
 </mapper>

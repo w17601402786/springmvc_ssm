@@ -32,9 +32,14 @@ import java.util.Date;
  *         <td>授课教师的编号</td>
  *     </tr>
  *     <tr>
- *         <td>time</td>
- *         <td>Date</td>
- *         <td>上课时间</td>
+ *         <td>start_time</td>
+ *         <td>Integer</td>
+ *         <td>上课开始节次</td>
+ *     </tr>
+ *     <tr>
+ *         <td>end_time</td>
+ *         <td>Integer</td>
+ *         <td>上课结束节次</td>
  *     </tr>
  *     <tr>
  *         <td>location</td>
