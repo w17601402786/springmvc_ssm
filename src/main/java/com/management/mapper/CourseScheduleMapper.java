@@ -1,6 +1,7 @@
 package com.management.mapper;
 
 import com.management.pojo.CourseSchedule;
+import org.apache.ibatis.annotations.Delete;
 
 import java.util.List;
 
@@ -12,27 +13,29 @@ public interface CourseScheduleMapper {
      */
     int addCourseSchedule(CourseSchedule courseSchedule);
 
-    // 删除一条课程表信息
+    /**
+     * 通过课程表id删除一条课程表信息
+     * @param id 课程表id
+     * @return 删除结果
+     */
+    @Delete("delete from course_schedule where id=#{id}")
     int deleteCourseScheduleById(Integer id);
 
-    // 修改一条课程表信息
+    /**
+     * 修改一条课程表信息
+     * <p color="yellow">
+     *  调课不需要改课程信息、教师信息、班级信息，只需要改时间、地点
+     * </p>
+     * @param courseSchedule 修改后的课程表信息
+     * @return 修改结果
+     */
     int updateCourseSchedule(CourseSchedule courseSchedule);
 
-    // 查询所有课程表信息
-    List<CourseSchedule> getAllCourseSchedules();
+    /**
+     * 查询课程表信息
+     * @param courseSchedule 课程表信息
+     * @return 课程表信息
+     */
+    List<CourseSchedule> getCourseSchedules(CourseSchedule courseSchedule);
 
-    // 根据id查询一条课程表信息
-    CourseSchedule getCourseScheduleById(Integer id);
-
-    // 根据课程号查询该门课程的课程表信息
-    List<CourseSchedule> getCourseSchedulesByCourseId(String courseId);
-
-    // 根据班级号查询该班级的课程表信息
-    List<CourseSchedule> getCourseSchedulesByClassId(String classId);
-
-    // 根据教师姓名查询该教师的课程表信息
-    List<CourseSchedule> getCourseSchedulesByTeacherId(String teacherId);
-
-    // 根据时间查询课程表信息
-    List<CourseSchedule> getCourseSchedulesByTime(String time);
 }

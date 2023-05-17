@@ -67,8 +67,30 @@ public class CourseSchedule {
      * 课程结束的节次
      */
     private Integer endTime;
-
     private String location;
+
+    /**
+     * 课程安排的周次
+     * <p color="green">
+     *     使用位运算来存储，一个week最多存储32个周的数据
+     * </p>
+     * <p color="yellow">
+     *     例如：第1、3、5周上课，那么week=0010101B=21
+     * </p>
+     */
+    private Integer week;
+
+    /**
+     * 课程安排的星期
+     * <p color="green">
+     *     使用位运算来存储，一个day最多存储7个星期的数据
+     * </p>
+     * <p color="yellow">
+     *     例如：周一、周三、周五上课，那么day=0010101B=21
+     * </p>
+     */
+    private Integer day;
+
     private Course courseInfo = null;
     private Classes classes = null;
     private Teacher teacher = null;
@@ -129,6 +151,23 @@ public class CourseSchedule {
         this.location = location;
     }
 
+
+    public Integer getWeek() {
+        return week;
+    }
+
+    public void setWeek(Integer week) {
+        this.week = week;
+    }
+
+    public Integer getDay() {
+        return day;
+    }
+
+    public void setDay(Integer day) {
+        this.day = day;
+    }
+
     public Course getCourseInfo() {
         return courseInfo;
     }
@@ -163,6 +202,8 @@ public class CourseSchedule {
                 ", startTime=" + startTime +
                 ", endTime=" + endTime +
                 ", location='" + location + '\'' +
+                ", week=" + week +
+                ", day=" + day +
                 ", courseInfo=" + courseInfo +
                 ", classInfo=" + classes +
                 ", teacher=" + teacher +

@@ -17,49 +17,125 @@
 
     <!-- 增加一条课程表信息 -->
     <insert id="addCourseSchedule" parameterType="com.management.pojo.CourseSchedule">
-        insert into course_schedule(course_id, class_id, teacher_id, start_time, end_time, location) values
-        (#{courseId}, #{classId}, #{teacherId}, #{startTime}, #{endTime}, #{location})
+        insert into course_schedule(course_id, class_id, teacher_id, start_time, end_time, location,week,day) values
+        (#{courseId}, #{classId}, #{teacherId}, #{startTime}, #{endTime}, #{location},#{week},#{day})
     </insert>
 
-    <!-- 删除一条课程表信息 -->
-    <delete id="deleteCourseScheduleById" parameterType="int">
-        delete from course_schedule where id=#{id}
-    </delete>
 
     <!-- 修改一条课程表信息 -->
     <update id="updateCourseSchedule" parameterType="com.management.pojo.CourseSchedule">
-        update course_schedule set course_id=#{courseId}, class_id=#{classId},
-                                   teacher_name=#{teacherName}, time=#{time}, location=#{location} where id=#{id}
+        update course_schedule
+        <set>
+            <if test="startTime != null">start_time=#{startTime},</if>
+            <if test="endTime != null">end_time=#{endTime},</if>
+            <if test="location != null">location=#{location},</if>
+            <if test="week != null">week=#{week},</if>
+            <if test="day != null">day=#{day},</if>
+        </set>
+        <where>
+            <choose>
+                <when test="id != 0">id=#{id}</when>
+                <when test="courseId != null">course_id=#{courseId}</when>
+                <when test="classId != null">class_id=#{classId}</when>
+                <when test="teacherId != null">teacher_id=#{teacherId}</when>
+            </choose>
+        </where>
     </update>
 
     <!-- 查询所有课程表信息 -->
-    <select id="getAllCourseSchedules" resultType="com.management.pojo.CourseSchedule">
-        select * from course_schedule
+    <select id="getCourseSchedules" parameterType="com.management.pojo.CourseSchedule" resultMap="courseScheduleMap">
+        select cs.id, cs.course_id, cs.class_id,cs.teacher_id, cs.start_time, cs.end_time, cs.location, cs.week, cs.day,
+               t.id as tid,  t.name as teacher_name, t.gender, t.birthday, t.faculty, t.phone,
+               c.id as coid, c.name as course_name, c.hours, c.credit,
+               cl.id as clid, cl.name as class_name, cl.major, cl.num, cl.year, cl.counsellor
+        from course_schedule cs
+        left join teacher t on t.teacher_id = cs.teacher_id
+        left join course c on c.course_id = cs.course_id
+        left join classes cl on cl.class_id = cs.class_id
+        <where>
+            <if test="week != null and week != 0">
+                and cs.week = #{week}
+            </if>
+            <if test="day != null and day != 0">
+                and cs.day = #{day}
+            </if>
+            <if test="startTime != null">
+                and cs.start_time &gt;= #{startTime}
+            </if>
+            <if test="endTime != null">
+                and cs.end_time &lt;= #{endTime}
+            </if>
+            <if test="location != null and location != ''">
+                and cs.location like concat('%',#{location},'%')
+            </if>
+            <if test="teacher != null">
+                <if test="teacher.name != null and teacher.name != ''">
+                    and t.name like concat('%',#{teacher.name},'%')
+                </if>
+                <if test="teacher.teacherId != null and teacher.teacherId != ''">
+                    and t.teacher_id = #{teacher.teacherId}
+                </if>
+            </if>
+            <if test="classes != null">
+
+                <if test="classes.name != null and classes.name != ''">
+                    and cl.name like concat('%',#{classes.name},'%')
+                </if>
+                <if test="classes.classId != null and classes.classId != ''">
+                    and cl.class_id = #{classes.classId}
+                </if>
+            </if>
+            <if test="courseInfo != null">
+                <if test="courseInfo.name != null and courseInfo.name != ''">
+                    and c.name like concat('%',#{courseInfo.name},'%')
+                </if>
+                <if test="courseInfo.courseId != null and courseInfo.courseId != ''">
+                    and c.course_id = #{courseInfo.courseId}
+                </if>
+            </if>
+        </where>
+
     </select>
 
-    <!-- 根据id查询一条课程表信息 -->
-    <select id="getCourseScheduleById" parameterType="int" resultType="com.management.pojo.CourseSchedule">
-        select * from course_schedule where id=#{id}
-    </select>
 
-    <!-- 根据课程号查询该门课程的课程表信息 -->
-    <select id="getCourseSchedulesByCourseId" parameterType="String" resultType="com.management.pojo.CourseSchedule">
-        select * from course_schedule where course_id=#{courseId}
-    </select>
+    <!-- 定义联合查询结果映射 -->
+    <resultMap id="courseScheduleMap" type="com.management.pojo.CourseSchedule">
+        <id property="id" column="id"/>
+        <result property="courseId" column="course_id"/>
+        <result property="classId" column="class_id"/>
+        <result property="teacherId" column="teacher_id"/>
+        <result property="startTime" column="start_time"/>
+        <result property="endTime" column="end_time"/>
+        <result property="location" column="location"/>
+        <result property="week" column="week"/>
+        <result property="day" column="day"/>
 
-    <!-- 根据班级号查询该班级的课程表信息 -->
-    <select id="getCourseSchedulesByClassId" parameterType="String" resultType="com.management.pojo.CourseSchedule">
-        select * from course_schedule where class_id=#{classId}
-    </select>
-
-    <!-- 根据教师姓名查询该教师的课程表信息 -->
-    <select id="getCourseSchedulesByTeacherName" parameterType="String" resultType="com.management.pojo.CourseSchedule">
-        select * from course_schedule where teacher_name=#{teacherName}
-    </select>
-
-    <!-- 根据时间查询课程表信息 -->
-    <select id="getCourseSchedulesByTime" parameterType="String" resultType="com.management.pojo.CourseSchedule">
-        select * from course_schedule where time=#{time}
-    </select>
+        <!-- 关联对象映射 -->
+        <association property="courseInfo" javaType="com.management.pojo.Course">
+            <id property="id" column="coid"/>
+            <result property="courseId" column="course_id"/>
+            <result property="name" column="course_name"/>
+            <result property="hours" column="hours"/>
+            <result property="credit" column="credit"/>
+        </association>
+        <association property="classes" javaType="com.management.pojo.Classes">
+            <id property="id" column="clid"/>
+            <result property="classId" column="class_id"/>
+            <result property="name" column="class_name"/>
+            <result property="major" column="major"/>
+            <result property="num" column="num"/>
+            <result property="year" column="year"/>
+            <result property="counsellor" column="counsellor"/>
+        </association>
+        <association property="teacher" javaType="com.management.pojo.Teacher">
+            <id property="id" column="tid"/>
+            <result property="teacherId" column="teacher_id"/>
+            <result property="name" column="teacher_name"/>
+            <result property="gender" column="gender"/>
+            <result property="birthday" column="birthday"/>
+            <result property="faculty" column="faculty"/>
+            <result property="phone" column="phone"/>
+        </association>
+    </resultMap>
 
 </mapper>

@@ -27,20 +27,36 @@ public class CourseScheduleServiceImpl implements CourseScheduleService {
         }
 
         return courseScheduleMapper.addCourseSchedule(courseSchedule);
+
     }
 
     @Override
     public int deleteCourseSchedule(int id, String userType) {
-        return 0;
+
+        if (!userType.equals("admin")) {
+            return 0;
+        }
+
+        return courseScheduleMapper.deleteCourseScheduleById(id);
     }
 
     @Override
     public int updateCourseSchedule(CourseSchedule courseSchedule, String userType) {
-        return 0;
+
+        if (!userType.equals("admin")) {
+            return 0;
+        }
+
+        return courseScheduleMapper.updateCourseSchedule(courseSchedule);
     }
 
     @Override
     public List<CourseSchedule> getCourseSchedule(CourseSchedule courseSchedule, String userType) {
-        return null;
+
+        if (!userType.equals("admin")) {
+            return null;
+        }
+
+        return courseScheduleMapper.getCourseSchedules(courseSchedule);
     }
 }
