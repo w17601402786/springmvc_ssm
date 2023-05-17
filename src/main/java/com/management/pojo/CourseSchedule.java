@@ -58,7 +58,16 @@ public class CourseSchedule {
     private String courseId;
     private String classId;
     private String teacherId;
-    private Date time;
+    /**
+     * 课程开始的节次
+     */
+    private Integer startTime;
+
+    /**
+     * 课程结束的节次
+     */
+    private Integer endTime;
+
     private String location;
     private Course courseInfo = null;
     private Classes classes = null;
@@ -95,12 +104,20 @@ public class CourseSchedule {
         this.teacherId = teacherId;
     }
 
-    public Date getTime() {
-        return time;
+    public Integer getStartTime() {
+        return startTime;
     }
 
-    public void setTime(Date time) {
-        this.time = time;
+    public void setStartTime(Integer startTime) {
+        this.startTime = startTime;
+    }
+
+    public Integer getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(Integer endTime) {
+        this.endTime = endTime;
     }
 
     public String getLocation() {
@@ -135,7 +152,8 @@ public class CourseSchedule {
                 ", courseId='" + courseId + '\'' +
                 ", classId='" + classId + '\'' +
                 ", teacherId='" + teacherId + '\'' +
-                ", time=" + time +
+                ", startTime=" + startTime +
+                ", endTime=" + endTime +
                 ", location='" + location + '\'' +
                 ", courseInfo=" + courseInfo +
                 ", classInfo=" + classes +
