@@ -40,4 +40,11 @@
         <aop:pointcut id="myCut" expression="execution(* com.management.service.impl.*.*(..))"></aop:pointcut>
         <aop:advisor advice-ref="myAdvice" pointcut-ref="myCut"></aop:advisor>
     </aop:config>
+
+
+    <context:component-scan base-package="com.management.aop"/>
+
+    <!--使Aspect注解生效，为目标类自动生成代理对象-->
+    <aop:aspectj-autoproxy/>
+
 </beans>

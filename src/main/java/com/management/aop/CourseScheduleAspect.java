@@ -26,9 +26,6 @@ public class CourseScheduleAspect {
 
     @Pointcut("execution(* com.management.service.impl.CourseScheduleServiceImpl.*(..))")
     public void courseScheduleServicePointcut() {
-
-        System.out.println("你好");
-
     }
 
     /**

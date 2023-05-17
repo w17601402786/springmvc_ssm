@@ -11,7 +11,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class) //启动spring容器
-@ContextConfiguration(locations = {"classpath:applicationContext_service.xml","classpath:applicationContext_mapper.xml"})
+@ContextConfiguration(locations = {
+        "classpath:applicationContext_service.xml",
+        "classpath:applicationContext_mapper.xml"
+})
 public class ClassesServiceTest extends TestCase {
 
 

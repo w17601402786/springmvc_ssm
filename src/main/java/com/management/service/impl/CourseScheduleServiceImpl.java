@@ -22,7 +22,6 @@ public class CourseScheduleServiceImpl implements CourseScheduleService {
     @Override
     public int addCourseSchedule(CourseSchedule courseSchedule, String userType) {
 
-
         if (!userType.equals("admin")) {
             return 0;
         }
