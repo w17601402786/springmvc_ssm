@@ -5,7 +5,11 @@ import com.management.pojo.CourseSchedule;
 import java.util.List;
 
 public interface CourseScheduleMapper {
-    // 增加一条课程表信息
+    /**
+     * 添加一条课程表信息
+     * @param courseSchedule 课程表信息
+     * @return 添加结果
+     */
     int addCourseSchedule(CourseSchedule courseSchedule);
 
     // 删除一条课程表信息

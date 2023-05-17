@@ -71,6 +71,7 @@ public class CourseSchedule {
     private String location;
     private Course courseInfo = null;
     private Classes classes = null;
+    private Teacher teacher = null;
 
     public Integer getId() {
         return id;
@@ -144,6 +145,13 @@ public class CourseSchedule {
         this.classes = classes;
     }
 
+    public Teacher getTeacher() {
+        return teacher;
+    }
+
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
+    }
 
     @Override
     public String toString() {
@@ -157,6 +165,7 @@ public class CourseSchedule {
                 ", location='" + location + '\'' +
                 ", courseInfo=" + courseInfo +
                 ", classInfo=" + classes +
+                ", teacher=" + teacher +
                 '}';
     }
 }

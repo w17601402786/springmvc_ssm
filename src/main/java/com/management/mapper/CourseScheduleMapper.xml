@@ -3,10 +3,22 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.management.mapper.CourseScheduleMapper">
 
+    <!--CREATE TABLE course_schedule (
+     id int PRIMARY KEY,
+     course_id varchar(20) NOT NULL AUTO_INCREMENT,
+     class_id varchar(20) NOT NULL,
+     teacher_id varchar(20) NOT NULL,
+     start_time int NOT NULL comment '上课节次的起始',
+     end_time int NOT NULL comment '上课节次的结束',
+     location varchar(100)
+);
+-->
+
+
     <!-- 增加一条课程表信息 -->
     <insert id="addCourseSchedule" parameterType="com.management.pojo.CourseSchedule">
-        insert into course_schedule(course_id, class_id, teacher_name, time, location)
-        values(#{courseId}, #{classId}, #{teacherName}, #{time}, #{location})
+        insert into course_schedule(course_id, class_id, teacher_id, start_time, end_time, location) values
+        (#{courseId}, #{classId}, #{teacherId}, #{startTime}, #{endTime}, #{location})
     </insert>
 
     <!-- 删除一条课程表信息 -->

@@ -14,30 +14,30 @@
     </bean>
     <!--启用事务注解-->
     <tx:annotation-driven transaction-manager="transactionManager"/>
-<!--    &lt;!&ndash;配置事务切面&ndash;&gt;-->
-<!--    <tx:advice id="myAdvice" transaction-manager="transactionManager">-->
-<!--        <tx:attributes>-->
-<!--            <tx:method name="*select*" read-only="true"/>-->
-<!--            <tx:method name="*find*" read-only="true"/>-->
-<!--            <tx:method name="*search*" read-only="true"/>-->
-<!--            <tx:method name="*get*" read-only="true"/>-->
-<!--            <tx:method name="*insert*" propagation="REQUIRED"/>-->
-<!--            <tx:method name="*add*" propagation="REQUIRED"/>-->
-<!--            <tx:method name="*save*" propagation="REQUIRED"/>-->
-<!--            <tx:method name="*set*" propagation="REQUIRED"/>-->
-<!--            <tx:method name="*update*" propagation="REQUIRED"/>-->
-<!--            <tx:method name="*change*" propagation="REQUIRED"/>-->
-<!--            <tx:method name="*modify*" propagation="REQUIRED"/>-->
-<!--            <tx:method name="*delete*" propagation="REQUIRED"/>-->
-<!--            <tx:method name="*drop*" propagation="REQUIRED"/>-->
-<!--            <tx:method name="*remove*" propagation="REQUIRED"/>-->
-<!--            <tx:method name="*clear*" propagation="REQUIRED"/>-->
-<!--            <tx:method name="*" propagation="SUPPORTS"/>-->
-<!--        </tx:attributes>-->
-<!--    </tx:advice>-->
-<!--    &lt;!&ndash;配置切入点+绑定&ndash;&gt;-->
-<!--    <aop:config>-->
-<!--        <aop:pointcut id="myCut" expression="execution(* com.management.service.impl.*.*(..))"></aop:pointcut>-->
-<!--        <aop:advisor advice-ref="myAdvice" pointcut-ref="myCut"></aop:advisor>-->
-<!--    </aop:config>-->
+    <!--配置事务切面-->
+    <tx:advice id="myAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="*select*" read-only="true"/>
+            <tx:method name="*find*" read-only="true"/>
+            <tx:method name="*search*" read-only="true"/>
+            <tx:method name="*get*" read-only="true"/>
+            <tx:method name="*insert*" propagation="REQUIRED"/>
+            <tx:method name="*add*" propagation="REQUIRED"/>
+            <tx:method name="*save*" propagation="REQUIRED"/>
+            <tx:method name="*set*" propagation="REQUIRED"/>
+            <tx:method name="*update*" propagation="REQUIRED"/>
+            <tx:method name="*change*" propagation="REQUIRED"/>
+            <tx:method name="*modify*" propagation="REQUIRED"/>
+            <tx:method name="*delete*" propagation="REQUIRED"/>
+            <tx:method name="*drop*" propagation="REQUIRED"/>
+            <tx:method name="*remove*" propagation="REQUIRED"/>
+            <tx:method name="*clear*" propagation="REQUIRED"/>
+            <tx:method name="*" propagation="SUPPORTS"/>
+        </tx:attributes>
+    </tx:advice>
+    <!--配置切入点+绑定-->
+    <aop:config>
+        <aop:pointcut id="myCut" expression="execution(* com.management.service.impl.*.*(..))"></aop:pointcut>
+        <aop:advisor advice-ref="myAdvice" pointcut-ref="myCut"></aop:advisor>
+    </aop:config>
 </beans>

@@ -2,6 +2,8 @@ package com.management.mapper;
 
 import com.management.pojo.*;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -36,5 +38,14 @@ public interface ClassesMapper {
      * @return 查询到的班级信息
      */
     List<Classes> getClasses(Classes classes);
+
+    /**
+     * 根据班级ID查询班级信息
+     * @param classId 班级ID
+     * @return 查询到的班级信息
+     */
+    @Select("select * from classes where class_id = #{classId}")
+    Classes getClassesById(@PathVariable("classId") String classId);
+
 
 }
