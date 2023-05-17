@@ -1,6 +1,7 @@
 package com.management.mapper;
 
 import com.management.pojo.CourseSchedule;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -35,4 +36,7 @@ public interface CourseScheduleMapper {
 
     // 根据时间查询课程表信息
     List<CourseSchedule> getCourseSchedulesByTime(String time);
+
+    // 根据userId查询课程表信息
+    List<CourseSchedule> getCourseScheduleByUserId(Integer userId);
 }

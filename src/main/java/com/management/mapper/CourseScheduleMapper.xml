@@ -62,4 +62,30 @@
         select * from course_schedule where time=#{time}
     </select>
 
+    <!-- 根据教师id查询该教师的课程表信息 -->
+    <select id="getCourseSchedulesByTeacherId" parameterType="int" resultType="com.management.pojo.CourseSchedule">
+        SELECT c.course_id, c.name, s.time, s.location
+        FROM course_schedule s
+                 JOIN course c ON s.course_id = c.course_id
+        WHERE s.teacher_id = #{teacherId}
+    </select>
+
+    <!-- 根据userId查询课程表信息 -->
+    <select id="getCourseScheduleByUserId" parameterType="Integer" resultMap="courseScheduleResultMap">
+        SELECT cs.*
+        FROM course_schedule cs
+                 JOIN users u ON cs.id = u.id
+        WHERE u.id = #{userId}
+    </select>
+
+    <resultMap type="com.management.pojo.CourseSchedule" id="courseScheduleResultMap">
+        <id property="id" column="id"/>
+        <result property="courseId" column="course_id"/>
+        <result property="teacherId" column="teacher_id"/>
+        <result property="classId" column="class_id"/>
+        <result property="location" column="location"/>
+        <result property="startTime" column="start_time"/>
+        <result property="endTime" column="end_time"/>
+    </resultMap>
+
 </mapper>
