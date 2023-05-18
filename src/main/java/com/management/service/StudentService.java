@@ -155,6 +155,62 @@ public interface StudentService {
     List<Grade> getGrades(Integer userId);
 
 
+
+    /**
+     * 更新学生的基本信息
+     * @param student 修改后的学生对象
+     * @return 更新结果
+     */
+    int updateStudent(Student student);
+
+    /**
+     * 获取学生的课程信息
+     *
+     * @param studentId 学生的学号
+     * @return 课程列表
+     */
+    @Deprecated
+    List<Course> getCourse(String studentId);
+
+    /**
+     * 获取学生的课程表信息
+     * @param studentId 学生的学号
+     * @return 课程表列表
+     */
+    @Deprecated
+    List<CourseSchedule> getGradeCalendar(String studentId);
+
+    /**
+     * 获取学生的成绩信息
+     * @param studentId  学生的学号
+     * @return 成绩列表
+     */
+    List<Grade> getGradeByStudentId(String studentId);
+
+    /**
+     * 选课
+     * @param studentId 学生的学号
+     * @param courseId 课程的id
+     * @return 选课结果
+     */
+    int selectCourse(String studentId, String courseId);
+
+    /**
+     * 退课
+     * @param studentId 学生的学号
+     * @param courseId 课程的id
+     * @return 退课结果
+     */
+    int withdrawCourse(String studentId, String courseId);
+
+    /**
+     * 获取所有学生信息
+     * @param student
+     * @return
+     */
+    List<Student> getStudents (Student student);
+
+
     //====================================//
     //      修改密码功能通过用户服务功能实现    //
     //====================================//

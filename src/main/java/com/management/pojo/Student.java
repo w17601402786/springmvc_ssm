@@ -1,6 +1,7 @@
 package com.management.pojo;
 
 import java.util.Date;
+import java.util.List;
 
 public class Student {
     private int id;
@@ -16,9 +17,14 @@ public class Student {
     private String note;
     private int userId;
 
-    private Classes classInfo = null;
+    private Classes classes = null;
 
     private Users userInfo = null;
+
+    /**
+     * TODO 这个学生自己所拥有的所有学生的信息
+     */
+    private List<Grade> grades;
 
     public int getId() {
         return id;
@@ -76,13 +82,6 @@ public class Student {
         this.classId = classId;
     }
 
-    public Classes getClassInfo() {
-        return classInfo;
-    }
-
-    public void setClassInfo(Classes classInfo) {
-        this.classInfo = classInfo;
-    }
 
     public String getAddress() {
         return address;
@@ -124,6 +123,22 @@ public class Student {
         this.userInfo = userInfo;
     }
 
+    public Classes getClasses() {
+        return classes;
+    }
+
+    public void setClasses(Classes classes) {
+        this.classes = classes;
+    }
+
+    public List<Grade> getGrades() {
+        return grades;
+    }
+
+    public void setGrades(List<Grade> grades) {
+        this.grades = grades;
+    }
+
     @Override
     public String toString() {
         return "Student{" +
@@ -138,8 +153,9 @@ public class Student {
                 ", phone='" + phone + '\'' +
                 ", note='" + note + '\'' +
                 ", userId=" + userId +
-                ", classInfo=" + classInfo +
+                ", classes=" + classes +
                 ", userInfo=" + userInfo +
+                ", grades=" + grades +
                 '}';
     }
 }

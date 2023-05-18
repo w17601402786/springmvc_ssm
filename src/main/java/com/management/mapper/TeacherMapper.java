@@ -74,4 +74,5 @@ public interface TeacherMapper {
     List<Grade> getGrade(String teacherId);
 
 
+    List<Teacher> getTeacherByName();
 }

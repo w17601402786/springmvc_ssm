@@ -112,7 +112,8 @@ public class TeacherServiceImpl implements TeacherService {
 
     @Override
     public Teacher getTeacherByName(String name) {
-        return null;
+        List<Teacher> teachers = teacherMapper.getTeacherByName();
+        return teachers.size() == 0 ? null : teachers.get(0);
     }
 
 

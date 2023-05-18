@@ -2,10 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
+<!-- 命名空间，指定该接口对应的Mapper -->
 <mapper namespace="com.management.mapper.StudentMapper">
 
+    <!-- 定义结果集映射，将查询结果映射到Student对象 -->
     <resultMap id="studentResultMap" type="com.management.pojo.Student">
+        <!-- 设置主键 -->
         <id property="sno" column="sno"/>
+        <!-- 将各列数据映射到对象属性 -->
         <result property="name" column="name"/>
         <result property="gender" column="gender"/>
         <result property="birthday" column="birthday"/>
@@ -16,15 +20,18 @@
         <result property="remark" column="remark"/>
     </resultMap>
 
+    <!-- 插入一条学生记录 -->
     <insert id="addStudent" parameterType="Student">
         insert into student(student_id, name, gender, birthday, major, class, address, phone, note)
         values(#{studentId}, #{name}, #{gender}, #{birthday}, #{major}, #{classNum}, #{address}, #{phone}, #{note})
     </insert>
 
+    <!-- 根据学号删除一条学生记录 -->
     <delete id="deleteStudent" parameterType="String">
         delete from student where student_id = #{studentId}
     </delete>
 
+    <!-- 更新一条学生记录 -->
     <update id="updateStudent" parameterType="Student">
         update student set name = #{name}, gender = #{gender},
                            birthday = #{birthday}, major = #{major}, class = #{classNum},
@@ -32,21 +39,127 @@
         where student_id = #{studentId}
     </update>
 
-    <select id="getStudentByStudentId" resultMap="studentResultMap" parameterType="String">
-        select * from student where student_id = #{studentId}
-    </select>
 
+    <!-- 根据姓名模糊查询学生记录 -->
     <select id="getStudentByName" resultMap="studentResultMap" parameterType="String">
         select * from student where name like '%${name}%'
     </select>
 
+    <!-- 根据专业和班级号查询学生记录 -->
     <select id="getStudentByClass" resultMap="studentResultMap" parameterType="Map">
         select * from student where major = #{major} and class = #{classNum}
     </select>
 
+    <!-- 根据用户id查询对应的学生记录 -->
     <select id="getStudentByUserId" resultMap="studentResultMap" parameterType="Integer">
         SELECT * FROM student WHERE student_id = #{userId}
     </select>
-   
+
+    <!-- 根据学号查询学生的成绩信息 -->
+    <select id="getGradeByStudentId" resultMap="gradeResultMap" parameterType="String">
+        SELECT g.id,  g.course_id, c.id as course_id,c.name as course_name, g.student_id, s.name, g.score
+        FROM grade g
+                 LEFT JOIN course c ON g.course_id = c.course_id
+                 LEFT JOIN student s ON g.student_id = s.student_id
+        WHERE g.student_id = #{studentId}
+    </select>
+
+    <!-- 定义结果集映射，将查询结果映射到Grade对象 -->
+    <resultMap id="gradeResultMap" type="com.management.pojo.Grade">
+        <!-- 设置主键 -->
+        <id property="id" column="id"/>
+        <!-- 将各列数据映射到对象属性 -->
+        <result property="courseId" column="course_id"/>
+        <result property="studentId" column="student_id"/>
+<!--        <result property="studentInfo" column="name"/>-->
+        <result property="score" column="score"/>
+        <association property="courseInfo" javaType="com.management.pojo.Course">
+            <!-- 设置主键 -->
+            <id property="courseId" column="course_id"/>
+            <!-- 将各列数据映射到对象属性 -->
+            <result property="name" column="course_name"/>
+            <result property="hours" column="hours"/>
+            <result property="credit" column="credit"/>
+        </association>
+    </resultMap>
+
+    <!-- 通过users、classes来查询所有学生信息 -->
+    <select id="getStudents" parameterType="com.management.pojo.Student" resultMap="studentMap">
+        select
+            s.id, s.student_id, s.name, s.gender, s.birthday, s.major, s.class_id, s.address, s.phone, s.note, s.user_id,
+            u.id as uid,u.username,u.user_type,
+            c.id as cid,c.name as class_name,c.major,c.num,c.year,c.counsellor
+        from student s
+        left join users u on s.user_id = u.id
+        left join classes c on c.class_id = s.class_id
+
+        <where>
+            <if test="name != null and name != ''">
+                s.name = #{name}
+            </if>
+            <if test="userInfo != null">
+                <if test="userInfo.username != null and userInfo.username != ''">
+                    u.username = #{userInfo.username}
+                </if>
+                <if test="userInfo.userType != null and userInfo.userType != ''">
+                    u.user_type = #{userInfo.userType}
+                </if>
+            </if>
+            <if test="classes != null">
+                <if test="classes.id != null and classes.id != ''">
+                    c.id = #{classes.id}
+                </if>
+                <if test="classes.name != null and classes.name != ''">
+                    c.name like concat('%',#{classes.name},'%')
+                </if>
+                <if test="classes.major != null and classes.major != ''">
+                    c.major like concat('%',#{classes.major},'%')
+                </if>
+                <if test="classes.num != null">
+                    c.num = #{classes.num}
+                </if>
+                <if test="classes.year != null">
+                    c.year = #{classes.year}
+                </if>
+                <if test="classes.counsellor != null and classes.counsellor != ''">
+                    c.counsellor = #{classes.counsellor}
+                </if>
+            </if>
+        </where>
+
+
+    </select>
+
+    <resultMap id="studentMap" type="com.management.pojo.Student">
+        <id property="id" column="id"/>
+        <result property="studentId" column="student_id"/>
+        <result property="name" column="name"/>
+        <result property="gender" column="gender"/>
+        <result property="birthday" column="birthday"/>
+        <result property="major" column="major"/>
+        <result property="address" column="address"/>
+        <result property="phone" column="phone"/>
+        <result property="note" column="note"/>
+        <result property="classId" column="class_id"/>
+        <result property="userId" column="user_id"/>
+        <association property="userInfo" javaType="com.management.pojo.Users">
+            <id property="id" column="uid"/>
+            <result property="username" column="username"/>
+            <result property="userType" column="user_type"/>
+        </association>
+        <association property="classes" javaType="com.management.pojo.Classes">
+            <id property="id" column="cid"/>
+            <result property="classId" column="class_id"/>
+            <result property="name" column="class_name"/>
+            <result property="major" column="major"/>
+            <result property="num" column="num"/>
+            <result property="year" column="year"/>
+            <result property="counsellor" column="counsellor"/>
+        </association>
+    </resultMap>
+
+
+
+
 
 </mapper>
