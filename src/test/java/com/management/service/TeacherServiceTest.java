@@ -56,14 +56,6 @@ public class TeacherServiceTest extends TestCase {
     }
 
     @Test
-    public void testGetGradeCalendar() {
-        List<CourseSchedule> scheduleList = teacherService.getGradeCalendar("t001");
-        for (CourseSchedule schedule : scheduleList) {
-            System.out.println(schedule);
-        }
-    }
-
-    @Test
     public void testGetGrade() {
         List<Grade> gradeList = teacherService.getGrade("t001");
         for (Grade grade : gradeList) {
@@ -73,12 +65,16 @@ public class TeacherServiceTest extends TestCase {
 
     @Test
     public void testSubmitGrade() {
+        //todo 提交成绩
         int result = teacherService.submitGrade("2001", "1", 80);
         System.out.println("提交结果：" + result);
     }
 
     @Test
     public void testGetCourseScheduleByUserId(){
+
+
+        //todo 通过userId获取课程表
         List<CourseSchedule> courseScheduleList = courseScheduleService.getCourseSchedulesByUserId(2);
         for (CourseSchedule courseSchedule : courseScheduleList){
             System.out.println(courseSchedule);

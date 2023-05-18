@@ -16,22 +16,99 @@
 
     <!-- 修改一条成绩记录 -->
     <update id="updateGrade" parameterType="com.management.pojo.Grade">
-        update grade set student_id=#{studentId}, course_id=#{courseId}, score=#{score} where id=#{id}
+        update grade set score=#{score}
+        <where>
+            <choose>
+                <when test="studentId != null and studentId != '' and courseId != null and courseId != ''">
+                    where student_id=#{studentId} and course_id=#{courseId}
+                </when>
+                <otherwise>
+                    where id=#{id}
+                </otherwise>
+            </choose>
+        </where>
     </update>
 
-    <!-- 查询所有成绩记录 -->
-    <select id="getAllGrades" resultType="com.management.pojo.Grade">
-        select * from grade
+
+    <select id="getGrades" parameterType="com.management.pojo.Grade" resultMap="gradeMap">
+        select g.*,
+               s.id as sid,s.name as student_name,s.gender,s.birthday,s.major,s.class_id,s.address,s.phone,s.note,s.user_id,
+                c.id as cid,c.name as course_name,c.hours,c.credit
+        from grade g
+        left join student s on g.student_id=s.student_id
+        left join course c on g.course_id=c.course_id
+        <where>
+            <if test="studentId!=null and studentId!=''">
+                and g.student_id=#{studentId}
+            </if>
+            <if test="courseId!=null and courseId!=''">
+                and g.course_id=#{courseId}
+            </if>
+            <if test="studentInfo != null">
+                <if test="studentInfo.name != null and studentInfo.name != ''">
+                    and s.name like concat('%',#{studentInfo.name},'%')
+                </if>
+                <if test="studnetIndo.major != null and studentInfo.major != ''">
+                    and s.major=#{studentInfo.major}
+                </if>
+                <if test="studentInfo.classId != null and studentInfo.classId != ''">
+                    and s.class_id=#{studentInfo.classId}
+                </if>
+                <if test="studentInfo.address != null and studentInfo.address != ''">
+                    and s.address like concat('%',#{studentInfo.address},'%')
+                </if>
+                <if test="studentInfo.phone != null and studentInfo.phone != ''">
+                    and s.phone like concat('%',#{studentInfo.phone},'%')
+                </if>
+                <if test="studentInfo.note != null and studentInfo.note != ''">
+                    and s.note like concat('%',#{studentInfo.note},'%')
+                </if>
+                <if test="studentInfo.userId != null and studentInfo.userId != ''">
+                    and s.user_id=#{studentInfo.userId}
+                </if>
+            </if>
+            <if test="courseInfo != null">
+                <if test="courseInfo.name != null and courseInfo.name != ''">
+                    and c.name like concat('%',#{courseInfo.name},'%')
+                </if>
+                <if test="courseInfo.hours != null and courseInfo.hours != ''">
+                    and c.hours=#{courseInfo.hours}
+                </if>
+                <if test="courseInfo.credit != null and courseInfo.credit != ''">
+                    and c.credit=#{courseInfo.credit}
+                </if>
+            </if>
+        </where>
     </select>
 
-    <!-- 根据id查询一条成绩记录 -->
-    <select id="getGradeById" parameterType="int" resultType="com.management.pojo.Grade">
-        select * from grade where id=#{id}
-    </select>
+    <resultMap id="gradeMap" type="com.management.pojo.Grade">
+        <id property="id" column="id"/>
+        <result property="studentId" column="student_id"/>
+        <result property="courseId" column="course_id"/>
+        <result property="score" column="score"/>
 
-    <!-- 根据学生号和课程号查询一条成绩记录 -->
-    <select id="getGradeByStudentIdAndCourseId" parameterType="map" resultType="com.management.pojo.Grade">
-        select * from grade where student_id=#{studentId} and course_id=#{courseId}
-    </select>
+        <association property="studentInfo" javaType="com.management.pojo.Student">
+            <id property="id" column="sid"/>
+            <result property="studentId" column="student_id"/>
+            <result property="name" column="student_name"/>
+            <result property="gender" column="gender"/>
+            <result property="birthday" column="birthday"/>
+            <result property="major" column="major"/>
+            <result property="classId" column="class_id"/>
+            <result property="address" column="address"/>
+            <result property="phone" column="phone"/>
+            <result property="note" column="note"/>
+            <result property="userId" column="user_id"/>
+        </association>
+
+        <association property="courseInfo" javaType="com.management.pojo.Course">
+            <id property="id" column="cid"/>
+            <result property="courseId" column="course_id"/>
+            <result property="name" column="course_name"/>
+            <result property="hours" column="hours"/>
+            <result property="credit" column="credit"/>
+        </association>
+    </resultMap>
+
 
 </mapper>

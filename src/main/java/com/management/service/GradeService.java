@@ -46,11 +46,34 @@ public interface GradeService {
      */
     int updateGrade(Grade grade, String userType);
 
+
+    /**
+     * 根据成绩的Bean对象查询成绩
+     * @param grade 成绩信息
+     *              <p>
+     *              可以关联grade中的其他属性进行查询
+     *              例如：grade中的studentId属性不为空，则查询该学生的所有成绩
+     *              也可以通过student对象的其他属性进行查询
+     *              例如：grade.student对象中的name属性不为空，则查询该名字的学生的所有成绩
+     *              也可以通过course对象的其他属性进行查询
+     *              例如：grade.course对象中的name属性不为空，则查询该课程的所有成绩
+
+     *              </p>
+     * @return 成绩信息
+     */
+    List<Grade> getGrades(Grade grade,String userType);
+
+    //======================//
+    //  以下为查询操作接口    //
+    //  暂时不实现          //
+    //======================//
+
     /**
      * 根据学号查询成绩
      * @param studentId 学号
      * @return 成绩信息
      */
+    @Deprecated
     List<Grade> getGradesByStudentId(String studentId);
 
 
@@ -59,6 +82,7 @@ public interface GradeService {
      * @param courseId 课程ID
      * @return 成绩信息
      */
+    @Deprecated
     List<Grade> getGradesByCourseId(String courseId);
 
 
@@ -68,6 +92,7 @@ public interface GradeService {
      * @param maxScore 最大成绩
      * @return  成绩信息
      */
+    @Deprecated
     List<Grade> getGradesByScoreRange(int minScore, int maxScore);
 
 

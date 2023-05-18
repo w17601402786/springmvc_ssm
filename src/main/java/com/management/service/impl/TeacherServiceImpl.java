@@ -175,12 +175,18 @@ public class TeacherServiceImpl implements TeacherService {
 
     @Override
     public int submitGrade(String studentId, String courseId, int score) {
-        Grade g = gradeMapper.getGradeByStudentIdAndCourseId(studentId, courseId);
-        if(g == null){
-            return 0;
-        }
-        g.setScore(score);
-        return gradeMapper.updateGrade(g);
+
+        //TODO 这里应该使用addGrade方法进行添加
+
+        return 0;
+
+
+//        Grade g = gradeMapper.getGradeByStudentIdAndCourseId(studentId, courseId);
+//        if(g == null){
+//            return 0;
+//        }
+//        g.setScore(score);
+//        return gradeMapper.updateGrade(g);
     }
 
 }
