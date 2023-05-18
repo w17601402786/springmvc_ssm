@@ -66,6 +66,7 @@ public class Grade {
                 ", courseId='" + courseId + '\'' +
                 ", score=" + score +
                 ", studentInfo=" + studentInfo +
+                ", courseInfo=" + courseInfo +
                 '}';
     }
 }

@@ -1,6 +1,8 @@
 package com.management.service.impl;
 
+import com.management.mapper.ClassesMapper;
 import com.management.mapper.StudentMapper;
+import com.management.mapper.UsersMapper;
 import com.management.pojo.*;
 import com.management.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,10 @@ public class StudentServiceImpl implements StudentService {
 
     @Autowired
     StudentMapper studentMapper;
+    @Autowired
+    ClassesMapper classesMapper;
+    @Autowired
+    UsersMapper usersMapper;
 
 
     @Override
@@ -55,13 +61,17 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public List<Student> getStudentByClasses(Classes classes) {
-        return null;
+
+        List<Student> students = studentMapper.getStudentByClass(classes.getMajor(),classes.getName());
+        return students.size() == 0 ? null : students;
     }
 
     @Override
     public List<Student> getStudentByMajor(String major) {
+//        List<Student> students = studentMapper.
         return null;
     }
+
 
     @Override
     public Classes getClasses(Integer userId) {
@@ -85,6 +95,45 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public List<Grade> getGrades(Integer userId) {
+//        return studentMapper.getGradeByStudentId()
         return null;
+    }
+
+
+    @Override
+    public int updateStudent(Student student) {
+        return 0;
+    }
+
+    @Override
+    public List<Course> getCourse(String studentId) {
+        return null;
+    }
+
+    @Override
+    public List<CourseSchedule> getGradeCalendar(String studentId) {
+        return null;
+    }
+
+    @Override
+    public List<Grade> getGradeByStudentId(String studentId) {
+        List<Grade> grades = studentMapper.getGradeByStudentId("101");
+        return grades;
+    }
+
+    @Override
+    public int selectCourse(String studentId, String courseId) {
+        return 0;
+    }
+
+    @Override
+    public int withdrawCourse(String studentId, String courseId) {
+        return 0;
+    }
+
+    @Override
+    public List<Student> getStudents(Student student) {
+        List<Student> students =  studentMapper.getStudents(student);
+        return students.size() == 0 ? null : students;
     }
 }
