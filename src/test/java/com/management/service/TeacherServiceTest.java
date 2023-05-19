@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.time.Instant;
+import java.util.Date;
 import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class) //启动spring容器
@@ -98,5 +100,23 @@ public class TeacherServiceTest extends TestCase {
         Teacher teacher = new Teacher();
         List<Teacher> teacherList = teacherService.getTeachers(teacher,"teacher");
         teacherList.forEach(System.out::println);
+    }
+
+    @Test
+    public void testAddTeacher(){
+        Teacher teacher = new Teacher();
+        teacher.setName("赵老师");
+        teacher.setGender("男");
+        teacher.setBirthday(Date.from(Instant.ofEpochSecond(1990-01-01)));
+        teacher.setFaculty("软件工程");
+        teacher.setTeacherId("t002");
+        teacher.setPhone(null);
+        teacher.setUserId(2);
+        teacherService.addTeacher(teacher,"teacher");
+    }
+
+    @Test
+    public void testDeleteTeacher(){
+        teacherService.deleteTeacherByUserId(2,"teacher");
     }
 }

@@ -95,12 +95,20 @@ public class TeacherServiceImpl implements TeacherService {
 
     @Override
     public int addTeacher(Teacher teacher, String userType) {
-        return 0;
+        if (!userType.equals("teacher")){
+            return -1;
+        }
+
+        return teacherMapper.addTeacher(teacher);
     }
 
     @Override
     public int deleteTeacherByUserId(Integer userId, String userType) {
-        return 0;
+        if (!userType.equals("teacher")){
+            return -1;
+        }
+
+        return teacherMapper.deleteTeacherById(userId);
     }
 
     @Override
