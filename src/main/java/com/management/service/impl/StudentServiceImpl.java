@@ -129,7 +129,7 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public List<Grade> getGradeByStudentId(String studentId) {
-        List<Grade> grades = studentMapper.getGradeByStudentId("101");
+        List<Grade> grades = studentMapper.getGradeByStudentId(studentId);
         return grades;
     }
 

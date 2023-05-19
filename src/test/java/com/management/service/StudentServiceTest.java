@@ -87,13 +87,15 @@ public class StudentServiceTest extends TestCase {
     }
     @Test
     public void testGetGradeByStudentId(){
-        List<Grade> gradeList = studentService.getGradeByStudentId("101");
+        List<Grade> gradeList = studentService.getGradeByStudentId("102");
         for (Grade grade : gradeList){
             System.out.println(grade);
         }
     }
 
+    @Test
     public void testGetStudentByClassInfo() {
+
     }
 
     public void testGetStudentByMajor() {
