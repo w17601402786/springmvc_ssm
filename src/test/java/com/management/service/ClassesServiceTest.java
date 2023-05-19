@@ -49,8 +49,6 @@ public class ClassesServiceTest extends TestCase {
 
         classesService.updateClasses(classes, "admin");
 
-
-
     }
 
     @Test
