@@ -78,4 +78,91 @@
         WHERE student_id = #{studentId} AND course_id = #{courseId}
     </update>
 
+<!--    &lt;!&ndash; 根据userType来查询所有教师信息 &ndash;&gt;-->
+<!--    <select id="getAllTeachers" parameterType="com.management.pojo.Teacher">-->
+<!--        -->
+<!--    </select>-->
+
+<!--    <resultMap id="teacherMap" type="com.management.pojo.Teacher">-->
+<!--        <id property="id" column="id"/>-->
+<!--        <result property="teacherId" column="teacher_id"/>-->
+<!--        <result property="name" column="name"/>-->
+<!--        <result property="gender" column="gender"/>-->
+<!--        <result property="birthday" column="birthday"/>-->
+<!--        <result property="faculty" column="faculty"/>-->
+<!--        <result property="phone" column="phone"/>-->
+<!--        <result property="userId" column="user_id"/>-->
+
+<!--        <association property="user" javaType="com.management.pojo.Users">-->
+<!--            <id property="id" column="id"/>-->
+<!--            <result property="username" column="username"/>-->
+<!--            <result property="password" column="password"/>-->
+<!--            <result property="userType" column="user_type"/>-->
+<!--        </association>-->
+<!--    </resultMap>-->
+
+    <select id="getTeachers" resultMap="teacherMap" parameterType="com.management.pojo.Teacher">
+        SELECT t.id, t.teacher_id, t.name, t.gender, t.birthday, t.faculty, t.phone, t.user_id, u.username, u.user_type
+        FROM teacher t
+        LEFT JOIN users u ON t.user_id = u.id
+        <where>
+            <if test="name != null and name != ''">
+                AND t.name = #{name}
+            </if>
+            <if test="id != null and id != ''">
+                and t.id = #{id}
+            </if>
+            <if test="teacher_id != null and teacher_id !=''">
+                and t.teacher_id = #{teacher_id}
+            </if>
+            <if test="birthday != null and birthday !=''">
+                and t.birthday = #{birthday}
+            </if>
+            <if test="phone != null and phone !=''">
+                and t.phone = #{phone}
+            </if>
+            <if test="user_id != null and user_id !=''">
+                and t.user_id = #{user_id}
+            </if>
+
+
+            <if test="userInfo != null">
+                <if test="userInfo.username != null and userInfo.username != ''">
+                    and u.username = #{userInfo.username}
+                </if>
+                <if test="userInfo.userType != null and userInfo.userType != ''">
+                    and u.user_type = #{userInfo.userType}
+                </if>
+            </if>
+            <if test="gender != null and gender != ''">
+                AND t.gender = #{gender}
+            </if>
+            <if test="faculty != null and faculty != ''">
+                AND t.faculty = #{faculty}
+            </if>
+            <if test="user_type != null and user_type != ''">
+                AND u.user_type = 'teacher'
+            </if>
+        </where>
+    </select>
+
+    <resultMap id="teacherMap" type="com.management.pojo.Teacher">
+        <id property="id" column="id"/>
+        <result property="teacherId" column="teacher_id"/>
+        <result property="name" column="name"/>
+        <result property="gender" column="gender"/>
+        <result property="birthday" column="birthday"/>
+        <result property="faculty" column="faculty"/>
+        <result property="phone" column="phone"/>
+        <result property="userId" column="user_id"/>
+        <association property="user" resultMap="userMap"/>
+    </resultMap>
+
+    <resultMap id="userMap" type="com.management.pojo.Users">
+        <result property="username" column="username"/>
+        <result property="userType" column="user_type"/>
+    </resultMap>
+
+
+
 </mapper>

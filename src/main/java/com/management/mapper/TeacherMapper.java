@@ -75,4 +75,13 @@ public interface TeacherMapper {
 
 
     List<Teacher> getTeacherByName();
+
+    /**
+     * Todo 根据教师的属性以及userType来查询教师
+     * @param teacher
+     * @param userType
+     * @return
+     */
+    List<Teacher> getTeachers(Teacher teacher,String userType);
+
 }

@@ -82,12 +82,15 @@ public class TeacherServiceImpl implements TeacherService {
 
     @Override
     public List<Teacher> getAllTeachers(String userType) {
-        return null;
+        List<Teacher> teachers = teacherMapper.getAllTeachers();
+        return teachers.size() == 0 ? null : teachers;
     }
 
     @Override
+    // todo 获取的值都为null，叼毛王宇哲，快帮我解决！！
     public List<Teacher> getTeachers(Teacher teacher, String userType) {
-        return null;
+        List<Teacher> teachers = teacherMapper.getTeachers(teacher,"teacher");
+        return teachers.size() == 0 ? null : teachers;
     }
 
     @Override
