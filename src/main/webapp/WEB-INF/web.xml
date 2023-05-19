@@ -8,6 +8,7 @@
         private boolean forceRequestEncoding;
         private boolean forceResponseEncoding;
     -->
+    <absolute-ordering/>
     <filter>
         <filter-name>encode</filter-name>
         <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -49,4 +50,5 @@
         <param-name>contextConfigLocation</param-name>
         <param-value>classpath:applicationContext_*.xml</param-value>
     </context-param>
+
 </web-app>

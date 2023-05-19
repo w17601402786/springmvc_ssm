@@ -8,8 +8,9 @@
        http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
     <!--添加包扫描-->
-    <context:component-scan base-package="com.management.controller"></context:component-scan>
+    <context:component-scan base-package="com.management"/>
+
     <!--添加注解驱动-->
-    <mvc:annotation-driven></mvc:annotation-driven>
+    <mvc:annotation-driven/>
     <!--因为本项目全部是ajax请求,不需要配置视图解析器-->
 </beans>

@@ -1,22 +1,21 @@
 package com.management.controller;
 
-import com.management.pojo.Users;
 import com.management.service.UsersService;
-//import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
 import java.util.Map;
 
-@Controller
+
+@RestController
 @RequestMapping("/admin")
 public class AdminController {
 
     @Autowired
     UsersService usersService;
-
 
 //    @RequestMapping("/user/add")
 //    public int addUser(Users user, HttpServletRequest request){
