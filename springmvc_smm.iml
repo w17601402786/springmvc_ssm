@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module version="4">
+  <component name="FacetManager">
+    <facet type="Spring" name="Spring">
+      <configuration>
+        <fileset id="fileset" name="Spring" removed="false">
+          <dependency>web application context</dependency>
+          <file>file://$MODULE_DIR$/src/main/resources/spring.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/applicationContext_mapper.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/applicationContext_service.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/springmvc.xml</file>
+          <file>file://$MODULE_DIR$/src/main/java/com/management/WebMvcConfig.java</file>
+          <file>file://$MODULE_DIR$/src/main/java/com/management/SwaggerConfig.java</file>
+        </fileset>
+      </configuration>
+    </facet>
+  </component>
+</module>
