@@ -86,4 +86,17 @@ public class TeacherServiceTest extends TestCase {
         Teacher teacher = teacherService.getTeacherByUserId(3);
         System.out.println(teacher);
     }
+
+    @Test
+    public void testGetAllTeachers(){
+        List<Teacher> teacherList = teacherService.getAllTeachers("teacher");
+        teacherList.forEach(System.out::println);
+    }
+
+    @Test
+    public void testGetTeachers(){
+        Teacher teacher = new Teacher();
+        List<Teacher> teacherList = teacherService.getTeachers(teacher,"teacher");
+        teacherList.forEach(System.out::println);
+    }
 }
