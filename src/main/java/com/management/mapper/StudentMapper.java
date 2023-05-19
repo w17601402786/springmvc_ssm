@@ -15,21 +15,21 @@ public interface StudentMapper {
      *
      * @param student 学生信息
      */
-    void addStudent(Student student);
+    int addStudent(Student student);
 
     /**
      * 删除学生基本信息
      *
      * @param studentId 学号
      */
-    void deleteStudent(String studentId);
+    int deleteStudentByUserId(Integer userId);
 
     /**
      * 修改学生基本信息
      *
      * @param student 学生信息
      */
-    void updateStudent(Student student);
+    int updateStudent(Student student);
 
 
     /**

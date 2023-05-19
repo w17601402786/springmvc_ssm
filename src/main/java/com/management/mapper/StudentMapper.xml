@@ -22,19 +22,19 @@
 
     <!-- 插入一条学生记录 -->
     <insert id="addStudent" parameterType="Student">
-        insert into student(student_id, name, gender, birthday, major, class, address, phone, note)
-        values(#{studentId}, #{name}, #{gender}, #{birthday}, #{major}, #{classNum}, #{address}, #{phone}, #{note})
+        insert into student(student_id, name, gender, birthday, major, class_id, address, phone, note,user_id)
+        values(#{studentId}, #{name}, #{gender}, #{birthday}, #{major}, #{classId}, #{address}, #{phone}, #{note},#{userId})
     </insert>
 
     <!-- 根据学号删除一条学生记录 -->
-    <delete id="deleteStudent" parameterType="String">
-        delete from student where student_id = #{studentId}
+    <delete id="deleteStudentByUserId" parameterType="int">
+        delete from student where user_id = #{userId}
     </delete>
 
     <!-- 更新一条学生记录 -->
-    <update id="updateStudent" parameterType="Student">
+    <update id="updateStudent" parameterType="com.management.pojo.Student">
         update student set name = #{name}, gender = #{gender},
-                           birthday = #{birthday}, major = #{major}, class = #{classNum},
+                           birthday = #{birthday}, major = #{major}, class_id = #{classId},
                            address = #{address}, phone = #{phone}, note = #{note}
         where student_id = #{studentId}
     </update>

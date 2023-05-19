@@ -33,16 +33,28 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public int addStudent(Student student, String userType) {
-        return 0;
+        if (!userType.equals("student")){
+            return -1;
+        }
+
+        return studentMapper.addStudent(student);
+
     }
 
     @Override
     public int deleteStudentByUserId(Integer userId, String userType) {
-        return 0;
+        if (!userType.equals("student")){
+            return -1;
+        }
+
+        return studentMapper.deleteStudentByUserId(userId);
     }
 
     @Override
-    public int updateStudent(Student student, String userType) {
+    public int updateStudent(Student student,String userType) {
+//        if (!userType.equals("student")){
+//            return -1;
+//        }
         return 0;
     }
 
@@ -102,7 +114,7 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public int updateStudent(Student student) {
-        return 0;
+        return studentMapper.updateStudent(student);
     }
 
     @Override

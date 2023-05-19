@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.time.Instant;
+import java.util.Date;
 import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class) //启动spring容器
@@ -35,11 +37,35 @@ public class StudentServiceTest extends TestCase {
 
     }
 
+    @Test
     public void testAddStudent() {
+        Student student = new Student();
+        student.setId(4);
+        student.setStudentId("103");
+        student.setName("王五");
+        student.setGender("男");
+        student.setBirthday(Date.from(Instant.ofEpochSecond(2000-03-01)));
+        student.setMajor("物联网");
+        student.setClassId("1903");
+        student.setAddress("湖北武汉");
+        student.setPhone(null);
+        student.setNote(null);
+        student.setUserId(4);
+        studentService.addStudent(student,"student");
     }
 
+    @Test
+    public void testDeleteStudent(){
+        studentService.deleteStudentByUserId(4,"student");
+    }
 
+    @Test
     public void testUpdateStudent() {
+        Student student = studentService.getStudentByStudentId("101");
+        student.setName("王老六");
+        int result = studentService.updateStudent(student);
+        System.out.println("更新结果：" + result);
+
     }
 
     @Test
