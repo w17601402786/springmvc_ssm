@@ -28,5 +28,6 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/swagger-ui/")
                 .setViewName("forward:/swagger-ui/index.html");
+        registry.addViewController("/").setViewName("redirect:/login");
     }
 }
