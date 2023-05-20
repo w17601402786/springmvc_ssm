@@ -12,6 +12,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import java.time.Instant;
 import java.util.Date;
 import java.util.List;
+import java.util.Stack;
 
 @RunWith(SpringJUnit4ClassRunner.class) //启动spring容器
 @ContextConfiguration(locations = {"classpath:applicationContext_service.xml","classpath:applicationContext_mapper.xml"})
@@ -20,8 +21,10 @@ public class StudentServiceTest extends TestCase {
     @Autowired
     StudentService studentService;
 
-
+    @Test
     public void testGetAllStudents() {
+        List<Student> studentList = studentService.getAllStudents("student");
+        studentList.forEach(System.out::println);
     }
 
     @Test

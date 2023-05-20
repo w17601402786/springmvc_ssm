@@ -64,6 +64,11 @@
         WHERE g.student_id = #{studentId}
     </select>
 
+    <!-- 根据userType查询所有学生 -->
+    <select id="getAllStudents" resultMap="studentMap" parameterType="com.management.pojo.Student">
+        SELECT *from student
+    </select>
+
     <!-- 定义结果集映射，将查询结果映射到Grade对象 -->
     <resultMap id="gradeResultMap" type="com.management.pojo.Grade">
         <!-- 设置主键 -->
