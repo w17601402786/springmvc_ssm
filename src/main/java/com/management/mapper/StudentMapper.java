@@ -43,6 +43,8 @@ public interface StudentMapper {
 
     List<Student> getStudents(Student student);
 
+    List<Student> getAllStudents(String userType);
+
 
 
 

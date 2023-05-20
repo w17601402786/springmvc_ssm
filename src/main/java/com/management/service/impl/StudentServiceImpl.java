@@ -23,7 +23,9 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public List<Student> getAllStudents(String userType) {
-        return null;
+        List<Student> students = studentMapper.getAllStudents(userType);
+
+        return students.size() == 0 ? null : students;
     }
 
     @Override
