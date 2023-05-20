@@ -78,10 +78,11 @@ public interface TeacherMapper {
 
     /**
      * Todo 根据教师的属性以及userType来查询教师
-     * @param teacher
-     * @param userType
-     * @return
+     * TODO 傻叼，谁跟你说要这样写的？
+     * TODO userType是在服务层进行判断权限，进而实现权限控制的，不是在这里进行判断的
+     * @param teacher 教师对象
+     * @return  教师列表
      */
-    List<Teacher> getTeachers(Teacher teacher,String userType);
+    List<Teacher> getTeachers(Teacher teacher);
 
 }

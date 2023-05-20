@@ -101,7 +101,10 @@ public class TeacherServiceTest extends TestCase {
     @Test
     public void testGetTeachers(){
         Teacher teacher = new Teacher();
-        List<Teacher> teacherList = teacherService.getTeachers(teacher,"teacher");
+
+
+        //TODO 再跟你说一遍，你个叼毛，我这里的userType是操作的用户，不是被操作的用户，这个操作只允许管理员操作，所以userType是admin
+        List<Teacher> teacherList = teacherService.getTeachers(teacher,"admin");
         teacherList.forEach(System.out::println);
     }
 

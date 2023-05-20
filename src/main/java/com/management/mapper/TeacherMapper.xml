@@ -58,12 +58,12 @@
     <select id="getGrade" parameterType="String" resultType="com.management.pojo.Grade">
         SELECT * FROM grade WHERE course_id = (
             SELECT course_id FROM course_schedule WHERE teacher_id = (
-                SELECT teacher_id FROM teacher WHERE user_id = #{user_id}
+                SELECT teacher_id FROM teacher WHERE user_id = #{userId}
             )
         ) AND student_id IN (
             SELECT student_id FROM student WHERE class_id = (
                 SELECT class_id FROM course_schedule WHERE teacher_id = (
-                    SELECT teacher_id FROM teacher WHERE user_id = #{user_id}
+                    SELECT teacher_id FROM teacher WHERE user_id = #{userId}
                 )
             )
         );
@@ -112,8 +112,8 @@
             <if test="id != null and id != ''">
                 and t.id = #{id}
             </if>
-            <if test="teacher_id != null and teacher_id !=''">
-                and t.teacher_id = #{teacher_id}
+            <if test="teacherId != null and teacherId !=''">
+                and t.teacher_id = #{teacherId}
             </if>
             <if test="birthday != null and birthday !=''">
                 and t.birthday = #{birthday}
@@ -121,8 +121,8 @@
             <if test="phone != null and phone !=''">
                 and t.phone = #{phone}
             </if>
-            <if test="user_id != null and user_id !=''">
-                and t.user_id = #{user_id}
+            <if test="userId != null and userId !=''">
+                and t.user_id = #{userId}
             </if>
 
 
@@ -140,9 +140,6 @@
             <if test="faculty != null and faculty != ''">
                 AND t.faculty = #{faculty}
             </if>
-            <if test="user_type != null and user_type != ''">
-                AND u.user_type = 'teacher'
-            </if>
         </where>
     </select>
 
@@ -155,10 +152,12 @@
         <result property="faculty" column="faculty"/>
         <result property="phone" column="phone"/>
         <result property="userId" column="user_id"/>
-        <association property="user" resultMap="userMap"/>
+<!--        TODO 你个傻叼，这里对象名字都错了-->
+        <association property="userInfo" resultMap="userMap"/>
     </resultMap>
 
     <resultMap id="userMap" type="com.management.pojo.Users">
+        <id property="id" column="user_id"/>
         <result property="username" column="username"/>
         <result property="userType" column="user_type"/>
     </resultMap>

@@ -87,10 +87,14 @@ public class TeacherServiceImpl implements TeacherService {
     }
 
     @Override
-    // todo 获取的值都为null，叼毛王宇哲，快帮我解决！！
+    // todo 用都不会用，傻叼
     public List<Teacher> getTeachers(Teacher teacher, String userType) {
-        List<Teacher> teachers = teacherMapper.getTeachers(teacher,"teacher");
-        return teachers.size() == 0 ? null : teachers;
+
+        if (!userType.equals("admin")){
+            return null;
+        }
+
+        return teacherMapper.getTeachers(teacher);
     }
 
     @Override
