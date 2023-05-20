@@ -33,7 +33,6 @@ public class Classes {
     @ApiModelProperty("班级编号")
     private String classId;
 
-
     public Integer getId() {
         return id;
     }

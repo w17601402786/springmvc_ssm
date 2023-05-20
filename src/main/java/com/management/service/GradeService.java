@@ -88,12 +88,11 @@ public interface GradeService {
 
     /**
      * 根据成绩区间查询成绩
+     * @param grade 成绩信息
      * @param minScore 最小成绩
      * @param maxScore 最大成绩
      * @return  成绩信息
      */
-    @Deprecated
-    List<Grade> getGradesByScoreRange(int minScore, int maxScore);
-
+    public List<Grade> getGradesByScoreRange(Grade grade,int minScore, int maxScore,String userType);
 
 }

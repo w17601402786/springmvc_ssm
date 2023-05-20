@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface GradeMapper {
@@ -44,6 +45,9 @@ public interface GradeMapper {
      * @return 查询结果
      */
     List<Grade> getGrades(Grade grade);
+
+
+    List<Grade> getGradesByScoreRange(Map<String, Object> map);
 
 //    // 根据id查询一条成绩记录
 //    Grade getGradeById(Integer id);

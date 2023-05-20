@@ -1,6 +1,7 @@
 package com.management.service;
 
 import com.management.pojo.Grade;
+import com.management.pojo.Student;
 import junit.framework.TestCase;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,7 +16,7 @@ import java.util.List;
         "classpath:applicationContext_service.xml",
         "classpath:applicationContext_mapper.xml"
 })
-public class GradeAspectTest extends TestCase {
+public class GradeServiceTest extends TestCase {
 
     @Autowired
     GradeService gradeService;
@@ -44,4 +45,24 @@ public class GradeAspectTest extends TestCase {
 
 
     }
+
+    @Test
+    public void testGetGradesByScoreRange(){
+
+        Grade grade = new Grade();
+
+
+        Student student = new Student();
+
+        student.setName("王");
+
+        grade.setStudentInfo(student);
+
+        List<Grade> grades = gradeService.getGradesByScoreRange(grade, 0, 86, "admin");
+
+        grades.forEach(System.out::println);
+
+
+    }
+
 }

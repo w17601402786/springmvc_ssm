@@ -80,6 +80,62 @@
             </if>
         </where>
     </select>
+    <select id="getGradesByScoreRange" resultType="com.management.pojo.Grade">
+        select g.*,
+        s.id as sid,s.name as student_name,s.gender,s.birthday,s.major,s.class_id,s.address,s.phone,s.note,s.user_id,
+        c.id as cid,c.name as course_name,c.hours,c.credit
+        from grade g
+        left join student s on g.student_id=s.student_id
+        left join course c on g.course_id=c.course_id
+        <where>
+            <if test="grade.studentId!=null and grade.studentId!=''">
+                and g.student_id=#{grade.studentId}
+            </if>
+            <if test="grade.courseId!=null and grade.courseId!=''">
+                and g.course_id=#{grade.courseId}
+            </if>
+            <if test="grade.studentInfo != null">
+                <if test="grade.studentInfo.name != null and grade.studentInfo.name != ''">
+                    and s.name like concat('%',#{grade.studentInfo.name},'%')
+                </if>
+                <if test="grade.studentInfo.major != null and grade.studentInfo.major != ''">
+                    and s.major=#{grade.studentInfo.major}
+                </if>
+                <if test="grade.studentInfo.classId != null and grade.studentInfo.classId != ''">
+                    and s.class_id=#{grade.studentInfo.classId}
+                </if>
+                <if test="grade.studentInfo.address != null and grade.studentInfo.address != ''">
+                    and s.address like concat('%',#{grade.studentInfo.address},'%')
+                </if>
+                <if test="grade.studentInfo.phone != null and grade.studentInfo.phone != ''">
+                    and s.phone like concat('%',#{grade.studentInfo.phone},'%')
+                </if>
+                <if test="grade.studentInfo.note != null and grade.studentInfo.note != ''">
+                    and s.note like concat('%',#{grade.studentInfo.note},'%')
+                </if>
+                <if test="grade.studentInfo.userId != null and grade.studentInfo.userId != ''">
+                    and s.user_id=#{grade.studentInfo.userId}
+                </if>
+            </if>
+            <if test="grade.courseInfo != null">
+                <if test="grade.courseInfo.name != null and grade.courseInfo.name != ''">
+                    and c.name like concat('%',#{grade.courseInfo.name},'%')
+                </if>
+                <if test="grade.courseInfo.hours != null and grade.courseInfo.hours != ''">
+                    and c.hours=#{grade.courseInfo.hours}
+                </if>
+                <if test="grade.courseInfo.credit != null and grade.courseInfo.credit != ''">
+                    and c.credit=#{grade.courseInfo.credit}
+                </if>
+            </if>
+            <if test="minScore!=null and minScore!=''">
+                and g.score &gt;= #{minScore}
+            </if>
+            <if test="maxScore!=null and maxScore!=''">
+                and g.score &lt;= #{maxScore}
+            </if>
+        </where>
+    </select>
 
     <resultMap id="gradeMap" type="com.management.pojo.Grade">
         <id property="id" column="id"/>
