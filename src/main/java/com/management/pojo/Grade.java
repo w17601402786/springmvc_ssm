@@ -1,13 +1,27 @@
 package com.management.pojo;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+@ApiModel("成绩基本信息")
 public class Grade {
+
+    @ApiModelProperty("成绩ID")
     private Integer id;
+
+    @ApiModelProperty("该成绩所属学生学号")
     private String studentId;
+
+    @ApiModelProperty("该成绩所属课程ID")
     private String courseId;
+
+    @ApiModelProperty("分数")
     private Integer score;
 
+    @ApiModelProperty("该成绩所属学生信息")
     private Student studentInfo = null;
 
+    @ApiModelProperty("该成绩所属课程信息")
     private Course courseInfo = null;
 
     public Integer getId() {

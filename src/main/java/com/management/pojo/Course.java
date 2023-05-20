@@ -1,10 +1,24 @@
 package com.management.pojo;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+@ApiModel("课程信息")
 public class Course {
+
+    @ApiModelProperty("课程ID")
     private int id;
+
+    @ApiModelProperty("课程号")
     private String courseId;
+
+    @ApiModelProperty("课程名")
     private String name;
+
+    @ApiModelProperty("学时")
     private int hours;
+
+    @ApiModelProperty("学分")
     private int credit;
 
     public int getId() {

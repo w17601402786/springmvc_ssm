@@ -1,24 +1,51 @@
 package com.management.pojo;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import java.util.Date;
 import java.util.List;
 
+@ApiModel("学生基本信息")
 public class Student {
+
+    @ApiModelProperty("学生ID")
     private int id;
+
+    @ApiModelProperty("学号")
     private String studentId;
+
+    @ApiModelProperty("姓名")
     private String name;
+
+    @ApiModelProperty("性别")
     private String gender;
+
+    @ApiModelProperty("出生日期")
     private Date birthday;
+
+    @ApiModelProperty("专业")
     private String major;
 
+    @ApiModelProperty("所在班级号")
     private String classId;
+
+    @ApiModelProperty("家庭住址")
     private String address;
+
+    @ApiModelProperty("电话")
     private String phone;
+
+    @ApiModelProperty("备注")
     private String note;
+
+    @ApiModelProperty("关联的用户ID")
     private int userId;
 
+    @ApiModelProperty("所在的班级信息")
     private Classes classes = null;
 
+    @ApiModelProperty("关联的用户信息")
     private Users userInfo = null;
 
 

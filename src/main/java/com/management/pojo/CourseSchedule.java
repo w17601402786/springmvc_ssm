@@ -1,5 +1,8 @@
 package com.management.pojo;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import java.util.Date;
 
 
@@ -58,20 +61,34 @@ import java.util.Date;
  *     </tr>
  * </table>
  */
+@ApiModel("课程安排基本信息")
 public class CourseSchedule {
+
+
+    @ApiModelProperty("课程安排ID")
     private Integer id;
+
+    @ApiModelProperty("所安排的课程的编号")
     private String courseId;
+
+    @ApiModelProperty("上课班级的编号")
     private String classId;
+
+    @ApiModelProperty("授课教师的编号")
     private String teacherId;
     /**
      * 课程开始的节次
      */
+    @ApiModelProperty("课程开始的节次")
     private Integer startTime;
 
     /**
      * 课程结束的节次
      */
+    @ApiModelProperty("课程结束的节次")
     private Integer endTime;
+
+    @ApiModelProperty("上课地点")
     private String location;
 
     /**
@@ -83,6 +100,7 @@ public class CourseSchedule {
      *     例如：第1、3、5周上课，那么week=0010101B=21
      * </p>
      */
+    @ApiModelProperty("课程安排的周次")
     private Integer week;
 
     /**
@@ -94,10 +112,16 @@ public class CourseSchedule {
      *     例如：周一、周三、周五上课，那么day=0010101B=21
      * </p>
      */
+    @ApiModelProperty("课程安排的星期")
     private Integer day;
 
+    @ApiModelProperty("课程详情")
     private Course courseInfo = null;
+
+    @ApiModelProperty("上课班级的详情")
     private Classes classes = null;
+
+    @ApiModelProperty("授课教师的详情")
     private Teacher teacher = null;
 
     public Integer getId() {
