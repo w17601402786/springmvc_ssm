@@ -121,8 +121,7 @@ public class TeacherServiceImpl implements TeacherService {
     @Override
     @Deprecated
     public List<Course> getCourses(String teacherId) {
-        List<Course> courses = teacherMapper.getTeacherCourses(teacherId);
-        return courses;
+        return teacherMapper.getTeacherCourses(teacherId);
     }
 
 

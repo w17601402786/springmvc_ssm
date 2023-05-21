@@ -1,10 +1,7 @@
 package com.management.controller;
 
 import com.management.pojo.*;
-import com.management.service.ClassesService;
-import com.management.service.CourseScheduleService;
-import com.management.service.CourseService;
-import com.management.service.StudentService;
+import com.management.service.*;
 import com.management.tools.ResultCommon;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
 import java.util.List;
 
 @CrossOrigin
@@ -40,6 +36,9 @@ public class StudentController {
 
     @Autowired
     StudentService studentService;
+
+    @Autowired
+    UsersService usersService;
 
 
 
@@ -163,10 +162,8 @@ public class StudentController {
         user.setPassword(newPassword);
 
 
-        //TODO 实现修改密码接口
-        int result  = 0;
+        int result  = usersService.updatePassword(user);
 
-//        int result = studentService.updatePassword(user);
 
         if (result == 0){
             return new ResultCommon<>(403, "修改失败", null);
