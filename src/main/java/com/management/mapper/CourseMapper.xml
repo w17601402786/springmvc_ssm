@@ -4,34 +4,47 @@
 <mapper namespace="com.management.mapper.CourseMapper">
 
     <!-- 增加一门课程信息 -->
-    <insert id="addCourse" parameterType="com.management.pojo.Course">
+    <insert id="addCourse" parameterType="com.management.pojo.Course" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
         insert into course(course_id, name, hours, credit)
         values(#{courseId}, #{name}, #{hours}, #{credit})
     </insert>
 
     <!-- 删除一门课程信息 -->
-    <delete id="deleteCourseById" parameterType="int">
+    <delete id="deleteCourseById" parameterType="Integer">
         delete from course where id=#{id}
     </delete>
 
     <!-- 修改一门课程信息 -->
     <update id="updateCourse" parameterType="com.management.pojo.Course">
-        update course set course_id=#{courseId}, name=#{name}, hours=#{hours}, credit=#{credit} where id=#{id}
+        update course set name=#{name}, hours=#{hours}, credit=#{credit}
+        <where>
+            <choose>
+                <when test="courseId != null and courseId != ''">
+                    and course_id=#{courseId}
+                </when>
+                <otherwise>
+                    and id=#{id}
+                </otherwise>
+            </choose>
+        </where>
     </update>
 
-    <!-- 查询所有课程信息 -->
-    <select id="getAllCourses" resultType="com.management.pojo.Course">
+    <select id="getCourses" resultType="com.management.pojo.Course">
         select * from course
-    </select>
-
-    <!-- 根据id查询一门课程信息 -->
-    <select id="getCourseById" parameterType="int" resultType="com.management.pojo.Course">
-        select * from course where id=#{id}
-    </select>
-
-    <!-- 根据课程号查询一门课程信息 -->
-    <select id="getCourseByCourseId" parameterType="String" resultType="com.management.pojo.Course">
-        select * from course where course_id=#{courseId}
+        <where>
+            <if test="courseId != null and courseId != ''">
+                and course_id=#{courseId}
+            </if>
+            <if test="name != null and courseId != ''">
+                and name like concat('%', #{name}, '%')
+            </if>
+            <if test="hours != null and hours != 0">
+                and hours=#{hours}
+            </if>
+            <if test="credit != null and hours != 0">
+                and credit=#{credit}
+            </if>
+        </where>
     </select>
 
 </mapper>

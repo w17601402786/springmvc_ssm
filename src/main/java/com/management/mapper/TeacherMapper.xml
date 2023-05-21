@@ -4,7 +4,7 @@
 <mapper namespace="com.management.mapper.TeacherMapper">
 
     <!-- 增加一位教师 -->
-    <insert id="addTeacher" parameterType="com.management.pojo.Teacher">
+    <insert id="addTeacher" parameterType="com.management.pojo.Teacher" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
         insert into teacher(teacher_id, name, gender, birthday, faculty, phone, user_id)
         values(#{teacherId}, #{name}, #{gender}, #{birthday}, #{faculty}, #{phone}, #{userId})
     </insert>

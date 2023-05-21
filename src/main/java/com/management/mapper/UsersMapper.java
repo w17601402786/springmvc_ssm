@@ -15,7 +15,6 @@ public interface UsersMapper {
      * @param user 用户对象
      * @return 影响记录数
      */
-    @Insert("insert into users(username,password,user_type) values(#{username},#{password},#{userType})")
     int addUser(Users user);
 
     /**

@@ -1,25 +1,36 @@
 package com.management.mapper;
 
 import com.management.pojo.Course;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
 public interface CourseMapper {
-    // 增加一门课程信息
+    /**
+     * 添加一门课程信息
+     * @param course 课程信息
+     * @return 添加后的主键id
+     */
     int addCourse(Course course);
 
-    // 删除一门课程信息
-    int deleteCourseById(Integer id);
+    /**
+     * 根据id删除一门课程信息
+     * @param id 课程id
+     * @return 删除结果
+     */
+    int deleteCourseById(@Param("id") Integer id);
 
-    // 修改一门课程信息
+    /**
+     * 更新一门课程信息
+     * @param course 课程信息
+     * @return 更新结果
+     */
     int updateCourse(Course course);
 
-    // 查询所有课程信息
-    List<Course> getAllCourses();
+    /**
+     * 根据课程号查询课程信息
+     * @return 课程信息列表
+     */
+    List<Course> getCourses(Course course);
 
-    // 根据id查询一门课程信息
-    Course getCourseById(Integer id);
-
-    // 根据课程号查询一门课程信息
-    Course getCourseByCourseId(String courseId);
 }

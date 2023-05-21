@@ -49,7 +49,7 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public int addStudent(Student student, String userType) {
-        if (!userType.equals("student")){
+        if (!userType.equals("admin")){
             return 0;
         }
 

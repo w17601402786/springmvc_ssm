@@ -31,11 +31,11 @@ public interface CourseService {
 
     /**
      * 根据课程号删除班级信息
-     * @param courseId 课程号
+     * @param id 课程编号
      * @param userType 当前用户类型
      * @return 删除结果
      */
-    int deleteCourseById(String courseId,String userType);
+    int deleteCourseById(Integer id,String userType);
 
 
     /**
@@ -43,7 +43,7 @@ public interface CourseService {
      * @param course 课程的Bean
      * @return 课程信息列表
      */
-    List<Course> getCourse(Course course);
+    List<Course> getCourse(Course course,String userType);
 
 
 

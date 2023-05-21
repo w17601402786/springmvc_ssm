@@ -16,7 +16,7 @@
 
 
     <!-- 增加一条课程表信息 -->
-    <insert id="addCourseSchedule" parameterType="com.management.pojo.CourseSchedule">
+    <insert id="addCourseSchedule" parameterType="com.management.pojo.CourseSchedule" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
         insert into course_schedule(course_id, class_id, teacher_id, start_time, end_time, location,week,day) values
         (#{courseId}, #{classId}, #{teacherId}, #{startTime}, #{endTime}, #{location},#{week},#{day})
     </insert>

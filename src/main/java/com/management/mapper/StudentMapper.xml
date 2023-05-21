@@ -21,7 +21,7 @@
     </resultMap>
 
     <!-- 插入一条学生记录 -->
-    <insert id="addStudent" parameterType="Student">
+    <insert id="addStudent" parameterType="Student" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
         insert into student(student_id, name, gender, birthday, major, class_id, address, phone, note,user_id)
         values(#{studentId}, #{name}, #{gender}, #{birthday}, #{major}, #{classId}, #{address}, #{phone}, #{note},#{userId})
     </insert>

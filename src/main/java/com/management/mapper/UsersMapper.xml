@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?> <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.management.mapper.UsersMapper">
+    <insert id="addUser" parameterType="com.management.pojo.Users" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        insert into users(username,password,user_type) values(#{username},#{password},#{userType})
+    </insert>
 
     <select id="getUsers" parameterType="com.management.pojo.Users" resultMap="usersResultMap">
         SELECT *
@@ -44,7 +47,7 @@
             <result column="gender" jdbcType="VARCHAR" property="gender"/>
             <result column="birthday" jdbcType="DATE" property="birthday"/>
             <result column="major" jdbcType="VARCHAR" property="major"/>
-            <result column="class_num" jdbcType="VARCHAR" property="classNum"/>
+            <result column="class_id" jdbcType="VARCHAR" property="classId"/>
             <result column="address" jdbcType="VARCHAR" property="address"/>
             <result column="phone" jdbcType="VARCHAR" property="phone"/>
             <result column="note" jdbcType="VARCHAR" property="note"/>

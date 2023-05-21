@@ -34,7 +34,7 @@ public class StudentServiceTest extends TestCase {
         Student student = new Student();
 
 
-        List<Student> studentList = studentService.getStudents(student);
+        List<Student> studentList = studentService.getStudents(student,"admin");
 
         studentList.forEach(System.out::println);
 
@@ -54,7 +54,7 @@ public class StudentServiceTest extends TestCase {
         student.setPhone(null);
         student.setNote(null);
         student.setUserId(4);
-        studentService.addStudent(student,"student");
+        studentService.addStudent(student,"admin");
     }
 
     @Test
@@ -66,7 +66,7 @@ public class StudentServiceTest extends TestCase {
     public void testUpdateStudent() {
         Student student = studentService.getStudentByStudentId("101");
         student.setName("王老六");
-        int result = studentService.updateStudent(student);
+        int result = studentService.updateStudent(student,"admin");
         System.out.println("更新结果：" + result);
 
     }
@@ -78,9 +78,11 @@ public class StudentServiceTest extends TestCase {
     }
 
     @Test
-    public void testGetStudentByName() {
-        Student student = studentService.getStudentByName("张三");
-        System.out.println(student);
+    public void testGetStudentsByName() {
+
+        List<Student> studentList = studentService.getStudentsByName("张三");
+
+        studentList.forEach(System.out::println);
     }
 
     @Test
