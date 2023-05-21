@@ -64,10 +64,6 @@
         WHERE g.student_id = #{studentId}
     </select>
 
-    <!-- 根据userType查询所有学生 -->
-    <select id="getAllStudents" resultMap="studentMap" parameterType="com.management.pojo.Student">
-        SELECT *from student
-    </select>
 
     <!-- 定义结果集映射，将查询结果映射到Grade对象 -->
     <resultMap id="gradeResultMap" type="com.management.pojo.Grade">
@@ -99,12 +95,45 @@
         left join classes c on c.class_id = s.class_id
 
         <where>
+            <if test="id != null and id != ''">
+                s.id = #{id}
+            </if>
+            <if test="studentId != null and studentId != ''">
+                s.student_id = #{studentId}
+            </if>
             <if test="name != null and name != ''">
-                s.name = #{name}
+                s.name like concat('%',#{name},'%')
+            </if>
+            <if test="gender != null and gender != ''">
+                s.gender = #{gender}
+            </if>
+            <if test="birthday != null">
+                s.birthday = #{birthday}
+            </if>
+            <if test="major != null and major != ''">
+                s.major like concat('%',#{major},'%')
+            </if>
+            <if test="address != null and address != ''">
+                s.address like concat('%',#{address},'%')
+            </if>
+            <if test="phone != null and phone != ''">
+                s.phone like concat('%',#{phone},'%')
+            </if>
+            <if test="note != null and note != ''">
+                s.note like concat('%',#{note},'%')
+            </if>
+            <if test="classId != null and classId != ''">
+                s.class_id = #{classId}
+            </if>
+            <if test="userId != null and userId != ''">
+                s.user_id = #{userId}
             </if>
             <if test="userInfo != null">
+                <if test="userInfo.id != null and userInfo.id != ''">
+                    u.id = #{userInfo.id}
+                </if>
                 <if test="userInfo.username != null and userInfo.username != ''">
-                    u.username = #{userInfo.username}
+                    u.username like concat('%',#{userInfo.username},'%')
                 </if>
                 <if test="userInfo.userType != null and userInfo.userType != ''">
                     u.user_type = #{userInfo.userType}
@@ -114,20 +143,23 @@
                 <if test="classes.id != null and classes.id != ''">
                     c.id = #{classes.id}
                 </if>
+                <if test="classes.classId != null and classes.classId != ''">
+                    c.class_id = #{classes.classId}
+                </if>
                 <if test="classes.name != null and classes.name != ''">
                     c.name like concat('%',#{classes.name},'%')
                 </if>
                 <if test="classes.major != null and classes.major != ''">
                     c.major like concat('%',#{classes.major},'%')
                 </if>
-                <if test="classes.num != null">
+                <if test="classes.num != 0">
                     c.num = #{classes.num}
                 </if>
-                <if test="classes.year != null">
+                <if test="classes.year != 0">
                     c.year = #{classes.year}
                 </if>
                 <if test="classes.counsellor != null and classes.counsellor != ''">
-                    c.counsellor = #{classes.counsellor}
+                    c.counsellor like concat('%',#{classes.counsellor},'%')
                 </if>
             </if>
         </where>

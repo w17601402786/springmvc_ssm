@@ -13,14 +13,16 @@ public interface ClassesMapper {
     /**
      * 添加班级信息
      * @param classes 班级信息
+     * @return 自增主键
      */
-    void addClasses(Classes classes);
+    int addClasses(Classes classes);
 
     /**
      * 删除班级信息
      * @param id 班级ID
+     * @return 删除记录数
      */
-    void deleteClasses(Integer id);
+    int deleteClasses(Integer id);
 
     /**
      * 修改班级信息
@@ -28,8 +30,9 @@ public interface ClassesMapper {
      *  classId不能修改
      * </p>
      * @param classes 班级信息
+     * @return 修改记录数
      */
-    void updateClasses(Classes classes);
+    int updateClasses(Classes classes);
 
 
     /**

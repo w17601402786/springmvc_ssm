@@ -4,7 +4,7 @@
 
 <mapper namespace="com.management.mapper.ClassesMapper">
 
-    <insert id="addClasses" parameterType="com.management.pojo.Classes">
+    <insert id="addClasses" parameterType="com.management.pojo.Classes" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
         insert into classes(name, major, num, year, counsellor,class_id)
         values(#{name}, #{major}, #{num}, #{year}, #{counsellor},#{classId})
     </insert>

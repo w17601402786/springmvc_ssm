@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class ClassInfoImpl implements ClassesService {
+public class ClassesServiceImpl implements ClassesService {
 
 
     @Autowired
@@ -23,23 +23,28 @@ public class ClassInfoImpl implements ClassesService {
             return 0;
         }
 
-        classesMapper.addClasses(classes);
-
-        return 1;
+        return classesMapper.addClasses(classes);
 
     }
 
     @Override
     public int updateClasses(Classes classes, String userType) {
-        classesMapper.updateClasses(classes);
-        return 0;
+
+        if (!userType.equals("admin")) {
+            return 0;
+        }
+
+        return classesMapper.updateClasses(classes);
     }
 
     @Override
     public int deleteClassesById(Integer classId, String userType) {
 
-        classesMapper.deleteClasses(classId);
-        return 0;
+        if (!userType.equals("admin")) {
+            return 0;
+        }
+
+        return classesMapper.deleteClasses(classId);
     }
 
     @Override

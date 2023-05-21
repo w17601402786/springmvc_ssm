@@ -38,17 +38,17 @@
         left join student s on g.student_id=s.student_id
         left join course c on g.course_id=c.course_id
         <where>
-            <if test="studentId!=null and studentId!=''">
+            <if test="studentId != null and studentId != ''">
                 and g.student_id=#{studentId}
             </if>
-            <if test="courseId!=null and courseId!=''">
+            <if test="courseId != null and courseId != ''">
                 and g.course_id=#{courseId}
             </if>
             <if test="studentInfo != null">
                 <if test="studentInfo.name != null and studentInfo.name != ''">
                     and s.name like concat('%',#{studentInfo.name},'%')
                 </if>
-                <if test="studnetIndo.major != null and studentInfo.major != ''">
+                <if test="studentInfo.major != null and studentInfo.major != ''">
                     and s.major=#{studentInfo.major}
                 </if>
                 <if test="studentInfo.classId != null and studentInfo.classId != ''">
@@ -63,7 +63,7 @@
                 <if test="studentInfo.note != null and studentInfo.note != ''">
                     and s.note like concat('%',#{studentInfo.note},'%')
                 </if>
-                <if test="studentInfo.userId != null and studentInfo.userId != ''">
+                <if test="studentInfo.userId != 0">
                     and s.user_id=#{studentInfo.userId}
                 </if>
             </if>
@@ -71,10 +71,10 @@
                 <if test="courseInfo.name != null and courseInfo.name != ''">
                     and c.name like concat('%',#{courseInfo.name},'%')
                 </if>
-                <if test="courseInfo.hours != null and courseInfo.hours != ''">
+                <if test="courseInfo.hours != 0">
                     and c.hours=#{courseInfo.hours}
                 </if>
-                <if test="courseInfo.credit != null and courseInfo.credit != ''">
+                <if test="courseInfo.credit != 0">
                     and c.credit=#{courseInfo.credit}
                 </if>
             </if>

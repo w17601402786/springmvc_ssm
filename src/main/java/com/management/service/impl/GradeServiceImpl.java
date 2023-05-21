@@ -65,10 +65,10 @@ public class GradeServiceImpl implements GradeService {
             return 0;
         }
 
-
-
         return gradeMapper.updateGrade(grade);
     }
+
+
 
     /**
      * TODO 在切面中进行判断，如果是学生，则只能查询自己的成绩
@@ -93,15 +93,6 @@ public class GradeServiceImpl implements GradeService {
         return gradeMapper.getGrades(grade);
     }
 
-    @Override
-    public List<Grade> getGradesByStudentId(String studentId) {
-        return null;
-    }
-
-    @Override
-    public List<Grade> getGradesByCourseId(String courseId) {
-        return null;
-    }
 
     @Override
     public List<Grade> getGradesByScoreRange(Grade grade,int minScore, int maxScore,String userType) {
@@ -114,4 +105,18 @@ public class GradeServiceImpl implements GradeService {
 
         return gradeMapper.getGradesByScoreRange(map);
     }
+
+    @Override
+    @Deprecated
+    public List<Grade> getGradesByStudentId(String studentId) {
+        return null;
+    }
+
+    @Override
+    @Deprecated
+    public List<Grade> getGradesByCourseId(String courseId) {
+        return null;
+    }
+
+
 }

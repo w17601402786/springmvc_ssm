@@ -87,7 +87,7 @@ public interface StudentService {
      * @param name 姓名
      * @return 学生信息
      */
-    Student getStudentByName(String name);
+    List<Student> getStudentsByName(String name);
 
     /**
      * 根据班级信息查询学生信息
@@ -154,32 +154,6 @@ public interface StudentService {
      */
     List<Grade> getGrades(Integer userId);
 
-
-
-    /**
-     * 更新学生的基本信息
-     * @param student 修改后的学生对象
-     * @return 更新结果
-     */
-    int updateStudent(Student student);
-
-    /**
-     * 获取学生的课程信息
-     *
-     * @param studentId 学生的学号
-     * @return 课程列表
-     */
-    @Deprecated
-    List<Course> getCourse(String studentId);
-
-    /**
-     * 获取学生的课程表信息
-     * @param studentId 学生的学号
-     * @return 课程表列表
-     */
-    @Deprecated
-    List<CourseSchedule> getGradeCalendar(String studentId);
-
     /**
      * 获取学生的成绩信息
      * @param studentId  学生的学号
@@ -203,12 +177,6 @@ public interface StudentService {
      */
     int withdrawCourse(String studentId, String courseId);
 
-    /**
-     * 获取所有学生信息
-     * @param student
-     * @return
-     */
-    List<Student> getStudents (Student student);
 
 
     //====================================//

@@ -16,10 +16,10 @@ public class Course {
     private String name;
 
     @ApiModelProperty("学时")
-    private int hours;
+    private Integer hours;
 
     @ApiModelProperty("学分")
-    private int credit;
+    private Integer credit;
 
     public int getId() {
         return id;

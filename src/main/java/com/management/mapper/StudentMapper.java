@@ -43,55 +43,72 @@ public interface StudentMapper {
 
     List<Student> getStudents(Student student);
 
-    List<Student> getAllStudents(String userType);
 
+
+
+    //---------------------------------分割线---------------------------------//
+    //                         以下方法全部弃用，不再使用                       //
+    //                         请使用上面的方法来代替                           //
+    //---------------------------------分割线---------------------------------//
 
 
 
     /**
+     * 获取所有学生基本信息
+     * 都说了，上面的方法可以直接获取所有学生，你还写这个干啥？
+     * @deprecated 请使用getStudents方法
+     * @return 所有学生基本信息
+     */
+    @Deprecated
+    List<Student> getAllStudents();
+
+    /**
      * 根据学号查询学生基本信息
-     *
+     * @deprecated 请使用getStudent方法
      * @param studentId 学号
      * @return 查询到的学生信息
      */
+    @Deprecated
     @Select("select * from student where student_id = #{studentId}")
     Student getStudentByStudentId(String studentId);
 
     /**
      * 根据姓名查询学生基本信息
-     *
+     * @deprecated 请使用getStudent方法
      * @param name 姓名
      * @return 查询到的学生信息
      */
+    @Deprecated
     List<Student> getStudentByName(String name);
 
     /**
      * 根据专业、班级查询学生基本信息
-     *
+     * @deprecated 请使用getStudent方法
      * @param major 专业
      * @param classNum 班级号
      * @return 查询到的学生信息
      */
+    @Deprecated
     List<Student> getStudentByClass(String major, String classNum);
-
-
-
 
 
 
     /**
      * 获取当前学生的学生信息
+     * @deprecated 请使用getStudent方法
      * @param userId 用户ID
      * @return 当前学生信息
      */
+    @Deprecated
     Student getStudentByUserId(Integer userId);
 
     /**
      * 根据学号查询学生的成绩信息
-     *
+     * @deprecated 请使用gradeMapper.getGrades方法
      * @param studentId 学生学号
      * @return 成绩信息列表
      */
+    @Deprecated
     List<Grade> getGradeByStudentId(String studentId);
 
 
