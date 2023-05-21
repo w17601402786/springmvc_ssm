@@ -74,8 +74,6 @@ public interface TeacherMapper {
     List<Grade> getGrade(String teacherId);
 
 
-    List<Teacher> getTeacherByName();
-
     /**
      * Todo 根据教师的属性以及userType来查询教师
      * TODO 傻叼，谁跟你说要这样写的？
@@ -85,4 +83,10 @@ public interface TeacherMapper {
      */
     List<Teacher> getTeachers(Teacher teacher);
 
+    /**
+     * 根据用户ID删除教师信息
+     * @param userId 用户ID
+     * @return 影响记录数
+     */
+    int deleteTeacherByUserId(Integer userId);
 }

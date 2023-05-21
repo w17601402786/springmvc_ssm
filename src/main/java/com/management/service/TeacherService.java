@@ -113,17 +113,10 @@ public interface TeacherService {
     List<Course> getCourses(String teacherId);
 
     /**
-     * 获取当前用户的课程表信息
-     * @param userId 用户ID
-     * @return 课程表信息列表
-     */
-    List<CourseSchedule> getCourseSchedule(Integer userId);
-
-
-    /**
      * 获取当前老师的学生成绩信息
      * @param userId 用户ID
      * @return 成绩信息列表
+     * @deprecated 废弃，你就不能调用getGrades方法吗？
      */
     List<Grade> getGrades(Integer userId);
 
@@ -132,6 +125,7 @@ public interface TeacherService {
      * 通过教师的id获取教师的基本信息
      * @param Id 教师的id
      * @return 教师对象
+     * @deprecated 废弃，你就不能调用getTeachers方法吗？
      */
     Teacher getTeacherById(Integer Id);
 
@@ -139,13 +133,16 @@ public interface TeacherService {
      * 通过教师的教工号获取教师的基本信息
      * @param teacherID 教师的教工号
      * @return 教师对象
+     * @deprecated 废弃，你就不能调用getTeachers方法吗？
      */
+    @Deprecated
     Teacher getTeacherByTeacherID(String teacherID);
 
     /**
      * 更新教师的基本信息
      * @param teacher 修改后的教师对象
      * @return 更新结果
+     * @deprecated 废弃，你就不能调用updateTeacher方法吗？
      */
     int updateTeacher(Teacher teacher);
 
@@ -154,23 +151,19 @@ public interface TeacherService {
      *
      * @param teacherId 教师的教工号
      * @return 课程列表
+     * @deprecated 废弃，你就不能调用courseService的getCourse方法吗？
      */
     @Deprecated
     List<Course> getCourse(String teacherId);
 
-    /**
-     * 获取教师的课程表信息
-     * @param teacherId 教师的教工号
-     * @return 课程表列表
-     */
-    @Deprecated
-    List<CourseSchedule> getGradeCalendar(String teacherId);
 
     /**
      * 获取教师的教学班的学生的成绩信息
      * @param teacherId  教师的教工号
      * @return 成绩列表
+     * @deprecated GradeService中有getGrade方法，你就不能调用一下吗？
      */
+    @Deprecated
     List<Grade> getGrade(String teacherId);
 
     /**
@@ -179,7 +172,10 @@ public interface TeacherService {
      * @param courseId 课程的id
      * @param score 成绩
      * @return  成绩提交结果
+     * @deprecated 废弃，你就不能调用gradeService的addGrade方法吗？
+     * TODO 傻叼
      */
+    @Deprecated
     int submitGrade(String studentId, String courseId, int score);
 
 

@@ -2,9 +2,11 @@ package com.management.controller;
 
 
 import com.fasterxml.jackson.databind.util.JSONPObject;
+import com.management.pojo.Course;
 import com.management.pojo.CourseSchedule;
 import com.management.pojo.Grade;
 import com.management.pojo.Teacher;
+import com.management.service.CourseScheduleService;
 import com.management.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,6 +24,8 @@ public class TeacherController {
     @Autowired
     private TeacherService teacherService;
 
+    @Autowired
+    private CourseScheduleService courseScheduleService;
     /*
       根据教师编号获取教师信息
 
@@ -58,14 +62,19 @@ public class TeacherController {
     /**
      * 获取指定教师的课程表
      *
-     * @param teacherName 教师姓名
+     * @param teacherId 教师编号
      * @return 课程表信息（JSON字符串）
      */
     @GetMapping("/{teacherId}/courseSchedules")
     @ResponseBody
-    public String getCourseSchedulesByTeacherId(@PathVariable Integer Id) {
-        List<CourseSchedule> courseSchedules = teacherService.getCourseSchedule(Id);
-        return JSON.toString();
+    public List<CourseSchedule> getCourseSchedulesByTeacherId(@PathVariable String teacherId) {
+
+
+        CourseSchedule courseSchedule = new CourseSchedule();
+        courseSchedule.setTeacherId(teacherId);
+
+
+        return courseScheduleService.getCourseSchedule(courseSchedule, "teacher");
     }
 
     /**

@@ -72,16 +72,6 @@ public class TeacherServiceTest extends TestCase {
         System.out.println("提交结果：" + result);
     }
 
-    @Test
-    public void testGetCourseScheduleByUserId(){
-
-
-        //todo 通过userId获取课程表
-        List<CourseSchedule> courseScheduleList = courseScheduleService.getCourseSchedulesByUserId(2);
-        for (CourseSchedule courseSchedule : courseScheduleList){
-            System.out.println(courseSchedule);
-        }
-    }
 
     @Test
     public void testGetTeacherByUserId(){
@@ -91,7 +81,7 @@ public class TeacherServiceTest extends TestCase {
 
     @Test
     public void testGetAllTeachers(){
-        List<Teacher> teacherList = teacherService.getAllTeachers("teacher");
+        List<Teacher> teacherList = teacherService.getAllTeachers("admin");
         teacherList.forEach(System.out::println);
     }
 

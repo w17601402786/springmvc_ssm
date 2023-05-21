@@ -13,6 +13,9 @@
     <delete id="deleteTeacherById" parameterType="int">
         delete from teacher where id=#{id}
     </delete>
+    <delete id="deleteTeacherByUserId">
+        delete from teacher where user_id=#{userId}
+    </delete>
 
     <!-- 修改一个教师的信息 -->
     <update id="updateTeacher" parameterType="com.management.pojo.Teacher">

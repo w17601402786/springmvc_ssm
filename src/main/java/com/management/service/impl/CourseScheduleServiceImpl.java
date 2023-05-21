@@ -60,9 +60,4 @@ public class CourseScheduleServiceImpl implements CourseScheduleService {
         return courseScheduleMapper.getCourseSchedules(courseSchedule);
     }
 
-    @Override
-    public List<CourseSchedule> getCourseSchedulesByUserId(Integer userId) {
-        List<CourseSchedule> courseSchedules = courseScheduleMapper.getCourseScheduleByUserId(userId);
-        return courseSchedules;
-    }
 }

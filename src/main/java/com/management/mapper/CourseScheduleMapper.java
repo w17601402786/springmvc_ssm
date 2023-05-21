@@ -39,12 +39,4 @@ public interface CourseScheduleMapper {
      */
     List<CourseSchedule> getCourseSchedules(CourseSchedule courseSchedule);
 
-    // 根据教师姓名查询该教师的课程表信息
-    List<CourseSchedule> getCourseSchedulesByTeacherId(String teacherId);
-
-    // 根据时间查询课程表信息
-    List<CourseSchedule> getCourseSchedulesByTime(String time);
-
-    // 根据userId查询课程表信息
-    List<CourseSchedule> getCourseScheduleByUserId(Integer userId);
 }
