@@ -4,6 +4,7 @@ import com.management.pojo.*;
 import com.management.service.ClassesService;
 import com.management.service.CourseScheduleService;
 import com.management.service.CourseService;
+import com.management.service.StudentService;
 import com.management.tools.ResultCommon;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -39,6 +40,9 @@ public class StudentController {
 
     @Autowired
     CourseScheduleService courseScheduleService;
+
+    @Autowired
+    StudentService studentService;
 
 
 
@@ -109,41 +113,7 @@ public class StudentController {
             return new ResultCommon<>(401, "未登录", null);
         }
 
-        Classes myClass;
-
-        // 先尝试获取自己的班级信息
-        if (user.getStudentInfo()!=null && user.getStudentInfo().getClasses()!=null){
-            myClass = user.getStudentInfo().getClasses();
-        }else {
-            Classes classes = new Classes();
-            classes.setClassId(user.getStudentInfo().getClassId());
-
-            List<Classes> classesList = classesService.getClasses(classes);
-
-            if (classesList.size() == 0){
-                return new ResultCommon<>(401,"获取失败",null);
-            }
-
-            myClass = classesList.get(0);
-        }
-
-        //再获取当前班级的课程表信息
-        CourseSchedule courseSchedule = new CourseSchedule();
-        courseSchedule.setClassId(myClass.getClassId());
-
-        List<CourseSchedule> courseScheduleList = courseScheduleService.getCourseSchedule(courseSchedule, user.getUserType());
-
-        if (courseScheduleList.size() == 0){
-            return new ResultCommon<>(401,"获取失败",null);
-        }
-
-        // 最后获取课程信息
-        List<Course> courseList = new ArrayList<>();
-
-        courseScheduleList.forEach(courseSchedule1 -> {
-            courseList.add(courseSchedule1.getCourseInfo());
-        });
-
+        List<Course> courseList = studentService.getCourses(user);
 
         return new ResultCommon<>(200, "成功", courseList);
 
