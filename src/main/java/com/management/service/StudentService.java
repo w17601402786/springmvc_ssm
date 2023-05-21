@@ -113,10 +113,10 @@ public interface StudentService {
      * <p color="red">
      *  涉及到三个表的联合查询
      * </p>
-     * @param userId 用户ID
+     * @param users 用户信息
      * @return 班级信息
      */
-    Classes getClasses(Integer userId);
+    Classes getClasses(Users users);
 
 
     /**
@@ -141,10 +141,10 @@ public interface StudentService {
 
     /**
      * 获取当前用户的课程表信息
-     * @param userId 用户ID
+     * @param users 用户信息
      * @return 课程表信息列表
      */
-    List<CourseSchedule> getCourseSchedule(Integer userId);
+    List<CourseSchedule> getCourseSchedule(Users users);
 
 
     /**

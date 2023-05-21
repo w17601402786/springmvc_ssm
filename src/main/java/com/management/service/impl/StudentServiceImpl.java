@@ -143,18 +143,27 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Classes getClasses(Integer userId) {
-        return null;
+    public Classes getClasses(Users user) {
+        // 如果已经有了班级信息，直接返回
+        if (user.getStudentInfo()!=null && user.getStudentInfo().getClasses()!=null){
+            return user.getStudentInfo().getClasses();
+        }
+
+
+        Classes classes = new Classes();
+        classes.setClassId(user.getStudentInfo().getClassId());
+
+        List<Classes> classesList = classesService.getClasses(classes);
+
+
+        return classesList.size() == 0 ? null : classesList.get(0);
     }
 
-    @Override
-    public List<Course> getCourses(Users user) {
 
-        Classes myClass;
-
+    private Classes getClassesByUser(Users user){
         // 先尝试获取自己的班级信息
         if (user.getStudentInfo()!=null && user.getStudentInfo().getClasses()!=null){
-            myClass = user.getStudentInfo().getClasses();
+            return user.getStudentInfo().getClasses();
         }else {
             Classes classes = new Classes();
             classes.setClassId(user.getStudentInfo().getClassId());
@@ -165,7 +174,18 @@ public class StudentServiceImpl implements StudentService {
                 return null;
             }
 
-            myClass = classesList.get(0);
+            return classesList.get(0);
+        }
+    }
+
+
+    @Override
+    public List<Course> getCourses(Users user) {
+
+        Classes myClass = getClasses(user);
+
+        if (myClass == null){
+            return null;
         }
 
         //再获取当前班级的课程表信息
@@ -194,8 +214,22 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public List<CourseSchedule> getCourseSchedule(Integer userId) {
-        return null;
+    public List<CourseSchedule> getCourseSchedule(Users user) {
+
+
+        CourseSchedule courseSchedule = new CourseSchedule();
+
+        Classes myClass = getClasses(user);
+
+        if (myClass == null){
+            return null;
+        }
+
+        courseSchedule.setClassId(myClass.getClassId());
+
+        return courseScheduleService.getCourseSchedule(courseSchedule, user.getUserType());
+
+
     }
 
     @Override

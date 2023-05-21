@@ -6,10 +6,7 @@ import com.management.service.CourseScheduleService;
 import com.management.service.CourseService;
 import com.management.service.StudentService;
 import com.management.tools.ResultCommon;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -73,32 +70,17 @@ public class StudentController {
         }
 
 
-        // 如果已经有了班级信息，直接返回
-        if (user.getStudentInfo()!=null && user.getStudentInfo().getClasses()!=null){
-            return new ResultCommon<>(200,"成功", user.getStudentInfo().getClasses());
-        }
-
-
-        Classes classes = new Classes();
-        classes.setClassId(user.getStudentInfo().getClassId());
-
-        List<Classes> classesList = classesService.getClasses(classes);
-
-
-        if (classesList.size() == 0){
-            return new ResultCommon<>(401,"获取失败",null);
-        }
-
+        //获取当前用户班级信息
+        Classes classes = studentService.getClasses(user);
 
         Student student = user.getStudentInfo();
-
-        student.setClasses(classesList.get(0));
+        student.setClasses(classes);
 
         user.setStudentInfo(student);
 
         request.getSession().setAttribute("user",user);
 
-        return new ResultCommon<>(200,"成功", classesList.get(0));
+        return new ResultCommon<>(200,"成功", classes);
     }
 
     @ApiOperation("学生查看自己课程信息")
@@ -116,6 +98,81 @@ public class StudentController {
         List<Course> courseList = studentService.getCourses(user);
 
         return new ResultCommon<>(200, "成功", courseList);
+
+    }
+
+    @ApiOperation("学生查看自己课程表信息")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200,message = "成功"),
+            @ApiResponse(code = 401,message = "未登录")
+    })
+    @RequestMapping( value = "/courseScheduleInfo",produces = "application/json;charset=utf-8",method = RequestMethod.GET)
+    public ResultCommon<List<CourseSchedule>> courseScheduleInfo() {
+        Users user = (Users) request.getSession().getAttribute("user");
+        if (user == null) {
+            return new ResultCommon<>(401, "未登录", null);
+        }
+
+        List<CourseSchedule> courseScheduleList = studentService.getCourseSchedule(user);
+
+        return new ResultCommon<>(200, "成功", courseScheduleList);
+
+    }
+
+    @ApiOperation("学生查看自己的成绩信息")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200,message = "成功"),
+            @ApiResponse(code = 401,message = "未登录")
+    })
+    @RequestMapping( value = "/scoreInfo",produces = "application/json;charset=utf-8",method = RequestMethod.GET)
+    public ResultCommon<List<Grade>> scoreInfo() {
+        Users user = (Users) request.getSession().getAttribute("user");
+        if (user == null) {
+            return new ResultCommon<>(401, "未登录", null);
+        }
+
+        List<Grade> scoreList = studentService.getGrades(user.getId());
+
+        return new ResultCommon<>(200, "成功", scoreList);
+
+    }
+
+
+    @ApiOperation("修改登录密码")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200,message = "成功"),
+            @ApiResponse(code = 401,message = "未登录"),
+            @ApiResponse(code = 402,message = "原密码错误"),
+            @ApiResponse(code = 403,message = "修改失败")
+    })
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "oldPassword",value = "原密码",required = true,dataType = "String"),
+            @ApiImplicitParam(name = "newPassword",value = "新密码",required = true,dataType = "String")
+    })
+    @RequestMapping( value = "/updatePassword",produces = "application/json;charset=utf-8",method = RequestMethod.POST)
+    public ResultCommon<String> updatePassword(String oldPassword,String newPassword) {
+        Users user = (Users) request.getSession().getAttribute("user");
+        if (user == null) {
+            return new ResultCommon<>(401, "未登录", null);
+        }
+
+        if (!user.getPassword().equals(oldPassword)){
+            return new ResultCommon<>(402, "原密码错误", null);
+        }
+
+        user.setPassword(newPassword);
+
+
+        //TODO 实现修改密码接口
+        int result  = 0;
+
+//        int result = studentService.updatePassword(user);
+
+        if (result == 0){
+            return new ResultCommon<>(403, "修改失败", null);
+        }
+
+        return new ResultCommon<>(200, "成功", null);
 
     }
 
