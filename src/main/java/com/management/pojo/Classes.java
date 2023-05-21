@@ -81,6 +81,15 @@ public class Classes {
         this.counsellor = counsellor;
     }
 
+
+    public String getClassId() {
+        return classId;
+    }
+
+    public void setClassId(String classId) {
+        this.classId = classId;
+    }
+
     @Override
     public String toString() {
         return "Classes{" +

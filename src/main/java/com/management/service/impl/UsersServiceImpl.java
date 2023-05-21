@@ -8,7 +8,9 @@ import com.management.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class UsersServiceImpl implements UsersService {
@@ -97,6 +99,29 @@ public class UsersServiceImpl implements UsersService {
         }
 
         return usersMapper.getTeacherUsers(user);
+    }
+
+    @Override
+    public Users login(Users user) {
+
+        Map<String, Object> map  = new HashMap<>();
+
+        map.put("userName", user.getUsername());
+        map.put("password", user.getPassword());
+
+        user = usersMapper.getUserByUserNameAndPassword(map);
+
+        if (user == null){
+            return null;
+        }
+
+        if (user.getUserType().equals("student")){
+            user = usersMapper.getStudentUsers(user).get(0);
+        }else if (user.getUserType().equals("teacher")){
+            user = usersMapper.getTeacherUsers(user).get(0);
+        }
+
+        return user;
     }
 
 }

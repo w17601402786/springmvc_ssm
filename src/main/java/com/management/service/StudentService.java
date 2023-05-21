@@ -134,10 +134,10 @@ public interface StudentService {
      *  课程的数据表、课程表的联合查询
      *  记得对课程去重
      * </p>
-     * @param userId 用户ID
+     * @param users 用户信息
      * @return 课程信息列表
      */
-    List<Course> getCourses(Integer userId);
+    List<Course> getCourses(Users users);
 
     /**
      * 获取当前用户的课程表信息

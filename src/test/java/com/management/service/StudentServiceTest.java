@@ -1,7 +1,9 @@
 package com.management.service;
 
+import com.management.pojo.Classes;
 import com.management.pojo.Grade;
 import com.management.pojo.Student;
+import com.management.pojo.Users;
 import junit.framework.TestCase;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -110,7 +112,21 @@ public class StudentServiceTest extends TestCase {
     }
 
 
+
+    @Test
     public void testGetCourses() {
+
+
+        Users users = new Users();
+
+        Student student = new Student();
+        student.setClassId("1901");
+
+        users.setStudentInfo(student);
+
+        studentService.getCourses(users).forEach(System.out::println);
+
+
     }
 
     public void testGetCourseSchedule() {

@@ -53,9 +53,8 @@ public class CourseScheduleServiceImpl implements CourseScheduleService {
     @Override
     public List<CourseSchedule> getCourseSchedule(CourseSchedule courseSchedule, String userType) {
 
-        if (!userType.equals("admin")) {
-            return null;
-        }
+        //TODO 添加权限判断
+
 
         return courseScheduleMapper.getCourseSchedules(courseSchedule);
     }

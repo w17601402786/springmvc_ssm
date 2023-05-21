@@ -82,5 +82,11 @@ public interface UsersService {
      */
     List<Users> getTeacherUsers(Users user, String thisUserType);
 
+    /**
+     * 用户登录
+     * @param user 包含用户名和密码的用户bean
+     * @return 登录成功的用户信息，登录成功就返回完整的用户信息，否则返回null
+     */
+    Users login(Users user);
 
 }

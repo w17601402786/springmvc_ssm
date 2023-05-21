@@ -15,32 +15,11 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/admin")
-@Api(tags = "管理员控制器",description = "只接受管理员的请求")
+@Api(tags = "管理员控制器",value = "只接受管理员的请求")
 public class AdminController {
 
     @Autowired
     UsersService usersService;
-
-//    @RequestMapping("/user/add")
-//    public int addUser(Users user, HttpServletRequest request){
-//
-//        if (user.getUsername() == null || user.getUsername().equals("")){
-//            return 402;
-//        }
-//
-//        if (user.getPassword() == null || user.getPassword().equals("")){
-//            return 402;
-//        }
-//
-//        Users currentUser = (Users) request.getSession().getAttribute("user");
-//
-//
-//        usersService.addUser(user, currentUser.getUserType());
-//
-//        //返回明文
-//        return 200;
-//
-//    }
 
     @ApiOperation("根据用户id删除用户信息")
     @ApiImplicitParam(name = "id",value = "用户ID")

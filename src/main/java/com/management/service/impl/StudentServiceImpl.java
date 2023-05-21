@@ -5,11 +5,16 @@ import com.management.mapper.GradeMapper;
 import com.management.mapper.StudentMapper;
 import com.management.mapper.UsersMapper;
 import com.management.pojo.*;
+import com.management.service.ClassesService;
+import com.management.service.CourseScheduleService;
 import com.management.service.StudentService;
+import com.management.tools.ResultCommon;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class StudentServiceImpl implements StudentService {
@@ -25,6 +30,12 @@ public class StudentServiceImpl implements StudentService {
 
     @Autowired
     GradeMapper gradeMapper;
+
+    @Autowired
+    ClassesService classesService;
+
+    @Autowired
+    CourseScheduleService courseScheduleService;
 
 
     @Override
@@ -137,8 +148,49 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public List<Course> getCourses(Integer userId) {
-        return null;
+    public List<Course> getCourses(Users user) {
+
+        Classes myClass;
+
+        // 先尝试获取自己的班级信息
+        if (user.getStudentInfo()!=null && user.getStudentInfo().getClasses()!=null){
+            myClass = user.getStudentInfo().getClasses();
+        }else {
+            Classes classes = new Classes();
+            classes.setClassId(user.getStudentInfo().getClassId());
+
+            List<Classes> classesList = classesService.getClasses(classes);
+
+            if (classesList.size() == 0){
+                return null;
+            }
+
+            myClass = classesList.get(0);
+        }
+
+        //再获取当前班级的课程表信息
+        CourseSchedule courseSchedule = new CourseSchedule();
+        courseSchedule.setClassId(myClass.getClassId());
+
+        List<CourseSchedule> courseScheduleList = courseScheduleService.getCourseSchedule(courseSchedule, user.getUserType());
+
+        if (courseScheduleList.size() == 0){
+            return null;
+        }
+
+        // 最后获取课程信息
+        List<Course> courseList = new ArrayList<>();
+
+        courseScheduleList.forEach(courseSchedule1 -> {
+            courseList.add(courseSchedule1.getCourseInfo());
+        });
+
+
+
+        return new ArrayList<>(courseList.stream()
+                .collect(Collectors.toMap(Course::getId, course -> course, (c1, c2) -> c1))
+                .values());
+
     }
 
     @Override

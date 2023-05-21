@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.*;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface UsersMapper {
@@ -55,12 +56,11 @@ public interface UsersMapper {
 
     /**
      * 查询用户名密码是否正确
-     * @param userName 用户名
-     * @param password 密码
+     * @param map 用户名和密码
      * @return 正确就匹配并返回
      */
     @Select("select * from users where username=#{userName} and password=#{password}")
-    Users getUserByUserNameAndPassword(@PathVariable("userName") String userName,@PathVariable("password") String password);
+    Users getUserByUserNameAndPassword(Map<String, Object> map);
 
 
     /**
