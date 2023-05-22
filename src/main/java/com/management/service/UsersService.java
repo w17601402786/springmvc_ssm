@@ -89,4 +89,11 @@ public interface UsersService {
      */
     Users login(Users user);
 
+    /**
+     * 修改密码
+     * @param user 包含用户ID和新密码的用户bean
+     * @return 修改结果
+     */
+    int updatePassword(Users user);
+
 }

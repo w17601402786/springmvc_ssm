@@ -34,7 +34,6 @@ public interface UsersMapper {
      * @param user 要修改的用户修改后的对象
      * @return 修改结果
      */
-    @Update("update users set password=#{password},user_type=#{userType} where id=#{id}")
     int updateUser(Users user);
 
     /**

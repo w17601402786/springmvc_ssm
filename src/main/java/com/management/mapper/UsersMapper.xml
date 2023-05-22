@@ -5,6 +5,14 @@
     <insert id="addUser" parameterType="com.management.pojo.Users" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
         insert into users(username,password,user_type) values(#{username},#{password},#{userType})
     </insert>
+    <update id="updateUser">
+        update users
+        <set>
+            <if test="password != null and password != ''">password = #{password},</if>
+            <if test="userType != null and userType != ''">user_type = #{userType},</if>
+        </set>
+        where id=#{id}
+    </update>
 
     <select id="getUsers" parameterType="com.management.pojo.Users" resultMap="usersResultMap">
         SELECT *

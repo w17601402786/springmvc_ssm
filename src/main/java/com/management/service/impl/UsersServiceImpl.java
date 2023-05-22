@@ -124,4 +124,17 @@ public class UsersServiceImpl implements UsersService {
         return user;
     }
 
+    @Override
+    public int updatePassword(Users user) {
+
+        //防止用户修改其他信息，比如权限
+        Users changeUser = new Users();
+        changeUser.setId(user.getId());
+        changeUser.setPassword(user.getPassword());
+
+        return usersMapper.updateUser(changeUser);
+
+    }
+
+
 }
