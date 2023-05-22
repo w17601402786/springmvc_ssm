@@ -45,7 +45,7 @@
     <!-- 查询所有课程表信息 -->
     <select id="getCourseSchedules" parameterType="com.management.pojo.CourseSchedule" resultMap="courseScheduleMap">
         select cs.id, cs.course_id, cs.class_id,cs.teacher_id, cs.start_time, cs.end_time, cs.location, cs.week, cs.day,
-               t.id as tid,  t.name as teacher_name, t.gender, t.birthday, t.faculty, t.phone,
+               t.id as tid,  t.name as teacher_name, t.gender, t.birthday, t.faculty, t.phone,t.user_id,
                c.id as coid, c.name as course_name, c.hours, c.credit,
                cl.id as clid, cl.name as class_name, cl.major, cl.num, cl.year, cl.counsellor
         from course_schedule cs
@@ -135,6 +135,7 @@
             <result property="birthday" column="birthday"/>
             <result property="faculty" column="faculty"/>
             <result property="phone" column="phone"/>
+            <result property="userId" column="user_id"/>
         </association>
     </resultMap>
 

@@ -4,12 +4,10 @@ package com.management.controller;
 import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.management.pojo.*;
 import com.management.service.CourseScheduleService;
+import com.management.service.GradeService;
 import com.management.service.TeacherService;
 import com.management.tools.ResultCommon;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -40,6 +38,8 @@ public class TeacherController {
     @Autowired
     private CourseScheduleService courseScheduleService;
 
+    @Autowired
+    private GradeService gradeService;
 
     @ApiOperation("教师查看自己的信息")
     @ApiResponses(value = {
@@ -96,7 +96,55 @@ public class TeacherController {
 
     }
 
+    @ApiOperation("教师查看自己所授课程的成绩信息")
+    @ApiImplicitParam(name = "courseId",value = "课程编号")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200,message = "成功"),
+            @ApiResponse(code = 401,message = "未登录")
+    })
+    @RequestMapping( value = "/gradeInfo",produces = "application/json;charset=utf-8",method = RequestMethod.GET)
+    public ResultCommon<List<Grade>> gradeInfo(String courseId) {
+        Users user = (Users) request.getSession().getAttribute("user");
+        if (user == null) {
+            return new ResultCommon<>(401, "未登录", null);
+        }
 
+        Grade grade = new Grade();
+        grade.setCourseId(courseId);
+
+        //记得加个判断，即只能查看自己的课程的成绩
+        List<Grade> gradeList = gradeService.getGrades(grade,"teacher");
+
+
+        return new ResultCommon<>(200, "成功", gradeList);
+
+
+    }
+
+
+    @ApiOperation("教师提交自己所授课程的成绩信息")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200,message = "成功"),
+            @ApiResponse(code = 401,message = "未登录")
+    })
+    @RequestMapping( value = "/addGrade",produces = "application/json;charset=utf-8",method = RequestMethod.POST)
+    public ResultCommon<String> gradeInfo(Grade grade) {
+        Users user = (Users) request.getSession().getAttribute("user");
+        if (user == null) {
+            return new ResultCommon<>(401, "未登录", null);
+        }
+
+
+        int result = gradeService.addGradeByTeacher(grade,user.getUserType());
+
+        if (result == 0){
+            return new ResultCommon<>(400, "失败", null);
+        }
+
+        return new ResultCommon<>(200, "成功");
+
+
+    }
 
 
 
