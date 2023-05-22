@@ -39,7 +39,6 @@ public class UsersController {
     @RequestMapping(value = "/login",method = RequestMethod.POST)
     public ResultCommon<Users> login(Users user){
 
-        Map<String,Object> resultMap = new HashMap<>();
 
         if (user.getUsername() == null || user.getUsername().equals("")){
             return new ResultCommon<>(402,"用户名或密码为空");

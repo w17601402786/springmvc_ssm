@@ -108,6 +108,23 @@ public class Teacher {
     }
 
 
+    /**
+     * 判断必要的参数是否为空
+     * @return 是否为空
+     */
+    public boolean isEmpty(){
+        if(name == null || "".equals(name)){
+            return false;
+        }
+        if (teacherId == null || "".equals(teacherId)){
+            return false;
+        }
+        if (userId == 0){
+            return false;
+        }
+        return true;
+    }
+
 
     @Override
     public String toString() {

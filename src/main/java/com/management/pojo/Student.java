@@ -167,6 +167,23 @@ public class Student {
         this.grades = grades;
     }
 
+
+    public boolean isEmpty(){
+        if(name == null || "".equals(name)){
+            return false;
+        }
+        if(studentId == null || "".equals(studentId)){
+            return false;
+        }
+        if(classId == null || "".equals(classId)){
+            return false;
+        }
+        if(userId == 0) {
+            return false;
+        }
+        return true;
+    }
+
     @Override
     public String toString() {
         return "Student{" +
