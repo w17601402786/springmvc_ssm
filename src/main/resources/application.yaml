@@ -1,29 +1,44 @@
 
 springdoc:
+
+
+
   api-docs:
+    info:
+      title: 教务管理系统
+      description: Optional multiline or single-line description in [CommonMark](http://commonmark.org/help/) or HTML.
+      version: 0.1.9
+
+
     #是否开启文档功能
     enabled: true
     #swagger后端请求地址
-    path: /api-docs
+#    path: /api-docs
   swagger-ui:
     #自定义swagger前端请求路径，输入http：127.0.0.1:8080/test会自动重定向到swagger页面
-    path: /test
+    path: /docs
   #包扫描路径
   packages-to-scan: com.management.controller,com.management.pojo
   #这里定义了两个分组，可定义多个，也可以不定义
-  group-configs:
-    #分组名
-    - group: admin
-      #按路径匹配
-      pathsToMatch: /admin/**
-      #分组名
-    - group: student
-      #按路径匹配
-      pathsToMatch: /student/**
-      #分组名
-    - group: teacher
-      #按路径匹配
-      pathsToMatch: /teacher/**
-    - group: user
-      #按包路径匹配
-      packagesToScan: com.hello.api.user
+#  group-configs:
+#    #分组名
+#    - group: admin
+#      #按路径匹配
+#      pathsToMatch: /admin/**
+#      #分组名
+#    - group: student
+#      #按路径匹配
+#      pathsToMatch: /student/**
+#      #分组名
+#    - group: teacher
+#      #按路径匹配
+#      pathsToMatch: /teacher/**
+#    - group: user
+#      #按包路径匹配
+#      packagesToScan: com.hello.api.user
+
+swagger:
+  application-name: 教务管理系统
+  application-version: 1.0
+  application-description: 由王宇哲、赵英杰、李佳倩开发的教务管理系统的API文档
+  try-host: http://localhost:${server.port}
