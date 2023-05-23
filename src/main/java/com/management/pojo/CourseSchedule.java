@@ -58,7 +58,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
  *     </tr>
  * </table>
  */
-@Schema(description = "课程安排基本信息")
+@Schema(title = "课程安排基本信息")
 public class CourseSchedule {
 
     @Schema(title = "课程安排ID", description = "课程安排的唯一标识符", example = "1")
@@ -97,7 +97,10 @@ public class CourseSchedule {
      *     例如：第1、3、5周上课，那么week=0010101B=21
      * </p>
      */
-    @Schema(title = "课程安排的周次", description = "该课程安排在哪几周上课", example = "21")
+    @Schema(title = "课程安排的周次",
+            description = "该课程安排在哪几周上课,使用位运算来存储，一个week最多存储32个周的数据,例如：第1、3、5周上课，那么week=0010101B=21",
+            example = "21"
+    )
     private Integer week;
 
     /**
@@ -109,16 +112,13 @@ public class CourseSchedule {
      *     例如：周一、周三、周五上课，那么day=0010101B=21
      * </p>
      */
-    @Schema(title = "课程安排的星期", description = "该课程安排在哪几天上课", example = "21")
+    @Schema(title = "课程安排的星期", description = "该课程安排在周几上课，使用位运算来存储，一个day最多存储7个星期的数据，例如：周一、周三、周五上课，那么day=0010101B=21", example = "21")
     private Integer day;
 
-    @Schema(title = "课程详情", description = "该课程的详细信息")
     private Course courseInfo = null;
 
-    @Schema(title = "上课班级的详情", description = "该班级的详细信息")
     private Classes classes = null;
 
-    @Schema(title = "授课教师的详情", description = "该教师的详细信息")
     private Teacher teacher = null;
 
     public Integer getId() {

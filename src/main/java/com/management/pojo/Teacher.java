@@ -4,7 +4,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.util.Date;
 
-@Schema(description = "教师基本信息")
+@Schema(title = "教师基本信息")
 public class Teacher {
 
     @Schema(title = "ID")
@@ -31,7 +31,6 @@ public class Teacher {
     @Schema(title = "关联的用户ID")
     private int userId;
 
-    @Schema(title = "关联的用户信息")
     private Users userInfo = null;
 
     public int getId() {

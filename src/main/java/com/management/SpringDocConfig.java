@@ -3,6 +3,7 @@ package com.management;
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.ExternalDocumentation;
 import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Contact;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
 import io.swagger.v3.oas.models.security.SecurityRequirement;
@@ -19,6 +20,11 @@ public class SpringDocConfig {
                 .info(new Info().title("教务管理系统API文档 API")
                         .description("教务管理系统的API接口文档，由王宇哲、赵英杰、李佳倩编写")
                         .version("v1.0.0")
+                        .contact(new Contact()
+                                .name("赵李王")
+                                .email("020301700164@stu.hbeu.edu.cn")
+                                .url("https://github.com/w17601402786/springmvc_ssm")
+                        )
                         .license(new License().name("Apache 2.0")))
                 .externalDocs(new ExternalDocumentation()
                         .description("教务管理系统项目地址")

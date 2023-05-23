@@ -98,6 +98,14 @@
       <artifactId>springdoc-openapi-ui</artifactId>
       <version>1.6.15</version>
     </dependency>
+    <dependency>
+      <groupId>com.github.xiaoymin</groupId>
+      <artifactId>knife4j-springdoc-ui</artifactId>
+      <version>3.0.3</version>
+    </dependency>
+
+
+
 
     <!-- jackson-databind 相关依赖 -->
     <dependency>

@@ -5,7 +5,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.Date;
 import java.util.List;
 
-@Schema(description = "学生基本信息")
+@Schema(title = "学生基本信息")
 public class Student {
 
     @Schema(title = "学生ID")
@@ -41,10 +41,8 @@ public class Student {
     @Schema(title = "关联的用户ID")
     private int userId;
 
-    @Schema(title = "所在的班级信息")
     private Classes classes = null;
 
-    @Schema(title = "关联的用户信息")
     private Users userInfo = null;
 
 

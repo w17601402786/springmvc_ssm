@@ -2,33 +2,33 @@ package com.management.pojo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(description = "班级信息")
+@Schema(title = "班级信息")
 public class Classes {
-    @Schema(description = "班级ID")
+    @Schema(title = "班级ID")
     private Integer id;
 
-    @Schema(description = "班级名")
+    @Schema(title = "班级名")
     private String name;
 
-    @Schema(description = "专业")
+    @Schema(title = "专业")
     private String major;
 
     /**
      * 班级人数
      */
-    @Schema(description = "班级人数")
+    @Schema(title = "班级人数")
     private Integer num;
 
-    @Schema(description = "入学年份")
+    @Schema(title = "入学年份")
     private Integer year;
 
-    @Schema(description = "辅导员")
+    @Schema(title = "辅导员")
     private String counsellor;
 
     /**
      * 班级编号
      */
-    @Schema(description = "班级编号")
+    @Schema(title = "班级编号")
     private String classId;
 
     public Integer getId() {

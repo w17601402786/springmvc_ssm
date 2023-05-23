@@ -4,7 +4,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.io.Serializable;
 
-@Schema(description = "成绩基本信息")
+@Schema(title = "成绩信息")
 public class Grade implements Serializable {
 
     @Schema(title = "成绩ID", description = "成绩的唯一标识符", example = "1")
@@ -19,10 +19,8 @@ public class Grade implements Serializable {
     @Schema(title = "分数", description = "该成绩的具体数值", example = "80")
     private Integer score;
 
-    @Schema(title = "该成绩所属学生信息", description = "该成绩所属的学生的详细信息")
     private Student studentInfo = null;
 
-    @Schema(title = "该成绩所属课程信息", description = "该成绩所属的课程的详细信息")
     private Course courseInfo = null;
 
     public Integer getId() {

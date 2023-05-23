@@ -2,22 +2,22 @@ package com.management.pojo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(description = "课程信息")
+@Schema(title = "课程信息")
 public class Course {
 
-    @Schema(description = "课程ID")
+    @Schema(title = "课程ID")
     private int id;
 
-    @Schema(description = "课程号")
+    @Schema(title = "课程号")
     private String courseId;
 
-    @Schema(description = "课程名")
+    @Schema(title = "课程名")
     private String name;
 
-    @Schema(description = "学时")
+    @Schema(title = "学时")
     private int hours;
 
-    @Schema(description = "学分")
+    @Schema(title = "学分")
     private int credit;
 
     public int getId() {

@@ -3,7 +3,7 @@ package com.management.pojo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(description = "用户基本信息")
+@Schema(title = "用户基本信息")
 public class Users {
 
     @Schema(title = "用户ID")
@@ -18,10 +18,8 @@ public class Users {
     @Schema(title = "用户类型")
     private String userType;
 
-    @Schema(title = "学生信息")
     private Student studentInfo = null;
 
-    @Schema(title = "教师信息")
     private Teacher teacherInfo = null;
 
     public int getId() {
