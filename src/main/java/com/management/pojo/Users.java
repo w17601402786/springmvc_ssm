@@ -1,28 +1,27 @@
 package com.management.pojo;
 
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
-@ApiModel("用户基本信息")
+@Schema(description = "用户基本信息")
 public class Users {
 
-    @ApiModelProperty("用户ID")
+    @Schema(title = "用户ID")
     private int id;
 
-    @ApiModelProperty("用户名")
+    @Schema(title = "用户名")
     private String username;
 
-    @ApiModelProperty("密码")
+    @Schema(title = "密码")
     private String password;
 
-    @ApiModelProperty("用户类型")
+    @Schema(title = "用户类型")
     private String userType;
 
-    @ApiModelProperty("学生信息")
+    @Schema(title = "学生信息")
     private Student studentInfo = null;
 
-    @ApiModelProperty("教师信息")
+    @Schema(title = "教师信息")
     private Teacher teacherInfo = null;
 
     public int getId() {

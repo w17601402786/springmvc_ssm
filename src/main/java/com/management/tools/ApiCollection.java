@@ -1,12 +1,12 @@
 package com.management.tools;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.util.List;
 
 public class ApiCollection<T> {
 
-    @ApiModelProperty(value = "数据集合",name = "data",dataType = "array",example = "200")
+    @Schema(description = "数据集合",name = "data")
     private List<T> data;
 
     public ApiCollection() {

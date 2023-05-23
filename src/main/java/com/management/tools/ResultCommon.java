@@ -1,18 +1,18 @@
 package com.management.tools;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * 返回结果类
  */
 public class ResultCommon<T> {
-    @ApiModelProperty(value = "返回码",name = "code",example = "200")
+    @Schema(description = "返回码",name = "code",example = "200")
     private Integer code;
 
-    @ApiModelProperty(value = "返回信息",name = "msg",example = "登录成功")
+    @Schema(description = "返回信息",name = "msg",example = "登录成功")
     private String msg;
 
-    @ApiModelProperty(value = "返回数据",name = "data")
+    @Schema(description = "返回数据",name = "data")
     private T data;
 
     public ResultCommon() {

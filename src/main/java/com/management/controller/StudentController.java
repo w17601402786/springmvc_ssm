@@ -3,12 +3,13 @@ package com.management.controller;
 import com.management.pojo.*;
 import com.management.service.*;
 import com.management.tools.ResultCommon;
-import io.swagger.annotations.*;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -16,7 +17,7 @@ import java.util.List;
 @CrossOrigin
 @RestController
 @RequestMapping("/student")
-@Api(tags = "学生控制器",value = "主要实现学生允许的操作")
+@Tag(name = "学生控制器",description = "主要实现学生允许的操作")
 public class StudentController {
 
 
@@ -42,10 +43,10 @@ public class StudentController {
 
 
 
-    @ApiOperation("学生查看自己的信息")
+    @Operation(description = "学生查看自己的信息")
     @ApiResponses(value = {
-            @ApiResponse(code = 200,message = "成功"),
-            @ApiResponse(code = 401,message = "未登录")
+            @ApiResponse(responseCode = "200",description = "成功"),
+            @ApiResponse(responseCode = "401",description = "未登录")
     })
     @RequestMapping( value = "/info",produces = "application/json;charset=utf-8",method = RequestMethod.GET)
     public ResultCommon<Users> info(){
@@ -56,10 +57,10 @@ public class StudentController {
         return new ResultCommon<>(200,"成功", user);
     }
 
-    @ApiOperation("学生查看自己班级基本信息")
+    @Operation(description = "学生查看自己班级基本信息")
     @ApiResponses(value = {
-            @ApiResponse(code = 200,message = "成功"),
-            @ApiResponse(code = 401,message = "未登录")
+            @ApiResponse(responseCode = "200",description = "成功"),
+            @ApiResponse(responseCode = "401",description = "未登录")
     })
     @RequestMapping( value = "/classInfo",produces = "application/json;charset=utf-8",method = RequestMethod.GET)
     public ResultCommon<Classes> classInfo(){
@@ -82,10 +83,10 @@ public class StudentController {
         return new ResultCommon<>(200,"成功", classes);
     }
 
-    @ApiOperation("学生查看自己课程信息")
+    @Operation(description = "学生查看自己课程信息")
     @ApiResponses(value = {
-            @ApiResponse(code = 200,message = "成功"),
-            @ApiResponse(code = 401,message = "未登录")
+            @ApiResponse(responseCode = "200",description = "成功"),
+            @ApiResponse(responseCode = "401",description = "未登录")
     })
     @RequestMapping( value = "/courseInfo",produces = "application/json;charset=utf-8",method = RequestMethod.GET)
     public ResultCommon<List<Course>> courseInfo() {
@@ -100,10 +101,10 @@ public class StudentController {
 
     }
 
-    @ApiOperation("学生查看自己课程表信息")
+    @Operation(description = "学生查看自己课程表信息")
     @ApiResponses(value = {
-            @ApiResponse(code = 200,message = "成功"),
-            @ApiResponse(code = 401,message = "未登录")
+            @ApiResponse(responseCode = "200",description = "成功"),
+            @ApiResponse(responseCode = "401",description = "未登录")
     })
     @RequestMapping( value = "/courseScheduleInfo",produces = "application/json;charset=utf-8",method = RequestMethod.GET)
     public ResultCommon<List<CourseSchedule>> courseScheduleInfo() {
@@ -118,10 +119,11 @@ public class StudentController {
 
     }
 
-    @ApiOperation("学生查看自己的成绩信息")
+    @Operation(description = "学生查看自己的成绩信息")
     @ApiResponses(value = {
-            @ApiResponse(code = 200,message = "成功"),
-            @ApiResponse(code = 401,message = "未登录")
+
+            @ApiResponse(responseCode = "200",description = "成功"),
+            @ApiResponse(responseCode = "401",description = "未登录")
     })
     @RequestMapping( value = "/scoreInfo",produces = "application/json;charset=utf-8",method = RequestMethod.GET)
     public ResultCommon<List<Grade>> scoreInfo() {
@@ -137,19 +139,18 @@ public class StudentController {
     }
 
 
-    @ApiOperation("修改登录密码")
+    @Operation(description = "修改登录密码")
     @ApiResponses(value = {
-            @ApiResponse(code = 200,message = "成功"),
-            @ApiResponse(code = 401,message = "未登录"),
-            @ApiResponse(code = 402,message = "原密码错误"),
-            @ApiResponse(code = 403,message = "修改失败")
-    })
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "oldPassword",value = "原密码",required = true,dataType = "String"),
-            @ApiImplicitParam(name = "newPassword",value = "新密码",required = true,dataType = "String")
+            @ApiResponse(responseCode = "200",description = "成功"),
+            @ApiResponse(responseCode = "401",description = "未登录"),
+            @ApiResponse(responseCode = "402",description = "原密码错误"),
+            @ApiResponse(responseCode = "403",description = "修改失败")
     })
     @RequestMapping( value = "/updatePassword",produces = "application/json;charset=utf-8",method = RequestMethod.POST)
-    public ResultCommon<String> updatePassword(String oldPassword,String newPassword) {
+    public ResultCommon<String> updatePassword(
+            @Parameter(description = "原密码", required = true) @RequestParam String oldPassword,
+            @Parameter(description = "新密码", required = true) @RequestParam String newPassword
+    ) {
         Users user = (Users) request.getSession().getAttribute("user");
         if (user == null) {
             return new ResultCommon<>(401, "未登录", null);

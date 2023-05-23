@@ -1,9 +1,6 @@
 package com.management.pojo;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-
-import java.util.Date;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 
 /**
@@ -61,34 +58,34 @@ import java.util.Date;
  *     </tr>
  * </table>
  */
-@ApiModel("课程安排基本信息")
+@Schema(description = "课程安排基本信息")
 public class CourseSchedule {
 
-
-    @ApiModelProperty("课程安排ID")
+    @Schema(title = "课程安排ID", description = "课程安排的唯一标识符", example = "1")
     private Integer id;
 
-    @ApiModelProperty("所安排的课程的编号")
+    @Schema(title = "所安排的课程的编号", description = "该课程的唯一标识符", example = "C001")
     private String courseId;
 
-    @ApiModelProperty("上课班级的编号")
+    @Schema(title = "上课班级的编号", description = "该班级的唯一标识符", example = "A001")
     private String classId;
 
-    @ApiModelProperty("授课教师的编号")
+    @Schema(title = "授课教师的编号", description = "该教师的唯一标识符", example = "T001")
     private String teacherId;
+
     /**
      * 课程开始的节次
      */
-    @ApiModelProperty("课程开始的节次")
+    @Schema(title = "课程开始的节次", description = "该课程从第几节开始", example = "1")
     private Integer startTime;
 
     /**
      * 课程结束的节次
      */
-    @ApiModelProperty("课程结束的节次")
+    @Schema(title = "课程结束的节次", description = "该课程从第几节结束", example = "2")
     private Integer endTime;
 
-    @ApiModelProperty("上课地点")
+    @Schema(title = "上课地点", description = "该课程安排的上课地点", example = "教学楼1-101")
     private String location;
 
     /**
@@ -100,7 +97,7 @@ public class CourseSchedule {
      *     例如：第1、3、5周上课，那么week=0010101B=21
      * </p>
      */
-    @ApiModelProperty("课程安排的周次")
+    @Schema(title = "课程安排的周次", description = "该课程安排在哪几周上课", example = "21")
     private Integer week;
 
     /**
@@ -112,16 +109,16 @@ public class CourseSchedule {
      *     例如：周一、周三、周五上课，那么day=0010101B=21
      * </p>
      */
-    @ApiModelProperty("课程安排的星期")
+    @Schema(title = "课程安排的星期", description = "该课程安排在哪几天上课", example = "21")
     private Integer day;
 
-    @ApiModelProperty("课程详情")
+    @Schema(title = "课程详情", description = "该课程的详细信息")
     private Course courseInfo = null;
 
-    @ApiModelProperty("上课班级的详情")
+    @Schema(title = "上课班级的详情", description = "该班级的详细信息")
     private Classes classes = null;
 
-    @ApiModelProperty("授课教师的详情")
+    @Schema(title = "授课教师的详情", description = "该教师的详细信息")
     private Teacher teacher = null;
 
     public Integer getId() {

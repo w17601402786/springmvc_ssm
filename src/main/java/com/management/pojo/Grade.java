@@ -1,29 +1,28 @@
 package com.management.pojo;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.io.Serializable;
 
-@ApiModel("成绩基本信息")
+@Schema(description = "成绩基本信息")
 public class Grade implements Serializable {
 
-    @ApiModelProperty("成绩ID")
+    @Schema(title = "成绩ID", description = "成绩的唯一标识符", example = "1")
     private Integer id;
 
-    @ApiModelProperty("该成绩所属学生学号")
+    @Schema(title = "该成绩所属学生学号", description = "该成绩所属的学生的唯一标识符", example = "S001")
     private String studentId;
 
-    @ApiModelProperty("该成绩所属课程ID")
+    @Schema(title = "该成绩所属课程ID", description = "该成绩所属的课程的唯一标识符", example = "C001")
     private String courseId;
 
-    @ApiModelProperty("分数")
+    @Schema(title = "分数", description = "该成绩的具体数值", example = "80")
     private Integer score;
 
-    @ApiModelProperty("该成绩所属学生信息")
+    @Schema(title = "该成绩所属学生信息", description = "该成绩所属的学生的详细信息")
     private Student studentInfo = null;
 
-    @ApiModelProperty("该成绩所属课程信息")
+    @Schema(title = "该成绩所属课程信息", description = "该成绩所属的课程的详细信息")
     private Course courseInfo = null;
 
     public Integer getId() {
