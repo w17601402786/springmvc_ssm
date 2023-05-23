@@ -31,8 +31,8 @@ public class UsersController {
 
     @Operation(summary = "用户登录",description = "根据用户名和密码登录,登录后将用户信息存入session")
     @Parameters({
-            @Parameter(name = "username",description = "用户名",required = true),
-            @Parameter(name = "password",description = "密码",required = true)
+            @Parameter(name = "username", description = "用户名", required = true),
+            @Parameter(name = "password", description = "密码", required = true)
     })
     @ApiResponses( value ={
             @ApiResponse(responseCode = "200",description = "登录成功"),
@@ -40,8 +40,10 @@ public class UsersController {
             @ApiResponse(responseCode = "402",description = "用户名或密码为空")
     })
 
-    @RequestMapping(value = "/login",method = RequestMethod.POST)
-    public ResultCommon<Users> login(Users user){
+
+    @RequestMapping(value = "/login",method = RequestMethod.POST,produces = "application/json;charset=UTF-8")
+    public ResultCommon<Users> login(
+            @Parameter(hidden = true) Users user){
 
 
         if (user.getUsername() == null || user.getUsername().equals("")){
