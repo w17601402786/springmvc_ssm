@@ -36,6 +36,7 @@ public class UsersController {
             @ApiResponse(code = 401,message = "用户名或密码错误"),
             @ApiResponse(code = 402,message = "用户名或密码为空")
     })
+
     @RequestMapping(value = "/login",method = RequestMethod.POST)
     public ResultCommon<Users> login(Users user){
 

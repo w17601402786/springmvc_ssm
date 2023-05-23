@@ -3,6 +3,7 @@ package com.management.mapper;
 import com.management.pojo.Grade;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
@@ -14,7 +15,7 @@ public interface GradeMapper {
      * @param grade 成绩信息
      * @return 添加结果
      */
-    int addGrade(Grade grade);
+    int addGrades(@Param("gradeList") List<Grade> grade);
 
     /**
      * 根据成绩ID删除一条成绩记录

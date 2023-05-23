@@ -3,10 +3,14 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.management.mapper.GradeMapper">
 
-    <!-- 增加一条成绩记录 -->
-    <insert id="addGrade" parameterType="com.management.pojo.Grade" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+    <!-- 增加成绩记录 -->
+    <insert id="addGrades" parameterType="com.management.pojo.Grade" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
         insert into grade(student_id, course_id, score)
-        values(#{studentId}, #{courseId}, #{score})
+        values
+            <foreach collection="gradeList" item="item" index="index" separator=",">
+                (#{item.studentId}, #{item.courseId}, #{item.score})
+            </foreach>
+
     </insert>
 
     <!-- 删除一条成绩记录 -->

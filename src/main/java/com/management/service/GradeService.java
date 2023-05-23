@@ -14,7 +14,7 @@ public interface GradeService {
      * @param userType 当前用户类型
      * @return 添加结果
      */
-    int addGradeByAdmin(Grade grade,String userType);
+    int addGradesByAdmin(List<Grade> grades,String userType);
 
     /**
      * 教师添加成绩操作
@@ -27,7 +27,7 @@ public interface GradeService {
      * @param userType 当前用户类型
      * @return 添加结果
      */
-    int addGradeByTeacher(Grade grade,String userType);
+    int addGradesByTeacher(List<Grade> grades,String userType);
 
     /**
      * 根据成绩ID删除成绩

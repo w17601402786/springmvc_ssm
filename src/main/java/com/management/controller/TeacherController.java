@@ -6,16 +6,26 @@ import com.management.pojo.*;
 import com.management.service.CourseScheduleService;
 import com.management.service.GradeService;
 import com.management.service.TeacherService;
+import com.management.tools.ApiCollection;
 import com.management.tools.ResultCommon;
 import io.swagger.annotations.*;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.Parameters;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
+import io.swagger.v3.oas.annotations.extensions.Extensions;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import static com.mysql.cj.MysqlType.JSON;
 
@@ -128,14 +138,17 @@ public class TeacherController {
             @ApiResponse(code = 401,message = "未登录")
     })
     @RequestMapping( value = "/addGrade",produces = "application/json;charset=utf-8",method = RequestMethod.POST)
-    public ResultCommon<String> gradeInfo(Grade grade) {
+    public ResultCommon<String> addGrade(Grade grade) {
         Users user = (Users) request.getSession().getAttribute("user");
         if (user == null) {
             return new ResultCommon<>(401, "未登录", null);
         }
 
+        List<Grade> gradeList = new ArrayList<>();
+        gradeList.add(grade);
 
-        int result = gradeService.addGradeByTeacher(grade,user.getUserType());
+
+        int result = gradeService.addGradesByTeacher(gradeList,user.getUserType());
 
         if (result == 0){
             return new ResultCommon<>(400, "失败", null);
@@ -146,6 +159,31 @@ public class TeacherController {
 
     }
 
+
+
+    @ApiOperation("教师批量提交自己所授课程的成绩信息")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200,message = "成功"),
+            @ApiResponse(code = 401,message = "未登录")
+    })
+    //TODO List怎么提交啊啊啊啊啊
+    @PostMapping( value = "/addGrades",produces = "application/json;charset=utf-8")
+    public ResultCommon<String> addGrades(
+            ApiCollection<Grade> grades
+    ) {
+        Users user = (Users) request.getSession().getAttribute("user");
+        if (user == null) {
+            return new ResultCommon<>(401, "未登录", null);
+        }
+
+        int result = gradeService.addGradesByTeacher(grades.getData(),user.getUserType());
+
+        if (result == 0){
+            return new ResultCommon<>(400, "失败", null);
+        }
+
+        return new ResultCommon<>(200, "成功");
+    }
 
 
 

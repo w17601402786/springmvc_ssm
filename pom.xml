@@ -9,14 +9,14 @@
   <version>1.0-SNAPSHOT</version>
   <packaging>war</packaging>
 
-  <repositories>
-    <!--spring里程碑版本的仓库-->
-    <repository>
-      <id>repository.spring.milestone</id>
-      <name>Spring Milestone Repository</name>
-      <url>https://repo.spring.io/milestone</url>
-    </repository>
-  </repositories>
+<!--  <repositories>-->
+<!--    &lt;!&ndash;spring里程碑版本的仓库&ndash;&gt;-->
+<!--    <repository>-->
+<!--      <id>repository.spring.milestone</id>-->
+<!--      <name>Spring Milestone Repository</name>-->
+<!--      <url>https://repo.spring.io/milestone</url>-->
+<!--    </repository>-->
+<!--  </repositories>-->
 
   <dependencies>
 
@@ -41,68 +41,34 @@
 <!--      <scope>compile</scope>-->
 <!--    </dependency>-->
 
+    <!-- Spring Boot 相关依赖 -->
+    <!--        切面依赖-->
 
 
     <dependency>
-      <groupId>io.springfox</groupId>
-      <artifactId>springfox-boot-starter</artifactId>
-      <version>3.0.0</version>
-    </dependency>
-
-    <dependency>
-      <groupId>io.springfox</groupId>
-      <artifactId>springfox-oas</artifactId>
-      <version>3.0.0</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-context</artifactId>
-      <version>5.3.23</version>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-thymeleaf</artifactId>
+      <version>2.6.13</version>
     </dependency>
     <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-jdbc</artifactId>
-      <version>5.3.23</version>
-    </dependency>
-    <!--添加springmvc-->
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-webmvc</artifactId>
-      <version>5.3.26</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-aop</artifactId>
-      <version>5.3.23</version>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-aop</artifactId>
+      <version>2.6.11</version>
     </dependency>
     <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-aspects</artifactId>
-      <version>5.3.23</version>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+      <version>2.6.1</version>
     </dependency>
-
     <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-test</artifactId>
-      <version>5.3.23</version>
-      <scope>test</scope>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-jdbc</artifactId>
+      <version>2.6.1</version>
     </dependency>
     <dependency>
       <groupId>mysql</groupId>
       <artifactId>mysql-connector-java</artifactId>
-      <version>8.0.32</version>
-    </dependency>
-    <dependency>
-      <groupId>org.mybatis</groupId>
-      <artifactId>mybatis</artifactId>
-      <version>3.5.10</version>
-    </dependency>
-    <dependency>
-      <groupId>org.mybatis</groupId>
-      <artifactId>mybatis-spring</artifactId>
-      <version>2.0.7</version>
+      <version>8.0.26</version>
     </dependency>
     <dependency>
       <groupId>com.alibaba</groupId>
@@ -110,60 +76,101 @@
       <version>1.2.13</version>
     </dependency>
     <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.13.2</version>
-      <scope>test</scope>
+      <groupId>org.mybatis.spring.boot</groupId>
+      <artifactId>mybatis-spring-boot-starter</artifactId>
+      <version>2.2.0</version>
     </dependency>
-    <!--添加servlet-->
     <dependency>
-      <groupId>jakarta.servlet</groupId>
-      <artifactId>jakarta.servlet-api</artifactId>
-      <version>4.0.4</version>
-      <scope>provided</scope>
+      <groupId>io.springfox</groupId>
+      <artifactId>springfox-boot-starter</artifactId>
+      <version>3.0.0</version>
     </dependency>
-    <!--添加jstl依赖-->
     <dependency>
-      <groupId>org.glassfish.web</groupId>
-      <artifactId>jakarta.servlet.jsp.jstl</artifactId>
-      <version>2.0.0</version>
+      <groupId>io.springfox</groupId>
+      <artifactId>springfox-oas</artifactId>
+      <version>3.0.0</version>
     </dependency>
-    <!-- 增加jackson-databind依赖 -->
+    <!-- jackson-databind 相关依赖 -->
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-databind</artifactId>
       <version>2.14.0</version>
     </dependency>
+    <!-- Lombok 相关依赖 -->
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
-      <version>1.18.24</version>
-      <scope>compile</scope>
+      <version>1.18.20</version>
+      <scope>provided</scope>
+    </dependency>
+    <!-- JUnit 相关依赖 -->
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.13.2</version>
+      <scope>test</scope>
     </dependency>
   </dependencies>
+<!--  <build>-->
+<!--    &lt;!&ndash;识别所有的配置文件&ndash;&gt;-->
+<!--    <resources>-->
+<!--      <resource>-->
+<!--        <directory>src/main/java</directory>-->
+<!--        <includes>-->
+<!--          <include>**/*.properties</include>-->
+<!--          <include>**/*.xml</include>-->
+<!--        </includes>-->
+<!--        <filtering>false</filtering>-->
+<!--      </resource>-->
+<!--      <resource>-->
+<!--        <directory>src/main/resources</directory>-->
+<!--        <includes>-->
+<!--          <include>*</include>-->
+<!--&lt;!&ndash;          <include>**/*.properties</include>&ndash;&gt;-->
+<!--&lt;!&ndash;          <include>**/*.xml</include>&ndash;&gt;-->
+<!--        </includes>-->
+<!--        <filtering>false</filtering>-->
+<!--      </resource>-->
+<!--    </resources>-->
+<!--  </build>-->
+
+
   <build>
-    <!--识别所有的配置文件-->
-    <resources>
-      <resource>
-        <directory>src/main/java</directory>
-        <includes>
-          <include>**/*.properties</include>
-          <include>**/*.xml</include>
-        </includes>
-        <filtering>false</filtering>
-      </resource>
-      <resource>
-        <directory>src/main/resources</directory>
-        <includes>
-          <include>**/*.properties</include>
-          <include>**/*.xml</include>
-        </includes>
-        <filtering>false</filtering>
-      </resource>
-    </resources>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.8.1</version>
+        <configuration>
+          <source>11</source>
+          <target>11</target>
+          <encoding>UTF-8</encoding>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <version>${spring-boot.version}</version>
+        <configuration>
+          <mainClass>com.management.springboot.Application</mainClass>
+          <skip>true</skip>
+        </configuration>
+        <executions>
+          <execution>
+            <id>repackage</id>
+            <goals>
+              <goal>repackage</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
   </build>
 
   <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <spring-boot.version>2.6.13</spring-boot.version>
     <maven.compiler.source>8</maven.compiler.source>
     <maven.compiler.target>8</maven.compiler.target>
   </properties>

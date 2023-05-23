@@ -3,8 +3,10 @@ package com.management.pojo;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+import java.io.Serializable;
+
 @ApiModel("成绩基本信息")
-public class Grade {
+public class Grade implements Serializable {
 
     @ApiModelProperty("成绩ID")
     private Integer id;

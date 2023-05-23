@@ -19,7 +19,7 @@ public class GradeServiceImpl implements GradeService {
 
 
     @Override
-    public int addGradeByAdmin(Grade grade, String userType) {
+    public int addGradesByAdmin(List<Grade> grades, String userType) {
 
         if (userType.equals("admin")) {
             return 0;
@@ -27,25 +27,24 @@ public class GradeServiceImpl implements GradeService {
 
 
 
-        return gradeMapper.addGrade(grade);
+        return gradeMapper.addGrades(grades);
     }
 
     /**
      * 老师录入成绩需要进行验证，确保是自己的授课，必须保证录入
-     * @param grade 成绩信息
+     * @param grades 成绩信息
      * @param userType 当前用户类型
      * @return 添加结果
      */
     @Override
-    public int addGradeByTeacher(Grade grade, String userType) {
+    public int addGradesByTeacher(List<Grade> grades, String userType) {
 
         if (userType.equals("teacher")) {
             return 0;
         }
 
 
-
-        return gradeMapper.addGrade(grade);
+        return gradeMapper.addGrades(grades);
     }
 
     @Override
