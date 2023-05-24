@@ -155,7 +155,6 @@
         <result property="faculty" column="faculty"/>
         <result property="phone" column="phone"/>
         <result property="userId" column="user_id"/>
-<!--        TODO 你个傻叼，这里对象名字都错了-->
         <association property="userInfo" resultMap="userMap"/>
     </resultMap>
 

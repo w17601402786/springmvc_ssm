@@ -34,7 +34,6 @@ public class TeacherServiceImpl implements TeacherService {
     }
 
     @Override
-    // todo 用都不会用，傻叼
     public List<Teacher> getTeachers(Teacher teacher, String userType) {
 
         if (!userType.equals("admin")){
@@ -47,8 +46,6 @@ public class TeacherServiceImpl implements TeacherService {
     @Override
     public int addTeacher(Teacher teacher, String userType) {
 
-        //TODO 傻叼，好多地方都看你都在瞎用权限验证
-        //TODO 权限给老师了，管理员干啥？
         if (!userType.equals("admin")){
             return 0;
         }
@@ -166,14 +163,5 @@ public class TeacherServiceImpl implements TeacherService {
         return teacherMapper.getGrade(teacherId);
     }
 
-    @Override
-    @Deprecated
-    public int submitGrade(String studentId, String courseId, int score) {
-
-        //TODO 这里应该使用addGrade方法进行添加
-
-        return 0;
-
-    }
 
 }

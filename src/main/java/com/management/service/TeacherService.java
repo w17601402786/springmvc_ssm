@@ -166,17 +166,5 @@ public interface TeacherService {
     @Deprecated
     List<Grade> getGrade(String teacherId);
 
-    /**
-     * 提交成绩
-     * @param studentId 学生的学号
-     * @param courseId 课程的id
-     * @param score 成绩
-     * @return  成绩提交结果
-     * @deprecated 废弃，你就不能调用gradeService的addGrade方法吗？
-     * TODO 傻叼
-     */
-    @Deprecated
-    int submitGrade(String studentId, String courseId, int score);
-
 
 }

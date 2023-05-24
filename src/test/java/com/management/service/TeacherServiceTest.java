@@ -65,13 +65,6 @@ public class TeacherServiceTest extends TestCase {
         }
     }
 
-    @Test
-    public void testSubmitGrade() {
-        //todo 提交成绩
-        int result = teacherService.submitGrade("2001", "1", 80);
-        System.out.println("提交结果：" + result);
-    }
-
 
     @Test
     public void testGetTeacherByUserId(){
@@ -85,15 +78,11 @@ public class TeacherServiceTest extends TestCase {
         teacherList.forEach(System.out::println);
     }
 
-    /**
-     * todo 不是？这个我叫你帮我解决，你个叼毛没解决怎么还删了
-     */
     @Test
     public void testGetTeachers(){
         Teacher teacher = new Teacher();
 
 
-        //TODO 再跟你说一遍，你个叼毛，我这里的userType是操作的用户，不是被操作的用户，这个操作只允许管理员操作，所以userType是admin
         List<Teacher> teacherList = teacherService.getTeachers(teacher,"admin");
         teacherList.forEach(System.out::println);
     }
