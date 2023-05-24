@@ -5,8 +5,10 @@ import com.management.mapper.TeacherMapper;
 import com.management.mapper.UsersMapper;
 import com.management.pojo.Users;
 import com.management.service.UsersService;
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
 import java.util.List;
@@ -32,13 +34,40 @@ public class UsersServiceImpl implements UsersService {
 
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public int addUser(Users user, String thisUserType) {
 
         if (!thisUserType.equals("admin")){
-            return -1;
+            return 0;
         }
 
-        return usersMapper.addUser(user);
+
+        boolean result = false;
+
+
+        int id = usersMapper.addUser(user);
+
+        result = (id != 0);
+
+        switch (user.getUserType()) {
+            case "teacher":
+                user.getTeacherInfo().setUserId(user.getId());
+                System.out.println("user.getTeacherInfo() = " + user.getTeacherInfo());
+                result = result && (teacherMapper.addTeacher(user.getTeacherInfo()) != 0 );
+                break;
+            case "student":
+                user.getStudentInfo().setUserId(user.getId());
+                System.out.println("user.getStudentInfo() = " + user.getStudentInfo());
+                result = result && (studentMapper.addStudent(user.getStudentInfo()) != 0);
+                break;
+        }
+
+
+        if (!result){
+            throw new RuntimeException("添加用户失败");
+        }
+
+        return 1;
     }
 
 

@@ -21,19 +21,19 @@ springdoc:
   packages-to-scan: com.management.controller,com.management.pojo
   #这里定义了两个分组，可定义多个，也可以不定义
   group-configs:
-    #分组名
-    - group: admin
-      #按路径匹配
-      pathsToMatch: /admin/**
-      #分组名
-    - group: student
-      #按路径匹配
-      pathsToMatch: /student/**
-      #分组名
-    - group: teacher
-      #按路径匹配
-      pathsToMatch: /teacher/**
-    - group: user
+#    #分组名
+#    - group: admin
+#      #按路径匹配
+#      pathsToMatch: /admin/**
+#      #分组名
+#    - group: student
+#      #按路径匹配
+#      pathsToMatch: /student/**
+#      #分组名
+#    - group: teacher
+#      #按路径匹配
+#      pathsToMatch: /teacher/**
+    - group: controllers
       #按包路径匹配
       packagesToScan: com.management.controller
 

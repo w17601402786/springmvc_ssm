@@ -164,18 +164,15 @@ public class Student {
 
     public boolean isEmpty(){
         if(name == null || "".equals(name)){
-            return false;
+            return true;
         }
         if(studentId == null || "".equals(studentId)){
-            return false;
+            return true;
         }
         if(classId == null || "".equals(classId)){
-            return false;
+            return true;
         }
-        if(userId == 0) {
-            return false;
-        }
-        return true;
+        return false;
     }
 
     @Override

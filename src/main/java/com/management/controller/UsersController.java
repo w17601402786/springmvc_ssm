@@ -10,10 +10,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -39,9 +36,7 @@ public class UsersController {
             @ApiResponse(responseCode = "401",description = "用户名或密码错误"),
             @ApiResponse(responseCode = "402",description = "用户名或密码为空")
     })
-
-
-    @RequestMapping(value = "/login",method = RequestMethod.POST,produces = "application/json;charset=UTF-8")
+    @PostMapping(value = "/login",produces = "application/json;charset=UTF-8")
     public ResultCommon<Users> login(
             @Parameter(hidden = true) Users user){
 

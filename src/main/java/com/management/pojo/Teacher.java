@@ -112,15 +112,12 @@ public class Teacher {
      */
     public boolean isEmpty(){
         if(name == null || "".equals(name)){
-            return false;
+            return true;
         }
         if (teacherId == null || "".equals(teacherId)){
-            return false;
+            return true;
         }
-        if (userId == 0){
-            return false;
-        }
-        return true;
+        return false;
     }
 
 
