@@ -211,6 +211,48 @@ public class AdminController {
         return new ResultCommon<>(200, "查询成功", usersService.getUsers(user,"admin"));
     }
 
+    @Operation(summary = "根据用户id查询用户信息")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",description = "成功"),
+            @ApiResponse(responseCode = "401",description = "未登录"),
+            @ApiResponse(responseCode = "500",description = "失败")
+    })
+    @PostMapping("/users/getUserById")
+    public ResultCommon<Users> getUserById(
+            @Parameter(name = "id", description = "用户ID", required = true)
+            Integer id,
+            @Parameter(name = "userType", description = "用户类型", required = true)
+            String userType
+    ) {
+
+        Users user = new Users();
+
+        user.setId(id);
+        user.setUserType(userType);
+
+        List<Users> users;
+        switch (userType){
+            case "admin":
+                users = usersService.getUsers(user,"admin");
+                break;
+            case "teacher":
+                users = usersService.getTeacherUsers(user,"admin");
+                break;
+            case "student":
+                users = usersService.getStudentUsers(user,"admin");
+                break;
+            default:
+                return new ResultCommon<>(404, "必要参数缺少或者错误");
+        }
+
+
+        if (users.size() == 0){
+            return new ResultCommon<>(500, "查询失败");
+        }
+
+        return new ResultCommon<>(200, "查询成功", users.get(0));
+    }
+
 
 
     @Operation(summary = "添加班级")
