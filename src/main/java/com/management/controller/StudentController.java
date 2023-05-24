@@ -43,7 +43,7 @@ public class StudentController {
 
 
 
-    @Operation(description = "学生查看自己的信息")
+    @Operation(summary = "学生查看自己的信息")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200",description = "成功"),
             @ApiResponse(responseCode = "401",description = "未登录")
@@ -57,7 +57,7 @@ public class StudentController {
         return new ResultCommon<>(200,"成功", user);
     }
 
-    @Operation(description = "学生查看自己班级基本信息")
+    @Operation(summary = "学生查看自己班级基本信息")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200",description = "成功"),
             @ApiResponse(responseCode = "401",description = "未登录")
@@ -83,7 +83,7 @@ public class StudentController {
         return new ResultCommon<>(200,"成功", classes);
     }
 
-    @Operation(description = "学生查看自己课程信息")
+    @Operation(summary = "学生查看自己课程信息")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200",description = "成功"),
             @ApiResponse(responseCode = "401",description = "未登录")
@@ -101,7 +101,7 @@ public class StudentController {
 
     }
 
-    @Operation(description = "学生查看自己课程表信息")
+    @Operation(summary = "学生查看自己课程表信息")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200",description = "成功"),
             @ApiResponse(responseCode = "401",description = "未登录")
@@ -119,9 +119,8 @@ public class StudentController {
 
     }
 
-    @Operation(description = "学生查看自己的成绩信息")
+    @Operation(summary = "学生查看自己的成绩信息")
     @ApiResponses(value = {
-
             @ApiResponse(responseCode = "200",description = "成功"),
             @ApiResponse(responseCode = "401",description = "未登录")
     })
@@ -139,7 +138,7 @@ public class StudentController {
     }
 
 
-    @Operation(description = "修改登录密码")
+    @Operation(summary = "修改登录密码")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200",description = "成功"),
             @ApiResponse(responseCode = "401",description = "未登录"),

@@ -75,8 +75,11 @@ public class UsersServiceImpl implements UsersService {
     public int updateUser(Users user,String thisUserType) {
 
         if (!thisUserType.equals("admin")){
-            return -1;
+            return 0;
         }
+
+
+        //TODO 如果涉及到修改用户类型，需要删除对应的学生或者教师信息，再添加新的学生或者教师信息
 
         return usersMapper.updateUser(user);
     }

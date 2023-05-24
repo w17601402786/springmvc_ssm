@@ -21,6 +21,16 @@ public interface CourseScheduleService {
 
 
     /**
+     * 批量添加课程表
+     * <p color="red">需要进行排课冲突检测</p>
+     * @param courseSchedule 课程表信息
+     * @param userType 当前用户类型
+     * @return 添加结果
+     */
+    int addCourseSchedules(List<CourseSchedule> courseSchedule, String userType);
+
+
+    /**
      * 添加课程表
      * <p color="red">需要进行排课冲突检测</p>
      * @param courseSchedule 课程表信息

@@ -20,6 +20,12 @@
         insert into course_schedule(course_id, class_id, teacher_id, start_time, end_time, location,week,day) values
         (#{courseId}, #{classId}, #{teacherId}, #{startTime}, #{endTime}, #{location},#{week},#{day})
     </insert>
+    <insert id="addCourseSchedules">
+        insert into course_schedule(course_id, class_id, teacher_id, start_time, end_time, location,week,day) values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.courseId}, #{item.classId}, #{item.teacherId}, #{item.startTime}, #{item.endTime}, #{item.location},#{item.week},#{item.day})
+        </foreach>
+    </insert>
 
 
     <!-- 修改一条课程表信息 -->

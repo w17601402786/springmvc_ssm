@@ -19,6 +19,17 @@ public class CourseScheduleServiceImpl implements CourseScheduleService {
     @Autowired
     CourseScheduleMapper courseScheduleMapper;
 
+
+    @Override
+    public int addCourseSchedules(List<CourseSchedule> courseSchedule, String userType) {
+
+        if (!userType.equals("admin")) {
+            return 0;
+        }
+
+        return courseScheduleMapper.addCourseSchedules(courseSchedule);
+    }
+
     @Override
     public int addCourseSchedule(CourseSchedule courseSchedule, String userType) {
 
