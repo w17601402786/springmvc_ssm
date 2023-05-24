@@ -4,8 +4,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.io.Serializable;
 
-@Schema(title = "成绩信息")
-public class Grade implements Serializable {
+@Schema(title = "成绩信息", description = "成绩信息")
+public class Grade{
 
     @Schema(title = "成绩ID", description = "成绩的唯一标识符", example = "1")
     private Integer id;

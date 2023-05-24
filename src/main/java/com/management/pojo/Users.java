@@ -3,19 +3,19 @@ package com.management.pojo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(title = "用户基本信息")
+@Schema(title = "用户基本信息", description = "用户基本信息")
 public class Users {
 
-    @Schema(title = "用户ID")
+    @Schema(title = "用户ID", description = "用户ID")
     private int id;
 
-    @Schema(title = "用户名")
+    @Schema(title = "用户名", description = "用户名")
     private String username;
 
-    @Schema(title = "密码")
+    @Schema(title = "密码", description = "密码")
     private String password;
 
-    @Schema(title = "用户类型")
+    @Schema(title = "用户类型", description = "用户类型", allowableValues = {"student", "teacher", "admin"})
     private String userType;
 
     private Student studentInfo = null;

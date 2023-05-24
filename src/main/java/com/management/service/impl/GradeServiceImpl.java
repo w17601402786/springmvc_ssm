@@ -3,14 +3,17 @@ package com.management.service.impl;
 import com.management.mapper.GradeMapper;
 import com.management.pojo.Grade;
 import com.management.service.GradeService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @Service
+@Slf4j
 public class GradeServiceImpl implements GradeService {
 
 
@@ -39,9 +42,11 @@ public class GradeServiceImpl implements GradeService {
     @Override
     public int addGradesByTeacher(List<Grade> grades, String userType) {
 
-        if (userType.equals("teacher")) {
+        if (!userType.equals("teacher")) {
             return 0;
         }
+
+        grades.forEach(System.out::println);
 
 
         return gradeMapper.addGrades(grades);

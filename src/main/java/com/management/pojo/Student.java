@@ -5,40 +5,40 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.Date;
 import java.util.List;
 
-@Schema(title = "学生基本信息")
+@Schema(title = "学生基本信息", description = "学生基本信息")
 public class Student {
 
-    @Schema(title = "学生ID")
+    @Schema(title = "学生ID", description = "学生ID")
     private int id;
 
-    @Schema(title = "学号")
+    @Schema(title = "学号", description = "学号")
     private String studentId;
 
-    @Schema(title = "姓名")
+    @Schema(title = "姓名", description = "姓名")
     private String name;
 
-    @Schema(title = "性别")
+    @Schema(title = "性别", description = "性别")
     private String gender;
 
-    @Schema(title = "出生日期")
+    @Schema(title = "出生日期", description = "出生日期")
     private Date birthday;
 
-    @Schema(title = "专业")
+    @Schema(title = "专业", description = "专业")
     private String major;
 
-    @Schema(title = "所在班级号")
+    @Schema(title = "所在班级号", description = "所在班级号")
     private String classId;
 
-    @Schema(title = "家庭住址")
+    @Schema(title = "家庭住址", description = "家庭住址")
     private String address;
 
-    @Schema(title = "电话")
+    @Schema(title = "电话", description = "电话")
     private String phone;
 
-    @Schema(title = "备注")
+    @Schema(title = "备注", description = "备注")
     private String note;
 
-    @Schema(title = "关联的用户ID")
+    @Schema(title = "关联的用户ID", description = "关联的用户ID")
     private int userId;
 
     private Classes classes = null;

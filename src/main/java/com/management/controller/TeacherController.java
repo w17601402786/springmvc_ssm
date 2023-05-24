@@ -8,15 +8,16 @@ import com.management.pojo.Users;
 import com.management.service.CourseScheduleService;
 import com.management.service.GradeService;
 import com.management.service.TeacherService;
-import com.management.tools.ApiCollection;
 import com.management.tools.ResultCommon;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,6 +25,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
+
+@Slf4j
 @RestController
 @RequestMapping("/teacher")
 @CrossOrigin
@@ -127,16 +130,21 @@ public class TeacherController {
     @Operation(summary = "教师提交自己所授课程的成绩信息")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "成功"),
+            @ApiResponse(responseCode = "400", description = "失败"),
             @ApiResponse(responseCode = "401", description = "未登录")
     })
     @PostMapping(value = "/addGrade", produces = "application/json;charset=utf-8")
     public ResultCommon<String> addGrade(
             @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "成绩信息", required = true)
+            @RequestBody
             Grade grade) {
         Users user = (Users) request.getSession().getAttribute("user");
         if (user == null) {
             return new ResultCommon<>(401, "未登录", null);
         }
+
+        //打印info级别的日志
+        log.info("grade:{}", grade);
 
         List<Grade> gradeList = new ArrayList<>();
         gradeList.add(grade);
@@ -159,16 +167,19 @@ public class TeacherController {
     public ResultCommon<String> addGrades(
             @Parameter(description = "成绩信息列表", required = true)
             @io.swagger.v3.oas.annotations.parameters.RequestBody(content = {
-                    @Content(mediaType = "application/json", schema = @Schema(implementation = Grade.class))
+                    @Content(mediaType = "application/json",array = @ArraySchema(
+                            schema = @Schema(implementation = Grade.class)
+                    ))
             })
-            ApiCollection<Grade> grades
+            @RequestBody
+            List<Grade> grades
     ) {
         Users user = (Users) request.getSession().getAttribute("user");
         if (user == null) {
             return new ResultCommon<>(401, "未登录", null);
         }
 
-        int result = gradeService.addGradesByTeacher(grades.getData(), user.getUserType());
+        int result = gradeService.addGradesByTeacher(grades, user.getUserType());
 
         if (result == 0) {
             return new ResultCommon<>(400, "失败", null);

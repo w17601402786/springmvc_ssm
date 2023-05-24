@@ -4,31 +4,31 @@ import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.util.Date;
 
-@Schema(title = "教师基本信息")
+@Schema(title = "教师基本信息", description = "教师基本信息")
 public class Teacher {
 
-    @Schema(title = "ID")
+    @Schema(title = "ID", description = "ID")
     private int id;
 
-    @Schema(title = "教师职工号")
+    @Schema(title = "教师职工号", description = "教师职工号")
     private String teacherId;
 
-    @Schema(title = "姓名")
+    @Schema(title = "姓名", description = "姓名")
     private String name;
 
-    @Schema(title = "性别")
+    @Schema(title = "性别", description = "性别")
     private String gender;
 
-    @Schema(title = "出生使其")
+    @Schema(title = "出生日期", description = "出生日期")
     private Date birthday;
 
-    @Schema(title = "职位")
+    @Schema(title = "职位", description = "职位")
     private String faculty;
 
-    @Schema(title = "电话")
+    @Schema(title = "电话", description = "电话")
     private String phone;
 
-    @Schema(title = "关联的用户ID")
+    @Schema(title = "关联的用户ID", description = "关联的用户ID")
     private int userId;
 
     private Users userInfo = null;
