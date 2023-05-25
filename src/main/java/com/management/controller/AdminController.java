@@ -145,40 +145,6 @@ public class AdminController {
             @RequestBody Users user
     ) {
 
-        // 存储查询所需信息
-        Users newUser = new Users();
-        newUser.setId(user.getId());
-
-        List<Users> users = usersService.getUsers(newUser, "admin");
-
-        // 首先判断该用户是否已经存在，如果存在，则返回错误信息
-        if (users.size() == 0) {
-            return new ResultCommon<>(400, "该用户不存在");
-        }
-
-        log.info("user: {}", user);
-
-        Users oldUser = users.get(0);
-
-
-        //修改涉及到用户类型的时候，需要将对应的信息置空，并且判断是否有必要参数
-        if (!oldUser.getUserType().equals(user.getUserType())){
-            if (user.getUserType().equals("admin")){
-                user.setStudentInfo(null);
-                user.setTeacherInfo(null);
-            }else if (user.getUserType().equals("teacher")){
-                user.setStudentInfo(null);
-                if (user.getTeacherInfo() == null || user.getTeacherInfo().isEmpty()) {
-                    return new ResultCommon<>(404, "必要参数缺少");
-                }
-            }else if (user.getUserType().equals("student")){
-                user.setTeacherInfo(null);
-                if (user.getStudentInfo() == null || user.getStudentInfo().isEmpty()) {
-                    return new ResultCommon<>(404, "必要参数缺少");
-                }
-            }
-        }
-
         //TODO 这里还没有进行测试，服务层代码也还没有完善
         int result = usersService.updateUser(user,"admin");
 

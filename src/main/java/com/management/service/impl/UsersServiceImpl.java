@@ -5,11 +5,13 @@ import com.management.mapper.TeacherMapper;
 import com.management.mapper.UsersMapper;
 import com.management.pojo.Users;
 import com.management.service.UsersService;
+import com.management.tools.ResultCommon;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -72,6 +74,7 @@ public class UsersServiceImpl implements UsersService {
 
 
     @Override
+    @Transactional
     public int updateUser(Users user,String thisUserType) {
 
         if (!thisUserType.equals("admin")){
@@ -79,7 +82,95 @@ public class UsersServiceImpl implements UsersService {
         }
 
 
-        //TODO 如果涉及到修改用户类型，需要删除对应的学生或者教师信息，再添加新的学生或者教师信息
+        // 存储查询所需信息
+        Users newUser = new Users();
+        newUser.setId(user.getId());
+
+        List<Users> users = getUsers(newUser, "admin");
+
+        // 首先判断该用户是否已经存在，如果存在，则返回错误信息
+        if (users.size() == 0) {
+            throw new RuntimeException("用户不存在，无法更新");
+        }
+
+
+        Users oldUser = users.get(0);
+
+
+        //存储每一步执行的结果
+        int result;
+
+        //修改涉及到用户类型的时候，需要将对应的信息置空，并且判断是否有必要参数
+        if (!oldUser.getUserType().equals(user.getUserType())){
+
+
+            //判断原用户类型,以删除对应的用户信息
+            switch (oldUser.getUserType()){
+                case "admin":
+                    break;
+                case "teacher":
+
+                    result = teacherMapper.deleteTeacherByUserId(oldUser.getId());
+
+                    if (result == 0){
+                        throw new RuntimeException("删除失败");
+                    }
+
+
+                    break;
+                case "student":
+
+                    result = studentMapper.deleteStudentByUserId(oldUser.getId());
+
+                    if (result == 0){
+                        throw new RuntimeException("删除失败");
+                    }
+                    break;
+                default:
+                    throw new RuntimeException("原用户类型存在问题");
+            }
+
+
+            //添加新的用户对应数据
+            switch (user.getUserType()) {
+                case "admin":
+
+                    user.setStudentInfo(null);
+                    user.setTeacherInfo(null);
+                    break;
+                case "teacher":
+
+                    user.setStudentInfo(null);
+                    if (user.getTeacherInfo() == null || user.getTeacherInfo().isEmpty()) {
+                        throw new RuntimeException("缺少必要参数");
+                    }
+                    result = teacherMapper.addTeacher(user.getTeacherInfo());
+
+                    if (result == 0){
+                        throw new RuntimeException("添加失败");
+                    }
+
+                    break;
+                case "student":
+
+                    user.setTeacherInfo(null);
+                    if (user.getStudentInfo() == null || user.getStudentInfo().isEmpty()) {
+                        throw new RuntimeException("缺少必要参数");
+                    }
+
+                    result = studentMapper.addStudent(user.getStudentInfo());
+
+                    if (result == 0){
+                        throw new RuntimeException("添加失败");
+                    }
+
+                    break;
+                default:
+                    throw new RuntimeException("缺少必要参数");
+            }
+        }
+
+
 
         return usersMapper.updateUser(user);
     }
