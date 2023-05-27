@@ -18,8 +18,10 @@ public class Users {
     @Schema(title = "用户类型", description = "用户类型", allowableValues = {"student", "teacher", "admin"})
     private String userType;
 
+    @Schema(hidden = true)
     private Student studentInfo = null;
 
+    @Schema(hidden = true)
     private Teacher teacherInfo = null;
 
     public int getId() {

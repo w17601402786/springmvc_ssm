@@ -42,7 +42,6 @@ public class StudentController {
     UsersService usersService;
 
 
-
     @Operation(summary = "学生查看自己的信息")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200",description = "成功"),
@@ -54,6 +53,12 @@ public class StudentController {
         if (user == null){
             return new ResultCommon<>(401,"未登录",null);
         }
+
+        //获取当前用户班级信息
+        Classes classes = studentService.getClasses(user);
+
+        user.getStudentInfo().setClasses(classes);
+
         return new ResultCommon<>(200,"成功", user);
     }
 

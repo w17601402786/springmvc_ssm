@@ -6,6 +6,10 @@ import com.management.tools.ResultCommon;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.media.SchemaProperties;
+import io.swagger.v3.oas.annotations.media.SchemaProperty;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -27,10 +31,6 @@ public class UsersController {
     HttpServletRequest request;
 
     @Operation(summary = "用户登录",description = "根据用户名和密码登录,登录后将用户信息存入session")
-    @Parameters({
-            @Parameter(name = "username", description = "用户名", required = true),
-            @Parameter(name = "password", description = "密码", required = true)
-    })
     @ApiResponses( value ={
             @ApiResponse(responseCode = "200",description = "登录成功"),
             @ApiResponse(responseCode = "401",description = "用户名或密码错误"),
@@ -38,7 +38,10 @@ public class UsersController {
     })
     @PostMapping(value = "/login",produces = "application/json;charset=UTF-8")
     public ResultCommon<Users> login(
-            @Parameter(hidden = true) Users user){
+            @Parameter(name = "用户名")
+            @RequestBody Users user){
+
+        System.out.println(user);
 
 
         if (user.getUsername() == null || user.getUsername().equals("")){
