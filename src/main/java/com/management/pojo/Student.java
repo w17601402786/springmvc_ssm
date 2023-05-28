@@ -41,6 +41,9 @@ public class Student {
     @Schema(title = "关联的用户ID", description = "关联的用户ID")
     private int userId;
 
+    @Schema(title = "该学生成绩信息",description = "仅在特定视图有用，大部分视图直接为null就行了")
+    private int score = -1;
+
     private Classes classes = null;
 
     private Users userInfo = null;
@@ -161,6 +164,13 @@ public class Student {
         this.grades = grades;
     }
 
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
 
     public boolean isEmpty(){
         if(name == null || "".equals(name)){
