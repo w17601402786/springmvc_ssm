@@ -43,9 +43,9 @@
     <select id="getTeacherCourses" parameterType="String" resultType="com.management.pojo.Course">
         SELECT c.course_id, c.name, c.hours, c.credit, cs.start_time,cs.end_time, cs.location, cs.week, cs.day
         FROM course c
-                 JOIN course_schedule cs ON c.course_id = cs.course_id
-                 JOIN teacher t ON cs.teacher_id = t.teacher_id
-                 JOIN users u ON t.user_id = u.id
+                 LEFT JOIN course_schedule cs ON c.course_id = cs.course_id
+                 LEFT JOIN teacher t ON cs.teacher_id = t.teacher_id
+                 LEFT JOIN users u ON t.user_id = u.id
         WHERE u.user_type = 'teacher' AND t.teacher_id = #{teacherId};
     </select>
 

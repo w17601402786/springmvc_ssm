@@ -1,8 +1,11 @@
 package com.management.service.impl;
 
 import com.management.mapper.GradeMapper;
+import com.management.pojo.Course;
 import com.management.pojo.Grade;
+import com.management.pojo.Users;
 import com.management.service.GradeService;
+import com.management.service.TeacherService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +22,9 @@ public class GradeServiceImpl implements GradeService {
 
     @Autowired
     GradeMapper gradeMapper;
+
+    @Autowired
+    TeacherService teacherService;
 
 
     @Override
@@ -95,6 +101,42 @@ public class GradeServiceImpl implements GradeService {
     public List<Grade> getGrades(Grade grade,String userType) {
 
         return gradeMapper.getGrades(grade);
+    }
+
+    @Override
+    public List<Grade> getGradesByTeacher(Grade grade, Users users, String userType) {
+
+
+
+        if (!"teacher".equals(userType)){
+            return null;
+        }
+
+
+        List<Course> courseList = teacherService.getCourses(users.getTeacherInfo().getTeacherId());
+
+        boolean isExist = false;
+
+
+
+        for (Course course : courseList){
+            if (course.getCourseId().equals(grade.getCourseId())){
+                isExist = true;
+                break;
+            }
+        }
+
+        if (!isExist && !(grade.getCourseId() == null || "".equals(grade.getCourseId()))){
+            return null;
+        }
+
+
+        Map<String,Object> paramMap = new HashMap<>();
+        paramMap.put("grade",grade);
+        paramMap.put("teacherInfo",users.getTeacherInfo());
+
+
+        return gradeMapper.getGradesByScoreRange(paramMap);
     }
 
 

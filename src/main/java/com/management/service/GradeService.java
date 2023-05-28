@@ -1,6 +1,7 @@
 package com.management.service;
 
 import com.management.pojo.Grade;
+import com.management.pojo.Users;
 
 import java.util.List;
 
@@ -62,6 +63,17 @@ public interface GradeService {
      * @return 成绩信息
      */
     List<Grade> getGrades(Grade grade,String userType);
+
+
+    /**
+     * 教师获取自己的课程成绩
+     * @param grade 成绩
+     * @param users 用户
+     * @param userType 用户类型
+     * @return 教师查询的本班学生成绩信息
+     */
+    List<Grade> getGradesByTeacher(Grade grade, Users users, String userType);
+
 
     //======================//
     //  以下为查询操作接口    //

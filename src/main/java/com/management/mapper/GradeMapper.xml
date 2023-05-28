@@ -84,6 +84,8 @@
             </if>
         </where>
     </select>
+
+
     <select id="getGradesByScoreRange" resultType="com.management.pojo.Grade">
         select g.*,
         s.id as sid,s.name as student_name,s.gender,s.birthday,s.major,s.class_id,s.address,s.phone,s.note,s.user_id,
@@ -91,6 +93,9 @@
         from grade g
         left join student s on g.student_id=s.student_id
         left join course c on g.course_id=c.course_id
+        <if test="teacherInfo != null">
+            left join course_schedule cs on c.course_id = cs.course_id
+        </if>
         <where>
             <if test="grade.studentId!=null and grade.studentId!=''">
                 and g.student_id=#{grade.studentId}
@@ -137,6 +142,9 @@
             </if>
             <if test="maxScore!=null and maxScore!=''">
                 and g.score &lt;= #{maxScore}
+            </if>
+            <if test="teacherInfo != null">
+                and cs.teacher_id = #{teacherInfo.teacherId}
             </if>
         </where>
     </select>

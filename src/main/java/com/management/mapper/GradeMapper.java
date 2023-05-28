@@ -1,6 +1,7 @@
 package com.management.mapper;
 
 import com.management.pojo.Grade;
+import com.management.pojo.Users;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -49,6 +50,7 @@ public interface GradeMapper {
 
 
     List<Grade> getGradesByScoreRange(Map<String, Object> map);
+
 
 //    // 根据id查询一条成绩记录
 //    Grade getGradeById(Integer id);

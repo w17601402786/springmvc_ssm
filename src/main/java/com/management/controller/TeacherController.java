@@ -120,8 +120,9 @@ public class TeacherController {
         Grade grade = new Grade();
         grade.setCourseId(courseId);
 
-        //记得加个判断，即只能查看自己的课程的成绩
-        List<Grade> gradeList = gradeService.getGrades(grade, "teacher");
+        //TODO 记得加个判断，即只能查看自己的课程的成绩
+
+        List<Grade> gradeList = gradeService.getGradesByTeacher(grade, user,"teacher");
 
         return new ResultCommon<>(200, "成功", gradeList);
     }
