@@ -167,16 +167,15 @@
 
     </select>
     <select id="getStudentByCourId" resultMap="studentMap">
-        select
-            s.id, s.student_id, s.name, s.gender, s.birthday, s.major, s.class_id, s.address, s.phone, s.note, s.user_id,
-            u.id as uid,u.username,u.user_type,
-            c.id as cid,c.name as class_name,c.major,c.num,c.year,c.counsellor,
-            g.score
+        select s.id, s.student_id, s.name, s.gender, s.birthday, s.major, s.class_id, s.address, s.phone, s.note, s.user_id,
+               u.id as uid,u.username,u.user_type,
+               c.id as cid,c.name as class_name,c.major,c.num,c.year,c.counsellor,
+               IFNULL(g.score, -1) as score
         from student s
-                 left join users u on s.user_id = u.id
-                 left join classes c on c.class_id = s.class_id
-                 join course_schedule cs on c.class_id = cs.class_id
-                 left join grade g on g.student_id = s.student_id
+            left join users u on s.user_id = u.id
+            left join classes c on c.class_id = s.class_id
+            left join course_schedule cs on c.class_id = cs.class_id
+            left join grade g on g.course_id = cs.course_id and s.student_id = g.student_id
         where cs.course_id = #{courseId}
         group by s.student_id
 
