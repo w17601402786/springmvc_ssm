@@ -42,7 +42,7 @@ public class Student {
     private int userId;
 
     @Schema(title = "该学生成绩信息",description = "仅在特定视图有用，大部分视图直接为null就行了")
-    private int score = -1;
+    private int score;
 
     private Classes classes = null;
 

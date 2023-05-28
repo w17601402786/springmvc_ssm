@@ -131,7 +131,7 @@ public class TeacherController {
             @ApiResponse(responseCode = "400", description = "失败"),
             @ApiResponse(responseCode = "401", description = "未登录")
     })
-    @PostMapping(value = "/getStudents", produces = "application/json;charset=utf-8")
+    @RequestMapping(value = "/getStudents", produces = "application/json;charset=utf-8",method = RequestMethod.GET)
     public ResultCommon<List<Student>> getStudents(
             @Parameter(description = "课程编号", required = true)
             @RequestParam String courseId) {
