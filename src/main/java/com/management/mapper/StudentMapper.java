@@ -44,6 +44,13 @@ public interface StudentMapper {
     List<Student> getStudents(Student student);
 
 
+    /**
+     * 查询选择了某个课程的学生
+     * @return 选择了某个课程的所有学生
+     */
+    List<Student> getStudentByCourId(String courseId);
+
+
 
 
     //---------------------------------分割线---------------------------------//

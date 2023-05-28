@@ -1,10 +1,7 @@
 package com.management.controller;
 
 
-import com.management.pojo.Course;
-import com.management.pojo.CourseSchedule;
-import com.management.pojo.Grade;
-import com.management.pojo.Users;
+import com.management.pojo.*;
 import com.management.service.CourseScheduleService;
 import com.management.service.GradeService;
 import com.management.service.TeacherService;
@@ -125,6 +122,29 @@ public class TeacherController {
         List<Grade> gradeList = gradeService.getGradesByTeacher(grade, user,"teacher");
 
         return new ResultCommon<>(200, "成功", gradeList);
+    }
+
+    //TODO 查看自己所授课班级的学生
+    @Operation(summary = "教师查看自己所授课程的学生信息")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "成功"),
+            @ApiResponse(responseCode = "400", description = "失败"),
+            @ApiResponse(responseCode = "401", description = "未登录")
+    })
+    @PostMapping(value = "/getStudents", produces = "application/json;charset=utf-8")
+    public ResultCommon<List<Student>> getStudents(
+            @Parameter(description = "课程编号", required = true)
+            @RequestParam String courseId) {
+
+        Users user = (Users) request.getSession().getAttribute("user");
+        if (user == null) {
+            return new ResultCommon<>(401, "未登录", null);
+        }
+
+
+        List<Student> result = teacherService.getStudentsByCourseId(courseId,user.getTeacherInfo().getTeacherId());
+
+        return new ResultCommon<>(200, "成功",result);
     }
 
 

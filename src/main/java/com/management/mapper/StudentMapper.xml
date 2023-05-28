@@ -166,6 +166,18 @@
 
 
     </select>
+    <select id="getStudentByCourId" resultMap="studentMap">
+        select
+            s.id, s.student_id, s.name, s.gender, s.birthday, s.major, s.class_id, s.address, s.phone, s.note, s.user_id,
+            u.id as uid,u.username,u.user_type,
+            c.id as cid,c.name as class_name,c.major,c.num,c.year,c.counsellor
+        from student s
+                left join users u on s.user_id = u.id
+                left join classes c on c.class_id = s.class_id
+                join course_schedule cs on c.class_id = cs.class_id
+        where cs.course_id = ${courseId}
+        group by student_id;
+    </select>
 
     <resultMap id="studentMap" type="com.management.pojo.Student">
         <id property="id" column="id"/>

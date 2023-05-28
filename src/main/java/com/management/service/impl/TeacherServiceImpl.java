@@ -1,10 +1,7 @@
 package com.management.service.impl;
 
 import com.management.mapper.*;
-import com.management.pojo.Course;
-import com.management.pojo.CourseSchedule;
-import com.management.pojo.Grade;
-import com.management.pojo.Teacher;
+import com.management.pojo.*;
 import com.management.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,10 +15,15 @@ public class TeacherServiceImpl implements TeacherService {
 
     @Autowired
     private CourseMapper courseMapper;
+
     @Autowired
     private CourseScheduleMapper courseScheduleMapper;
+
     @Autowired
     private GradeMapper gradeMapper;
+
+    @Autowired
+    private StudentMapper studentMapper;
 
     @Override
     public List<Teacher> getAllTeachers(String userType) {
@@ -107,19 +109,43 @@ public class TeacherServiceImpl implements TeacherService {
     }
 
 
+    @Override
+    public List<Student> getStudentsByCourseId(String courseId,String teacherId) {
 
-    //-----------------你他妈-----------------//
-    //以下代码全都废弃，不要用了，用了就是傻叼
-    //以下代码全都废弃，不要用了，用了就是傻叼
-    //以下代码全都废弃，不要用了，用了就是傻叼
-    //-----------------你他妈-----------------//
 
+        List<Course> courses = getCourses(teacherId);
+
+        boolean isBelong = false;
+
+        for (Course course : courses){
+            if(course.getCourseId().equals(courseId)){
+                isBelong = true;
+                break;
+            }
+        }
+
+        if (!isBelong){
+            return null;
+        }
+
+        return studentMapper.getStudentByCourId(courseId);
+    }
 
     @Override
-    @Deprecated
     public List<Course> getCourses(String teacherId) {
         return teacherMapper.getTeacherCourses(teacherId);
     }
+
+
+
+    //-----------------你他妈-----------------//
+    //以下代码全都废弃，不要用了，用了就是傻叼
+    //以下代码全都废弃，不要用了，用了就是傻叼
+    //以下代码全都废弃，不要用了，用了就是傻叼
+    //-----------------你他妈-----------------//
+
+
+
 
 
     @Override
@@ -133,6 +159,8 @@ public class TeacherServiceImpl implements TeacherService {
     public Teacher getTeacherById(Integer id) {
         return teacherMapper.getTeacherById(id);
     }
+
+
 
     @Override
     @Deprecated

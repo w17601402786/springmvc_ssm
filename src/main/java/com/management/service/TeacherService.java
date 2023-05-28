@@ -83,6 +83,15 @@ public interface TeacherService {
      */
     Teacher getTeacherByTeacherId(String teacherId);
 
+
+    /**
+     * 通过课程号获取教师所授班级所有学生信息
+     * @param courseId 教师所授课程id
+     * @param teacherId 教师id
+     * @return 教师对象
+     */
+    List<Student> getStudentsByCourseId(String courseId,String teacherId);
+
     /**
      * 根据姓名查询单个老师信息
      * @param name 姓名
@@ -128,6 +137,10 @@ public interface TeacherService {
      * @deprecated 废弃，你就不能调用getTeachers方法吗？
      */
     Teacher getTeacherById(Integer Id);
+
+
+
+
 
     /**
      * 通过教师的教工号获取教师的基本信息

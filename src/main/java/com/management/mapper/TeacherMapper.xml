@@ -46,7 +46,8 @@
                  LEFT JOIN course_schedule cs ON c.course_id = cs.course_id
                  LEFT JOIN teacher t ON cs.teacher_id = t.teacher_id
                  LEFT JOIN users u ON t.user_id = u.id
-        WHERE u.user_type = 'teacher' AND t.teacher_id = #{teacherId};
+        WHERE u.user_type = 'teacher' AND t.teacher_id = #{teacherId}
+        GROUP BY c.course_id;
     </select>
 
     <!-- 根据userId查询一位教师的信息 -->

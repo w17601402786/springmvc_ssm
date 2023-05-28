@@ -86,7 +86,7 @@
     </select>
 
 
-    <select id="getGradesByScoreRange" resultType="com.management.pojo.Grade">
+    <select id="getGradesByScoreRange" resultMap="gradeMap">
         select g.*,
         s.id as sid,s.name as student_name,s.gender,s.birthday,s.major,s.class_id,s.address,s.phone,s.note,s.user_id,
         c.id as cid,c.name as course_name,c.hours,c.credit
