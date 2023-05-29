@@ -30,12 +30,9 @@ public class GradeServiceImpl implements GradeService {
     @Override
     public int addGradesByAdmin(List<Grade> grades, String userType) {
 
-        if (userType.equals("admin")) {
+        if (!userType.equals("admin")) {
             return 0;
         }
-
-
-
         return gradeMapper.addGrades(grades);
     }
 

@@ -29,11 +29,11 @@
 
         select * from classes
         <where>
-            <if test="name != null">and name = #{name}</if>
-            <if test="major != null">and major = #{major}</if>
-            <if test="year != null">and year = #{year}</if>
-            <if test="counsellor != null">and counsellor = #{counsellor}</if>
-            <if test="classId != null">and class_id = #{classId}</if>
+            <if test="name != null and name != ''">and name = #{name}</if>
+            <if test="major != null and major != ''">and major = #{major}</if>
+            <if test="year != null and year != 0">and year = #{year}</if>
+            <if test="counsellor != null and counsellor != ''">and counsellor = #{counsellor}</if>
+            <if test="classId != null and classId != ''">and class_id = #{classId}</if>
         </where>
     </select>
 </mapper>

@@ -1,5 +1,6 @@
 package com.management.controller;
 
+import com.management.mapper.StudentMapper;
 import com.management.pojo.*;
 import com.management.service.*;
 import com.management.tools.ResultCommon;
@@ -45,6 +46,10 @@ public class AdminController {
 
     @Autowired
     GradeService gradeService;
+
+    @Autowired
+    StudentMapper studentMapper;
+
 
     @Operation(summary = "添加用户")
     @ApiResponses(value = {
@@ -146,7 +151,6 @@ public class AdminController {
             @RequestBody Users user
     ) {
 
-        //TODO 这里还没有进行测试，服务层代码也还没有完善
         int result = usersService.updateUser(user,"admin");
 
         if (result == 0){
@@ -269,7 +273,15 @@ public class AdminController {
             @RequestBody
             Classes classes
     ){
-        return null;
+
+        int result = classesService.addClasses(classes,"admin");
+
+        if (result == 0){
+            return new ResultCommon<>(500, "增加失败");
+        }
+
+        return new ResultCommon<>(200, "增加成功");
+
     }
 
 
@@ -279,7 +291,7 @@ public class AdminController {
             @ApiResponse(responseCode = "401",description = "未登录"),
             @ApiResponse(responseCode = "500",description = "失败")
     })
-    @PostMapping("/classes/delete")
+    @RequestMapping(value = "/classes/delete",method = RequestMethod.GET)
     public ResultCommon<String> deleteClassById(
             @Parameter(name = "id", description = "班级ID", required = true)
             Integer id
@@ -388,7 +400,7 @@ public class AdminController {
             @ApiResponse(responseCode = "401",description = "未登录"),
             @ApiResponse(responseCode = "500",description = "失败")
     })
-    @PostMapping("/course/delete")
+    @RequestMapping(value = "/course/delete",method = RequestMethod.GET)
     public ResultCommon<String> deleteCourseById(
             @Parameter(name = "id", description = "课程ID", required = true)
             Integer id
@@ -586,7 +598,6 @@ public class AdminController {
             List<Grade> grades
     ){
 
-
         int result = gradeService.addGradesByAdmin(grades,"admin");
 
         if(result == 0){
@@ -660,6 +671,29 @@ public class AdminController {
 
         List<Grade> grades = gradeService.getGrades(grade,"admin");
         return new ResultCommon<List<Grade>>(200,"成功",grades);
+    }
+
+
+
+    @Operation(summary = "管理员查看自己某个课程的学生信息")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "成功"),
+            @ApiResponse(responseCode = "400", description = "失败"),
+            @ApiResponse(responseCode = "401", description = "未登录")
+    })
+    @RequestMapping(value = "/course/getStudents", produces = "application/json;charset=utf-8",method = RequestMethod.GET)
+    public ResultCommon<List<Student>> getStudents(
+            @Parameter(description = "课程编号", required = true)
+            @RequestParam String courseId) {
+
+        Users user = (Users) request.getSession().getAttribute("user");
+        if (user == null) {
+            return new ResultCommon<>(401, "未登录", null);
+        }
+
+        List<Student> result = studentMapper.getStudentByCourId(courseId);
+
+        return new ResultCommon<>(200, "成功",result);
     }
 
 

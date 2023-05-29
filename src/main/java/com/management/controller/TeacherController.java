@@ -124,7 +124,6 @@ public class TeacherController {
         return new ResultCommon<>(200, "成功", gradeList);
     }
 
-    //TODO 查看自己所授课班级的学生
     @Operation(summary = "教师查看自己所授课程的学生信息")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "成功"),
@@ -208,95 +207,5 @@ public class TeacherController {
 
         return new ResultCommon<>(200, "成功");
     }
-
-
-
-//
-//
-//    /**
-//      根据教师编号获取教师信息
-//      @param id 教师编号
-//      @return 教师信息（JSON字符串）
-//     */
-//    @GetMapping("/{id}")
-//    @ResponseBody
-//    public String getTeacherById(@PathVariable Integer id){
-//        Teacher teacher = teacherService.getTeacherById(id);
-//        return JSON.toString();
-//    }
-//    /**
-//     * 更新教师信息
-//     *
-//     * @param teacher 教师信息
-//     * @return 更新结果（JSON字符串）
-//     */
-//    @PutMapping("/update")
-//    @ResponseBody
-//    public String updateTeacher(@RequestBody Teacher teacher) {
-//        Map<String, Object> result = new HashMap<>();
-//        int count = teacherService.updateTeacher(teacher);
-//        if (count > 0) {
-//            result.put("code", "success");
-//            result.put("msg", "更新成功");
-//        } else {
-//            result.put("code", "failure");
-//            result.put("msg", "更新失败");
-//        }
-//        return JSON.toString();
-//    }
-//
-//    /**
-//     * 获取指定教师的课程表
-//     *
-//     * @param teacherId 教师编号
-//     * @return 课程表信息（JSON字符串）
-//     */
-//    @GetMapping("/{teacherId}/courseSchedules")
-//    @ResponseBody
-//    public List<CourseSchedule> getCourseSchedulesByTeacherId(@PathVariable String teacherId) {
-//
-//
-//        CourseSchedule courseSchedule = new CourseSchedule();
-//        courseSchedule.setTeacherId(teacherId);
-//
-//
-//        return courseScheduleService.getCourseSchedule(courseSchedule, "teacher");
-//    }
-//
-//    /**
-//     * 获取指定教师的成绩信息
-//     *
-//     * @param teacherId 教师编号
-//     * @return 成绩信息（JSON字符串）
-//     */
-//    @GetMapping("/{teacherId}/grades")
-//    @ResponseBody
-//    public String getGradesByTeacherId(@PathVariable String teacherId) {
-//        List<Grade> grades = teacherService.getGrade(teacherId);
-//        return JSON.toString();
-//    }
-//
-//    /**
-//     * 提交学生某门课程的成绩
-//     *
-//     * @param studentId 学生编号
-//     * @param courseId  课程编号
-//     * @param score     成绩
-//     * @return 提交结果（JSON字符串）
-//     */
-//    @PostMapping("/submit_grade")
-//    @ResponseBody
-//    public String submitGrade(@RequestParam String studentId, @RequestParam String courseId, @RequestParam int score) {
-//        Map<String, Object> result = new HashMap<>();
-//        int count = teacherService.submitGrade(studentId, courseId, score);
-//        if (count > 0) {
-//            result.put("code", "success");
-//            result.put("msg", "成绩提交成功");
-//        } else {
-//            result.put("code", "failure");
-//            result.put("msg", "成绩提交失败");
-//        }
-//        return JSON.toString();
-//    }
 
 }

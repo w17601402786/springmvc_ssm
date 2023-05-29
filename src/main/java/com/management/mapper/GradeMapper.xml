@@ -5,11 +5,13 @@
 
     <!-- 增加成绩记录 -->
     <insert id="addGrades" parameterType="com.management.pojo.Grade" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
-        insert ignore into grade(student_id, course_id, score)
+        insert into grade(student_id, course_id, score)
         values
             <foreach collection="gradeList" item="item" index="index" separator=",">
                 (#{item.studentId}, #{item.courseId}, #{item.score})
             </foreach>
+--    当插入的数据存在时执行更新操作
+        ON DUPLICATE KEY UPDATE score = VALUES(score);
 
     </insert>
 
