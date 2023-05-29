@@ -98,7 +98,7 @@ public class UsersServiceImpl implements UsersService {
 
 
         //存储每一步执行的结果
-        int result;
+        int result = 0;
 
         //修改涉及到用户类型的时候，需要将对应的信息置空，并且判断是否有必要参数
         if (!oldUser.getUserType().equals(user.getUserType())){
@@ -115,7 +115,6 @@ public class UsersServiceImpl implements UsersService {
                     if (result == 0){
                         throw new RuntimeException("删除失败");
                     }
-
 
                     break;
                 case "student":
@@ -171,15 +170,35 @@ public class UsersServiceImpl implements UsersService {
         }
 
 
+        if (user.getTeacherInfo()!=null){
+            result = teacherMapper.updateTeacher(user.getTeacherInfo());
+        } else if (user.getStudentInfo() != null) {
+            result = studentMapper.updateStudent(user.getStudentInfo());
+        }
 
-        return usersMapper.updateUser(user);
+
+        //只要用户信息能更新成功一个就行了
+        result = usersMapper.updateUser(user) + result;
+
+        if (result == 0){
+            throw new RuntimeException("更新失败");
+        }
+
+        return result;
     }
 
     @Override
+    @Transactional
     public int deleteUserById(Integer userId,String thisUserType) {
         if (!thisUserType.equals("admin")){
             return -1;
         }
+
+
+        //尝试删除用户的其他信息
+        teacherMapper.deleteTeacherByUserId(userId);
+        studentMapper.deleteStudentByUserId(userId);
+
         return usersMapper.deleteUserById(userId);
     }
 

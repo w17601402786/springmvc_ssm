@@ -12,14 +12,15 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 
 @Slf4j
 @RestController
@@ -112,7 +113,7 @@ public class AdminController {
             @ApiResponse(responseCode = "401",description = "未登录"),
             @ApiResponse(responseCode = "500",description = "失败")
     })
-    @PostMapping("/users/delete")
+    @RequestMapping(value = "/users/delete",produces = "application/json",method = RequestMethod.GET)
     public ResultCommon<String> deleteUserById(
             @Parameter(name = "id", description = "用户ID", required = true)
             Integer id
@@ -174,7 +175,40 @@ public class AdminController {
             })
             @RequestBody Users user
     ) {
-        return new ResultCommon<>(200, "查询成功", usersService.getUsers(user,"admin"));
+
+        List<Users> users;
+
+        if (user.getUserType() != null && !"".equals(user.getUserType()) ){
+            switch (user.getUserType()){
+                case "admin":
+                    users = usersService.getUsers(user,"admin");
+                    break;
+                case "student":
+                    users = usersService.getStudentUsers(user,"admin");
+                    break;
+                case "teacher":
+                    users = usersService.getTeacherUsers(user,"admin");
+                    break;
+                default:
+                    return new ResultCommon<>(500,"参数错误");
+            }
+
+            return new ResultCommon<>(200,"成功",users);
+
+        }
+
+        user.setUserType("admin");
+        List<Users> adminUsers = usersService.getUsers(user,"admin");
+        user.setUserType("teacher");
+        List<Users> teacherUsers = usersService.getTeacherUsers(user,"admin");
+        user.setUserType("student");
+        List<Users> studentUsers = usersService.getStudentUsers(user,"admin");
+
+        users = Stream.of(adminUsers, teacherUsers, studentUsers)
+                .flatMap(Collection::stream)
+                .collect(Collectors.toList());
+
+        return new ResultCommon<>(200, "查询成功", users);
     }
 
     @Operation(summary = "根据用户id查询用户信息")

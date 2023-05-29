@@ -13,7 +13,6 @@
         </set>
         where id=#{id}
     </update>
-
     <select id="getUsers" parameterType="com.management.pojo.Users" resultMap="usersResultMap">
         SELECT *
         FROM users
