@@ -1,6 +1,7 @@
 package com.management.controller;
 
 import com.management.mapper.StudentMapper;
+import com.management.mapper.TeacherMapper;
 import com.management.pojo.*;
 import com.management.service.*;
 import com.management.tools.ResultCommon;
@@ -49,6 +50,12 @@ public class AdminController {
 
     @Autowired
     StudentMapper studentMapper;
+
+    @Autowired
+    TeacherMapper teacherMapper;
+
+    @Autowired
+    TeacherService teacherService;
 
 
     @Operation(summary = "添加用户")
@@ -491,7 +498,7 @@ public class AdminController {
             @ApiResponse(responseCode = "401",description = "未登录"),
             @ApiResponse(responseCode = "500",description = "失败")
     })
-    @PostMapping("/course_schedule/delete")
+    @RequestMapping(value = "/course_schedule/delete",method = RequestMethod.GET)
     public ResultCommon<String> deleteScheduleById(
             @Parameter(name = "id", description = "课表ID", required = true)
             Integer id
@@ -546,7 +553,31 @@ public class AdminController {
             CourseSchedule courseSchedule
     ){
 
+
         List<CourseSchedule> courseSchedules = courseScheduleService.getCourseSchedule(courseSchedule,"admin");
+
+
+        return new ResultCommon<List<CourseSchedule>>(200,"查询成功",courseSchedules);
+
+    }
+
+    @Operation(summary = "查看课表信息(或条件查询)",description = "主要查有课时间的时候，需要这个，不然按与条件查不到我想要的")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",description = "成功"),
+            @ApiResponse(responseCode = "401",description = "未登录"),
+            @ApiResponse(responseCode = "500",description = "失败")
+    })
+    @PostMapping("/course_schedule/getSchedulesOr")
+    public ResultCommon<List<CourseSchedule>> getSchedulesOr(
+            @io.swagger.v3.oas.annotations.parameters.RequestBody(
+                    description = "查询条件", required = true
+            )
+            @RequestBody
+            CourseSchedule courseSchedule
+    ){
+
+
+        List<CourseSchedule> courseSchedules = courseScheduleService.getCourseScheduleOr(courseSchedule,"admin");
 
 
         return new ResultCommon<List<CourseSchedule>>(200,"查询成功",courseSchedules);
@@ -674,6 +705,25 @@ public class AdminController {
     }
 
 
+    @Operation(summary = "区间查看学生成绩信息")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",description = "成功"),
+            @ApiResponse(responseCode = "500",description = "失败")
+    })
+    @PostMapping("/grade/getGradesRange")
+    public ResultCommon<List<Grade>> getGradesRange(
+            @io.swagger.v3.oas.annotations.parameters.RequestBody(
+                    description = "查询条件", required = true
+            )
+            @RequestBody
+            GradeQuery grade
+    ){
+
+        List<Grade> grades = gradeService.getGradesByScoreRange(grade.getGrade(),grade.getMin(), grade.getMax(), "admin");
+        return new ResultCommon<List<Grade>>(200,"成功",grades);
+    }
+
+
 
     @Operation(summary = "管理员查看自己某个课程的学生信息")
     @ApiResponses(value = {
@@ -692,6 +742,45 @@ public class AdminController {
         }
 
         List<Student> result = studentMapper.getStudentByCourId(courseId);
+
+        return new ResultCommon<>(200, "成功",result);
+    }
+
+    @Operation(summary = "管理员查看所有教师信息")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "成功"),
+            @ApiResponse(responseCode = "400", description = "失败"),
+            @ApiResponse(responseCode = "401", description = "未登录")
+    })
+    @RequestMapping(value = "/commonData/getAllTeachers", produces = "application/json;charset=utf-8",method = RequestMethod.GET)
+    public ResultCommon<List<Teacher>> getAllTeachers() {
+
+        Users user = (Users) request.getSession().getAttribute("user");
+        if (user == null) {
+            return new ResultCommon<>(401, "未登录", null);
+        }
+
+        List<Teacher> result = teacherService.getAllTeachers("admin");
+
+        return new ResultCommon<>(200, "成功",result);
+    }
+
+
+    @Operation(summary = "管理员查看所有场地信息",description = "其实没有场地这个表，但是我们的场地允许管理员自己随意编辑，这里我们只要从数据库找出所有课程表信息，对场地去重就行了")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "成功"),
+            @ApiResponse(responseCode = "400", description = "失败"),
+            @ApiResponse(responseCode = "401", description = "未登录")
+    })
+    @RequestMapping(value = "/commonData/getAllLocations", produces = "application/json;charset=utf-8",method = RequestMethod.GET)
+    public ResultCommon<List<CourseSchedule>> getAllLocations() {
+
+        Users user = (Users) request.getSession().getAttribute("user");
+        if (user == null) {
+            return new ResultCommon<>(401, "未登录", null);
+        }
+
+        List<CourseSchedule> result = courseScheduleService.getAllLocations("admin");
 
         return new ResultCommon<>(200, "成功",result);
     }

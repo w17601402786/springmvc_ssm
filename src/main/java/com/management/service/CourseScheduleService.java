@@ -66,5 +66,15 @@ public interface CourseScheduleService {
     List<CourseSchedule> getCourseSchedule(CourseSchedule courseSchedule, String userType);
 
 
+    /**
+     * 查询课程表，按照与方法
+     * @param courseSchedule 查询条件
+     * @param userType 当前用户类型
+     * @return 课程表信息
+     */
+    List<CourseSchedule> getCourseScheduleOr(CourseSchedule courseSchedule, String userType);
+
+
+    List<CourseSchedule> getAllLocations(String userType);
 
 }

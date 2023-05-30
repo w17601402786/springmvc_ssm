@@ -40,9 +40,18 @@ public interface CourseScheduleMapper {
     List<CourseSchedule> getCourseSchedules(CourseSchedule courseSchedule);
 
     /**
+     * 查询课程表信息(按照或条件)
+     * @param courseSchedule 课程表信息
+     * @return 课程表信息
+     */
+    List<CourseSchedule> getCourseSchedulesOr(CourseSchedule courseSchedule);
+    /**
      * 批量添加一条课程表信息
      * @param courseSchedule 课程表信息
      * @return 添加结果
      */
     int addCourseSchedules(List<CourseSchedule> courseSchedule);
+
+    List<CourseSchedule> getAllLocations();
+
 }

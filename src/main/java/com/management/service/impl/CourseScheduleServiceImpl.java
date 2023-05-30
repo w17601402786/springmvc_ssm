@@ -70,4 +70,20 @@ public class CourseScheduleServiceImpl implements CourseScheduleService {
         return courseScheduleMapper.getCourseSchedules(courseSchedule);
     }
 
+    @Override
+    public List<CourseSchedule> getCourseScheduleOr(CourseSchedule courseSchedule, String userType) {
+
+        return courseScheduleMapper.getCourseSchedulesOr(courseSchedule);
+    }
+
+    @Override
+    public List<CourseSchedule> getAllLocations(String userType) {
+
+        if (!userType.equals("admin")){
+            return null;
+        }
+
+        return courseScheduleMapper.getAllLocations();
+    }
+
 }
