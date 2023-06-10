@@ -17,7 +17,7 @@ public class StudentControllerAspect {
     HttpServletRequest request;
 
     /**
-     * 检测是否为老师
+     * 检测是否为学生
      */
     @Before("execution(* com.management.controller.StudentController.*(..))")
     public void checkAdmin() {
